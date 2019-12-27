@@ -1,4 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+
+import { SiteLanguage } from 'utils/enums';
+import { NormalizedBeverage } from 'utils/types/normalized';
 import { BeverageService } from './beverage.service';
 
 @Controller('beverage')
@@ -12,9 +15,9 @@ export class BeverageController {
 	// 	return { id: generatedId };
 	// }
 
-	@Get()
-	async getAllBeveragesDetails() {
-		const beverages = await this.beverageService.getAllBeveragesDetails();
+	@Get(':language')
+	async getAllBeveragesDetails(@Param('language') language: SiteLanguage) {
+		const beverages: NormalizedBeverage[] = await this.beverageService.getAllBeveragesDetails(language);
 		return beverages;
 	}
 
