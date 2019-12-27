@@ -1,9 +1,12 @@
-import { Module } from "@nestjs/common";
+import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 
-import { BeverageController } from "./beverage.controller";
-import { BeverageService } from "./beverage.service";
+import { BeverageSchema } from 'utils/schemas';
+import { BeverageController } from './beverage.controller';
+import { BeverageService } from './beverage.service';
 
 @Module({
+	imports: [MongooseModule.forFeature([{ name: 'Beverage', schema: BeverageSchema }])],
 	controllers: [BeverageController],
 	providers: [BeverageService]
 })

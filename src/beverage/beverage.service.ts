@@ -1,48 +1,57 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Beverage } from './beverage.model';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+
+import { Beverage } from 'utils/types';
 
 @Injectable()
 export class BeverageService {
-	private beverages: Beverage[] = [];
+	beverages = [];
 
-	addBeverage(badge: string, added: Date) {
-		const newBeverage = new Beverage(badge, added);
-		this.beverages.push(newBeverage);
+	constructor(@InjectModel('Beverage') private readonly beverageModel: Model<Beverage>) { }
 
-		return badge;
+	// async addBeverage(badge: string, added: Date) {
+	// 	const newBeverage = new this.beverageModel({});
+	// 	const result = await newBeverage.save();
+
+	// 	// @ToDo: test it
+	// 	console.log('-->', result);
+	// 	return result._id as string;
+	// }
+
+	async getAllBeveragesDetails() {
+		const result = await this.beverageModel.find().exec();
+
+		return result as Beverage[];
 	}
 
-	getAllBeveragesDetails() {
-		return [...this.beverages];
-	}
+	// getSingleBeverageDetails(badge: string) {
+	// 	const result = this.findBeverage(badge)[0];
 
-	getSingleBeverageDetails(badge: string) {
-		const result = this.findBeverage(badge)[0];
+	// 	return { ...result };
+	// }
 
-		return { ...result };
-	}
+	// updateBeverage(badge: string, added: Date) {
+	// 	const [result, resultIndex] = this.findBeverage(badge);
 
-	updateBeverage(badge: string, added: Date) {
-		const [result, resultIndex] = this.findBeverage(badge);
+	// 	this.beverages[resultIndex] = { ...result, added };
+	// }
 
-		this.beverages[resultIndex] = { ...result, added };
-	}
+	// removeBeverage(badge: string) {
+	// 	const [_, resultIndex] = this.findBeverage(badge);
 
-	removeBeverage(badge: string) {
-		const [_, resultIndex] = this.findBeverage(badge);
+	// 	this.beverages.splice(resultIndex, 1);
+	// 	return badge;
+	// }
 
-		this.beverages.splice(resultIndex, 1);
-		return badge;
-	}
+	// private findBeverage(badge): [Beverage, number] {
+	// 	const resultIndex = this.beverages.findIndex((beverage) => beverage.badge === badge);
+	// 	const result = this.beverages[resultIndex];
 
-	private findBeverage(badge): [Beverage, number] {
-		const resultIndex = this.beverages.findIndex((beverage) => beverage.badge === badge);
-		const result = this.beverages[resultIndex];
+	// 	if (!result) {
+	// 		throw new NotFoundException('Could not found a beverage');
+	// 	}
 
-		if (!result) {
-			throw new NotFoundException('Could not found a beverage');
-		}
-
-		return [result, resultIndex];
-	}
+	// 	return [result, resultIndex];
+	// }
 }

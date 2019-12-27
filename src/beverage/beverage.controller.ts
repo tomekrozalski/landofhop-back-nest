@@ -5,30 +5,31 @@ import { BeverageService } from './beverage.service';
 export class BeverageController {
 	constructor(private readonly beverageService: BeverageService) { }
 
-	@Post()
-	addBeverage(@Body('badge') badge: string, @Body('added') added: string): { badge: string } {
-		const generatedBadge = this.beverageService.addBeverage(badge, new Date(added));
+	// @Post()
+	// async addBeverage(@Body('badge') badge: string, @Body('added') added: string) {
+	// 	const generatedId = await this.beverageService.addBeverage(badge, new Date(added));
 
-		return { badge: generatedBadge };
-	}
+	// 	return { id: generatedId };
+	// }
 
 	@Get()
-	getAllBeveragesDetails() {
-		return this.beverageService.getAllBeveragesDetails();
+	async getAllBeveragesDetails() {
+		const beverages = await this.beverageService.getAllBeveragesDetails();
+		return beverages;
 	}
 
-	@Get(':badge')
-	getSingleBeverageDetails(@Param('badge') badge: string) {
-		return this.beverageService.getSingleBeverageDetails(badge);
-	}
+	// @Get(':badge')
+	// getSingleBeverageDetails(@Param('badge') badge: string) {
+	// 	return this.beverageService.getSingleBeverageDetails(badge);
+	// }
 
-	@Put(':badge')
-	updateBeverage(@Param('badge') badge: string, @Body('added') added: string) {
-		return this.beverageService.updateBeverage(badge, new Date(added));
-	}
+	// @Put(':badge')
+	// updateBeverage(@Param('badge') badge: string, @Body('added') added: string) {
+	// 	return this.beverageService.updateBeverage(badge, new Date(added));
+	// }
 
-	@Delete(':badge')
-	removeBeverage(@Param('badge') badge: string) {
-		return this.beverageService.removeBeverage(badge);
-	}
+	// @Delete(':badge')
+	// removeBeverage(@Param('badge') badge: string) {
+	// 	return this.beverageService.removeBeverage(badge);
+	// }
 }
