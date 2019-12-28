@@ -330,17 +330,14 @@ export class BeverageService {
 										shortId: '$$coop.shortId',
 										badge: '$$coop.badge',
 										name: '$$coop.name',
-										consortium: '$$coop.consortium',
 										website: '$$coop.website',
 									},
 								},
 							},
 							contract: {
-								id: '$label.general.contract_info._id',
 								shortId: '$label.general.contract_info.shortId',
 								badge: '$label.general.contract_info.badge',
 								name: '$label.general.contract_info.name',
-								consortium: '$label.general.contract_info.consortium',
 								website: '$label.general.contract_info.website',
 							},
 							place: {
@@ -428,17 +425,14 @@ export class BeverageService {
 										shortId: '$$coop.shortId',
 										badge: '$$coop.badge',
 										name: '$$coop.name',
-										consortium: '$$coop.consortium',
 										website: '$$coop.website',
 									},
 								},
 							},
 							contract: {
-								id: '$producer.general.contract_info._id',
 								shortId: '$producer.general.contract_info.shortId',
 								badge: '$producer.general.contract_info.badge',
 								name: '$producer.general.contract_info.name',
-								consortium: '$producer.general.contract_info.consortium',
 								website: '$producer.general.contract_info.website',
 							},
 							place: {
@@ -523,17 +517,14 @@ export class BeverageService {
 										shortId: '$$coop.shortId',
 										badge: '$$coop.badge',
 										name: '$$coop.name',
-										consortium: '$$coop.consortium',
 										website: '$$coop.website',
 									},
 								},
 							},
 							contract: {
-								id: '$editorial.general.contract_info._id',
 								shortId: '$editorial.general.contract_info.shortId',
 								badge: '$editorial.general.contract_info.badge',
 								name: '$editorial.general.contract_info.name',
-								consortium: '$editorial.general.contract_info.consortium',
 								website: '$editorial.general.contract_info.website',
 							},
 							place: {
@@ -591,6 +582,7 @@ export class BeverageService {
 					updated: 1,
 				},
 			},
+			{ $sort: { added: -1 } }
 		]);
 
 		return result.map(beverage => normalizeBeverageDetails({ beverage, language })) as NormalizedBeverage[];

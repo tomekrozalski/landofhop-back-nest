@@ -46,7 +46,7 @@ export type Beverage = {
 			value: number
 			hasCapWireFlip?: boolean
 		}
-		price?: BeveragePrice
+		price?: BeveragePrice[]
 	}
 	producer?: {
 		general?: {
@@ -60,7 +60,7 @@ export type Beverage = {
 		brewing?: Brewing
 		ingredients?: BeverageIngredients
 		impressions?: BeverageImpressions
-		price?: BeveragePrice
+		price?: BeveragePrice[]
 	}
 	editorial?: {
 		general?: {
@@ -88,7 +88,7 @@ export type Beverage = {
 			color?: string
 			clarity?: Clarity
 		}
-		price?: BeveragePrice
+		price?: BeveragePrice[]
 		photos?: {
 			cap?: boolean
 			cover?: {
