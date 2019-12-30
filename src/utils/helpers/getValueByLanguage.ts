@@ -5,7 +5,7 @@ type ExtendedLanguageValue = LanguageValue & { complete?: boolean };
 
 export default (
 	values: ExtendedLanguageValue[],
-	language: DataLanguage | SiteLanguage,
+	language: DataLanguage | SiteLanguage = SiteLanguage.pl,
 	strict: boolean = false
 ) => {
 	if (strict && !values.find(item => item.language === language)) {

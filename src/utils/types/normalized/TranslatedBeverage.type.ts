@@ -18,10 +18,10 @@ import {
 import { Aged, BeveragePrice, LanguageValue } from '../';
 import { NormalizedInstitution } from '.';
 
-export type NormalizedBeverage = {
+export type NormalizedTranslatedBeverage = {
 	shortId: string
 	badge: string
-	name: LanguageValue
+	name: LanguageValue[]
 	series?: {
 		label?: LanguageValue[]
 		producer?: LanguageValue[]
@@ -39,21 +39,21 @@ export type NormalizedBeverage = {
 	}
 	place?: {
 		label?: {
-			city: LanguageValue
-			country: LanguageValue
+			city: LanguageValue[]
+			country: LanguageValue[]
 		}
 		producer?: {
-			city: LanguageValue
-			country: LanguageValue
+			city: LanguageValue[]
+			country: LanguageValue[]
 		}
 		editorial?: {
-			city: LanguageValue
-			country: LanguageValue
+			city: LanguageValue[]
+			country: LanguageValue[]
 		}
 	}
 	tale?: {
 		label?: LanguageValue[]
-		producer?: LanguageValue
+		producer?: LanguageValue[]
 	}
 	barcode?: string
 	fermentation?: {
@@ -139,11 +139,11 @@ export type NormalizedBeverage = {
 	}
 	ingredientsList?: {
 		label?: {
-			name: LanguageValue
+			name: LanguageValue[]
 			type: IngredientType
 		}[]
 		producer?: {
-			name: LanguageValue
+			name: LanguageValue[]
 			type: IngredientType
 		}[]
 	}

@@ -21,7 +21,7 @@ import {
 } from '.';
 
 export type Beverage = {
-	_id: string
+	id: string
 	shortId: string
 	badge: string
 	label: {

@@ -6,18 +6,24 @@ import {
 	unset,
 } from 'lodash';
 
-import { SiteLanguage, DataLanguage } from 'utils/enums';
 import { Beverage } from 'utils/types';
-import { NormalizedBeverage } from 'utils/types/normalized';
+import { NormalizedBeverage, NormalizedTranslatedBeverage } from 'utils/types/normalized';
+import { SiteLanguage } from 'utils/enums';
 import { getValueByLanguage } from 'utils/helpers';
 
-type Props = {
+const normalizeBeverageDetails = <T extends boolean>({ beverage, language, translated }: {
 	beverage: Beverage
-	language: SiteLanguage
-}
+	language?: SiteLanguage
+	translated: T
+}): T extends true ? NormalizedTranslatedBeverage : NormalizedBeverage => {
+	const translate = (values: [], strict: boolean = false) => {
+		if (translated) {
+			return getValueByLanguage(values, language, strict);
+		}
 
-const normalizeBeverageDetails = ({ beverage, language }: Props): NormalizedBeverage => {
-	const translate = (values, strict = false) => getValueByLanguage(values, language, strict);
+		return values;
+	};
+
 	const label = query => get(beverage, `label.${query}`);
 	const producer = query => get(beverage, `producer.${query}`);
 	const editorial = query => get(beverage, `editorial.${query}`);
@@ -75,6 +81,7 @@ const normalizeBeverageDetails = ({ beverage, language }: Props): NormalizedBeve
 	}
 
 	const formattedObject = {
+		id: beverage.id,
 		shortId: beverage.shortId,
 		badge: beverage.badge,
 		name: translate(label('general.name')),
@@ -151,8 +158,8 @@ const normalizeBeverageDetails = ({ beverage, language }: Props): NormalizedBeve
 			...(producer('ingredients.description') && { producer: translate(producer('ingredients.description')) }),
 		},
 		ingredientsList: {
-			...(label('ingredients.list') && { label: label('ingredients.list').map(({ name, type }) => ({ name: translate(name), type })) }),
-			...(producer('ingredients.list') && { producer: producer('ingredients.list').map(({ name, type }) => ({ name: translate(name), type })) }),
+			...(!isEmpty(label('ingredients.list')) && { label: label('ingredients.list').map(({ name, type }) => ({ name: translate(name), type })) }),
+			...(!isEmpty(producer('ingredients.list')) && { producer: producer('ingredients.list').map(({ name, type }) => ({ name: translate(name), type })) }),
 		},
 		smokedMalt: {
 			...(isBoolean(label('ingredients.smokedMalt')) && { label: label('ingredients.smokedMalt') }),
@@ -179,8 +186,20 @@ const normalizeBeverageDetails = ({ beverage, language }: Props): NormalizedBeve
 			...(isNumber(producer('impressions.hoppyness')) && { producer: producer('impressions.hoppyness') }),
 		},
 		temperature: {
-			...(!isEmpty(label('impressions.temperature')) && { label: label('impressions.temperature') }),
-			...(!isEmpty(producer('impressions.temperature')) && { producer: producer('impressions.temperature') }),
+			...(!isEmpty(label('impressions.temperature')) && {
+				label: {
+					...label('impressions.temperature'),
+					from: +label('impressions.temperature.from'),
+					to: +label('impressions.temperature.to'),
+				}
+			}),
+			...(!isEmpty(producer('impressions.temperature')) && {
+				producer: {
+					...producer('impressions.temperature'),
+					from: +producer('impressions.temperature.from'),
+					to: +producer('impressions.temperature.to'),
+				}
+			}),
 		},
 		color: {
 			...(editorial('impressions.color') && { editorial: editorial('impressions.color') }),
@@ -193,7 +212,7 @@ const normalizeBeverageDetails = ({ beverage, language }: Props): NormalizedBeve
 			material: label('container.material'),
 			unit: label('container.unit'),
 			type: label('container.type'),
-			value: label('container.value'),
+			value: +label('container.value'),
 			...(isBoolean(label('container.hasCapWireFlip')) && { hasCapWireFlip: label('container.hasCapWireFlip') })
 		},
 		price: {
@@ -250,7 +269,7 @@ const normalizeBeverageDetails = ({ beverage, language }: Props): NormalizedBeve
 		'photos',
 	]);
 
-	return formattedObject as NormalizedBeverage;
+	return formattedObject as any;
 }
 
 export default normalizeBeverageDetails;

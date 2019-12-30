@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 
 import { SiteLanguage } from 'utils/enums';
-import { NormalizedBeverage } from 'utils/types/normalized';
+import { NormalizedBeverage, NormalizedTranslatedBeverage } from 'utils/types/normalized';
 import { BeverageService } from './beverage.service';
 
 @Controller('beverage')
@@ -15,16 +15,28 @@ export class BeverageController {
 	// 	return { id: generatedId };
 	// }
 
-	@Get(':language')
-	async getAllBeveragesDetails(@Param('language') language: SiteLanguage) {
-		const beverages: NormalizedBeverage[] = await this.beverageService.getAllBeveragesDetails(language);
+	@Get()
+	async getAllBeverages() {
+		const beverages: NormalizedBeverage[] = await this.beverageService.getAllBeverages();
 		return beverages;
 	}
 
-	// @Get(':badge')
-	// getSingleBeverageDetails(@Param('badge') badge: string) {
-	// 	return this.beverageService.getSingleBeverageDetails(badge);
-	// }
+	@Get(':language/:shortId/:brand/:badge')
+	async getBeverage(
+		@Param('language') language: SiteLanguage,
+		@Param('shortId') shortId: string,
+		@Param('brand') brand: string,
+		@Param('badge') badge: string,
+	) {
+		const beverage: NormalizedTranslatedBeverage = await this.beverageService.getBeverage({
+			language,
+			shortId,
+			brand,
+			badge,
+		});
+
+		return beverage;
+	}
 
 	// @Put(':badge')
 	// updateBeverage(@Param('badge') badge: string, @Body('added') added: string) {
