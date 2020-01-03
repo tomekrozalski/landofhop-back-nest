@@ -16,44 +16,52 @@ import {
 	TemperatureUnit,
 } from '../../enums/beverage';
 import { Aged, BeveragePrice, LanguageValue } from '../';
-import { NormalizedInstitution } from '.';
+
+type NormalizedTranslatedInstitution = {
+	badge: string
+	name: LanguageValue
+	shortId: string
+	website?: string
+	consortium?: LanguageValue
+}
 
 export type NormalizedTranslatedBeverage = {
+	id: string
 	shortId: string
 	badge: string
-	name: LanguageValue[]
+	name: LanguageValue
 	series?: {
 		label?: LanguageValue[]
 		producer?: LanguageValue[]
 	}
-	brand: NormalizedInstitution
+	brand: NormalizedTranslatedInstitution
 	cooperation?: {
-		label?: NormalizedInstitution[]
-		producer?: NormalizedInstitution[]
-		editorial?: NormalizedInstitution[]
+		label?: NormalizedTranslatedInstitution[]
+		producer?: NormalizedTranslatedInstitution[]
+		editorial?: NormalizedTranslatedInstitution[]
 	}
 	contract?: {
-		label?: NormalizedInstitution
-		producer?: NormalizedInstitution
-		editorial?: NormalizedInstitution
+		label?: NormalizedTranslatedInstitution
+		producer?: NormalizedTranslatedInstitution
+		editorial?: NormalizedTranslatedInstitution
 	}
 	place?: {
 		label?: {
-			city: LanguageValue[]
-			country: LanguageValue[]
+			city: LanguageValue
+			country: LanguageValue
 		}
 		producer?: {
-			city: LanguageValue[]
-			country: LanguageValue[]
+			city: LanguageValue
+			country: LanguageValue
 		}
 		editorial?: {
-			city: LanguageValue[]
-			country: LanguageValue[]
+			city: LanguageValue
+			country: LanguageValue
 		}
 	}
 	tale?: {
 		label?: LanguageValue[]
-		producer?: LanguageValue[]
+		producer?: LanguageValue
 	}
 	barcode?: string
 	fermentation?: {
