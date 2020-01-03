@@ -54,32 +54,6 @@ const normalizeBeverageDetails = <T extends boolean>({ beverage, language, trans
 		...(alcohol.scope && { scope: alcohol.scope }),
 	});
 
-	const normalizeAged = (type: 'label' | 'producer' | 'editorial') => {
-		const value = get(beverage, `${type}.brewing.aged`);
-
-		if (!isEmpty(value)) {
-			if (value.length === 1 && isEmpty(value[0])) {
-				return { [type]: true }
-			}
-
-			return { [type]: get(beverage, `${type}.brewing.aged`) }
-		}
-
-		return false;
-	}
-
-	const normalizeDryHopping = (type: 'label' | 'producer' | 'editorial') => {
-		if (!isEmpty(get(beverage, `${type}.brewing.dryHopped.hops`))) {
-			return { [type]: get(beverage, `${type}.brewing.dryHopped.hops`).map(({ name }) => translate(name)) }
-		}
-
-		if (get(beverage, `${type}.brewing.isDryHopped`)) {
-			return { [type]: true }
-		}
-
-		return false;
-	}
-
 	const formattedObject = {
 		id: beverage.id,
 		shortId: beverage.shortId,
@@ -134,20 +108,30 @@ const normalizeBeverageDetails = <T extends boolean>({ beverage, language, trans
 			...(isBoolean(producer('brewing.pasteurization')) && { producer: producer('brewing.pasteurization') }),
 			...(isBoolean(editorial('brewing.pasteurization')) && { editorial: editorial('brewing.pasteurization') })
 		},
+		isAged: {
+			...(!isEmpty(label('brewing.aged')) && { label: true }),
+			...(!isEmpty(producer('brewing.aged')) && { producer: true }),
+			...(!isEmpty(editorial('brewing.aged')) && { editorial: true })
+		},
 		aged: {
-			...(normalizeAged('label')),
-			...(normalizeAged('producer')),
-			...(normalizeAged('editorial'))
+			...(!isEmpty(label('brewing.aged')) && (label('brewing.aged').length !== 1 || !isEmpty(label('brewing.aged')[0])) && { label: label('brewing.aged') }),
+			...(!isEmpty(producer('brewing.aged')) && (producer('brewing.aged').length !== 1 || !isEmpty(producer('brewing.aged')[0])) && { producer: producer('brewing.aged') }),
+			...(!isEmpty(editorial('brewing.aged')) && (editorial('brewing.aged').length !== 1 || !isEmpty(editorial('brewing.aged')[0])) && { editorial: editorial('brewing.aged') }),
 		},
 		style: {
 			...(!isEmpty(label('brewing.style')) && { label: label('brewing.style') }),
 			...(!isEmpty(producer('brewing.style')) && { producer: producer('brewing.style') }),
 			...(!isEmpty(editorial('brewing.style')) && { editorial: editorial('brewing.style') })
 		},
+		isDryHopped: {
+			...((label('brewing.isDryHopped') || !isEmpty(label('brewing.dryHopped.hops'))) && { label: true }),
+			...((producer('brewing.isDryHopped') || !isEmpty(producer('brewing.dryHopped.hops'))) && { producer: true }),
+			...((editorial('brewing.isDryHopped') || !isEmpty(editorial('brewing.dryHopped.hops'))) && { editorial: true }),
+		},
 		dryHopped: {
-			...(normalizeDryHopping('label')),
-			...(normalizeDryHopping('producer')),
-			...(normalizeDryHopping('editorial'))
+			...(!isEmpty(label('brewing.dryHopped.hops')) && { label: label('brewing.dryHopped.hops').map(({ name }) => translate(name)) }),
+			...(!isEmpty(producer('brewing.dryHopped.hops')) && { producer: producer('brewing.dryHopped.hops').map(({ name }) => translate(name)) }),
+			...(!isEmpty(editorial('brewing.dryHopped.hops')) && { editorial: editorial('brewing.dryHopped.hops').map(({ name }) => translate(name)) }),
 		},
 		expirationDate: {
 			...(!isEmpty(label('brewing.expirationDate')) && { label: label('brewing.expirationDate') }),
@@ -250,8 +234,10 @@ const normalizeBeverageDetails = <T extends boolean>({ beverage, language, trans
 		'alcohol',
 		'filtration',
 		'pasteurization',
+		'isAged',
 		'aged',
 		'style',
+		'isDryHopped',
 		'dryHopped',
 		'expirationDate',
 		'ingredientsDescription',

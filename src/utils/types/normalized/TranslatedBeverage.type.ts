@@ -108,20 +108,30 @@ export type NormalizedTranslatedBeverage = {
 		producer?: boolean
 		editorial?: boolean
 	}
+	isAged?: {
+		label?: true
+		producer?: true
+		editorial?: true
+	}
 	aged?: {
-		label?: true | Aged[]
-		producer?: true | Aged[]
-		editorial?: true | Aged[]
+		label?: Aged[]
+		producer?: Aged[]
+		editorial?: Aged[]
 	}
 	style?: {
 		label?: LanguageValue[]
 		producer?: LanguageValue[]
 		editorial?: LanguageValue[]
 	}
+	isDryHopped?: {
+		label?: true
+		producer?: true
+		editorial?: true
+	}
 	dryHopped?: {
-		label?: true | LanguageValue[]
-		producer?: true | LanguageValue[]
-		editorial?: true | LanguageValue[]
+		label?: LanguageValue[]
+		producer?: LanguageValue[]
+		editorial?: LanguageValue[]
 	}
 	expirationDate?: {
 		label?: {
