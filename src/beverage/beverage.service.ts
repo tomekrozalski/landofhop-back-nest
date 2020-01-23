@@ -3,9 +3,10 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { SiteLanguage } from 'utils/enums';
-import { Beverage } from 'utils/types';
-import { NormalizedBeverage, NormalizedTranslatedBeverage } from 'utils/types/normalized';
+import { Beverage, BeverageBasics } from 'utils/types';
+import { NormalizedBeverage, NormalizedTranslatedBeverage, TranslatedBeverageBasics } from 'utils/types/normalized';
 import normalizeBeverageDetails from 'utils/normalizers/output/beverage';
+import normalizeBeverageBasics from 'utils/normalizers/output/beverageBasics';
 import { getValueByLanguage } from 'utils/helpers';
 
 @Injectable()
@@ -64,14 +65,25 @@ export class BeverageService {
 	// 	return badge;
 	// }
 
-	// private findBeverage(badge): [Beverage, number] {
-	// 	const resultIndex = this.beverages.findIndex((beverage) => beverage.badge === badge);
-	// 	const result = this.beverages[resultIndex];
+	async beverageSearch({
+		language,
+		phrase,
+	}: {
+		language: SiteLanguage,
+		phrase: string,
+	}) {
+		const rawResults: BeverageBasics[] = await this.beverageModel.beverageSearch(phrase);
 
-	// 	if (!result) {
-	// 		throw new NotFoundException('Could not found a beverage');
-	// 	}
+		if (!rawResults.length) {
+			throw new NotFoundException('Could not found any beverage');
+		}
 
-	// 	return [result, resultIndex];
-	// }
+		const formattedResults: TranslatedBeverageBasics[] = rawResults.map(beverage =>
+			normalizeBeverageBasics({
+				beverage,
+				language,
+			}));
+
+		return formattedResults;
+	}
 }

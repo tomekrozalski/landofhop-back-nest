@@ -1,5 +1,6 @@
 export * from './Aged.type';
 export * from './Beverage.type';
+export * from './BeverageBasics.type';
 export * from './BeverageImpressions.type';
 export * from './BeverageIngredients.type';
 export * from './BeveragePrice.type';

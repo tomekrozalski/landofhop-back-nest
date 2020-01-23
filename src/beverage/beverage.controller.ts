@@ -1,7 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 
 import { SiteLanguage } from 'utils/enums';
-import { NormalizedBeverage, NormalizedTranslatedBeverage } from 'utils/types/normalized';
+import {
+	NormalizedBeverage,
+	NormalizedTranslatedBeverage,
+	TranslatedBeverageBasics,
+} from 'utils/types/normalized';
 import { BeverageService } from './beverage.service';
 
 @Controller('beverage')
@@ -34,6 +38,17 @@ export class BeverageController {
 			brand,
 			badge,
 		});
+
+		return beverage;
+	}
+
+	@Post('search')
+	async beverageSearch(
+		@Body('language') language: SiteLanguage,
+		@Body('phrase') phrase: string,
+	) {
+		const beverage: TranslatedBeverageBasics[] =
+			await this.beverageService.beverageSearch({ language, phrase });
 
 		return beverage;
 	}
