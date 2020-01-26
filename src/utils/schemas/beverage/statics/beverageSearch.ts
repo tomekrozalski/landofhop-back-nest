@@ -565,8 +565,8 @@ const beverageSearch = function (phrase: string): any {
 			$match: {
 				$or: [
 					{ badge: { $regex: new RegExp(phrase, 'i') } },
-					{ 'label.general.brand.badge': { $regex: new RegExp(phrase, 'i') } },
-					{ 'label.general.brand.badge': { $regex: new RegExp(phrase, 'i') } }
+					{ 'label.general.name.value': { $regex: new RegExp(phrase, 'i') } },
+					{ 'label.general.brand.name.value': { $regex: new RegExp(phrase, 'i') } }
 				]
 			}
 		},

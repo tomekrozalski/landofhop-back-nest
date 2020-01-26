@@ -75,7 +75,7 @@ export class BeverageService {
 		const rawResults: BeverageBasics[] = await this.beverageModel.beverageSearch(phrase);
 
 		if (!rawResults.length) {
-			throw new NotFoundException('Could not found any beverage');
+			return [];
 		}
 
 		const formattedResults: TranslatedBeverageBasics[] = rawResults.map(beverage =>
