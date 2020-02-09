@@ -1,6 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import * as sharp from 'sharp';
+import * as potrace from 'potrace';
+import * as SVGO from 'svgo';
+import 'isomorphic-unfetch';
 
 import { SiteLanguage } from 'utils/enums';
 import { Beverage, BeverageBasics } from 'utils/types';
@@ -12,15 +16,6 @@ import { getValueByLanguage } from 'utils/helpers';
 @Injectable()
 export class BeverageService {
 	constructor(@InjectModel('Beverage') private readonly beverageModel: Model<Beverage>) { }
-
-	// async addBeverage(badge: string, added: Date) {
-	// 	const newBeverage = new this.beverageModel({});
-	// 	const result = await newBeverage.save();
-
-	// 	// @ToDo: test it
-	// 	console.log('-->', result);
-	// 	return result._id as string;
-	// }
 
 	async getAllBeverages() {
 		const rawBeverages: Beverage[] = await this.beverageModel.getAllBeverages();
@@ -46,24 +41,48 @@ export class BeverageService {
 		return formattedBeverage;
 	}
 
-	// getSingleBeverageDetails(badge: string) {
-	// 	const result = this.findBeverage(badge)[0];
+	async getTracedSVGs({
+		badge,
+		brand,
+		color,
+		shortId
+	}) {
+		const svgo = new SVGO({ multipass: true, floatPrecision: 0 });
 
-	// 	return { ...result };
-	// }
+		return new Promise((resolve, reject) => {
+			const imgPath = `${process.env.IMAGES_SERVER}/${brand}/${badge}/${shortId}/cover/jpg/4x.jpg`;
+			const imgColor = `#${color}`;
 
-	// updateBeverage(badge: string, added: Date) {
-	// 	const [result, resultIndex] = this.findBeverage(badge);
+			fetch(imgPath)
+				.then(response => response.arrayBuffer())
+				.then(data => {
+					const image = Buffer.from(data);
 
-	// 	this.beverages[resultIndex] = { ...result, added };
-	// }
+					sharp(image)
+						.resize(220, 500)
+						.toBuffer()
+						.then(preparedImage => {
+							potrace.trace(preparedImage, {
+								color: imgColor,
+								threshold: 200,
+								optTolerance: 0.4,
+								turdSize: 100,
+								turnPolicy: potrace.Potrace.TURNPOLICY_MAJORITY,
+							}, (err: any, svg: string) => {
+								if (err) {
+									reject();
+								}
 
-	// removeBeverage(badge: string) {
-	// 	const [_, resultIndex] = this.findBeverage(badge);
-
-	// 	this.beverages.splice(resultIndex, 1);
-	// 	return badge;
-	// }
+								svgo.optimize(svg)
+									.then((result: any) => {
+										resolve(result.data);
+									});
+							});
+						})
+						.catch(err => { reject(err) });
+				});
+		});
+	}
 
 	async beverageSearch({
 		language,

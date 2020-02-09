@@ -8,7 +8,7 @@ import {
 	TranslatedBeverageBasics,
 } from 'utils/types/normalized';
 import { BeverageService } from './beverage.service';
-import * as potrace from 'potrace';
+
 
 
 
@@ -30,32 +30,6 @@ export class BeverageController {
 		return beverages;
 	}
 
-	@Get('create-traced-svgs/:shortId/:brand/:badge')
-	// @UseGuards(AuthGuard)
-	async getTracedSVGs(
-		@Param('shortId') shortId: string,
-		@Param('brand') brand: string,
-		@Param('badge') badge: string,
-	) {
-
-		await potrace.trace('https://land-of-hop-images.s3.eu-central-1.amazonaws.com/browar-stu-mostow/baltic-porter/93r65i/cover/jpg/4x.jpg', {
-			color: '#666',
-			threshold: 200,
-			turdSize: 20,
-			alphaMax: 20,
-		}, (err: any, svg: string) => {
-
-			if (err) {
-				return false;
-			}
-
-			console.log('svg', svg);
-
-			return svg;
-		});
-
-	}
-
 	@Get(':language/:shortId/:brand/:badge')
 	async getBeverage(
 		@Param('language') language: SiteLanguage,
@@ -71,6 +45,18 @@ export class BeverageController {
 		});
 
 		return beverage;
+	}
+
+	@Get('create-traced-svgs/:shortId/:brand/:badge/:color')
+	@UseGuards(AuthGuard)
+	getTracedSVGs(
+		@Param('badge') badge: string,
+		@Param('brand') brand: string,
+		@Param('color') color: string,
+		@Param('shortId') shortId: string,
+	) {
+		const result = this.beverageService.getTracedSVGs({ badge, brand, color, shortId });
+		return result;
 	}
 
 	@Post('search')
