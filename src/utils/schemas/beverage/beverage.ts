@@ -3,7 +3,14 @@ import * as mongoose from 'mongoose';
 import editorialSchema from './editorialSchema';
 import labelSchema from './labelSchema';
 import producerSchema from './producerSchema';
-import { beverageSearch, getAllBeverages, getBeverage } from './statics';
+import {
+	beverageSearch,
+	getAllBeverages,
+	getBeverage,
+	getUpdatedBeverageImages,
+	updateContainerOutline,
+	updateCoverOutline,
+} from './statics';
 
 const beverageSchema = new mongoose.Schema({
 	shortId: {
@@ -31,5 +38,8 @@ beverageSchema.index({ badge: 1, shortId: 1 }, { unique: true });
 beverageSchema.statics.beverageSearch = beverageSearch;
 beverageSchema.statics.getAllBeverages = getAllBeverages;
 beverageSchema.statics.getBeverage = getBeverage;
+beverageSchema.statics.getUpdatedBeverageImages = getUpdatedBeverageImages;
+beverageSchema.statics.updateContainerOutline = updateContainerOutline;
+beverageSchema.statics.updateCoverOutline = updateCoverOutline;
 
 export default beverageSchema;

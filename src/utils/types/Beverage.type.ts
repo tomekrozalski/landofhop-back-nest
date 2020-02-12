@@ -96,6 +96,10 @@ export type Beverage = {
 				width: number
 			}
 			gallery?: number
+			outlines?: {
+				cover?: string
+				gallery?: string
+			}
 		}
 		notes?: string
 	}

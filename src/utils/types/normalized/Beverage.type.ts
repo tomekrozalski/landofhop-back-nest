@@ -227,6 +227,10 @@ export type NormalizedBeverage = {
 			width: number
 		}
 		gallery?: number
+		outlines?: {
+			cover?: string
+			gallery?: string
+		}
 	}
 	notes?: string
 	added: Date

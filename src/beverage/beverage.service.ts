@@ -9,8 +9,17 @@ import 'isomorphic-unfetch';
 import { SiteLanguage } from 'utils/enums';
 import { Beverage, BeverageBasics } from 'utils/types';
 import { NormalizedBeverage, NormalizedTranslatedBeverage, TranslatedBeverageBasics } from 'utils/types/normalized';
-import normalizeBeverageDetails from 'utils/normalizers/output/beverage';
-import normalizeBeverageBasics from 'utils/normalizers/output/beverageBasics';
+import {
+	RawBeverage as BeverageUpdatedImages,
+	TranslatedBeverage as TranslatedBeverageUpdatedImages
+} from 'utils/types/beverage/getUpdatedBeverageImages';
+
+import {
+	normalizeBeverageBasics,
+	normalizeBeverageDetails,
+	normalizeUpdatedBeverageImgages,
+} from 'utils/normalizers/output';
+
 import { getValueByLanguage } from 'utils/helpers';
 
 @Injectable()
@@ -41,16 +50,20 @@ export class BeverageService {
 		return formattedBeverage;
 	}
 
-	async getTracedSVGs({
+	async getTracedSVG({
 		badge,
 		brand,
 		color,
-		shortId
+		shortId,
+		type,
 	}) {
 		const svgo = new SVGO({ multipass: true, floatPrecision: 0 });
 
 		return new Promise((resolve, reject) => {
-			const imgPath = `${process.env.IMAGES_SERVER}/${brand}/${badge}/${shortId}/cover/jpg/4x.jpg`;
+			const generalPath = `${process.env.IMAGES_SERVER}/${brand}/${badge}/${shortId}`;
+			const imgPath = type === 'cover'
+				? `${generalPath}/cover/jpg/4x.jpg`
+				: `${generalPath}/container/jpg/4x/01.jpg`;
 			const imgColor = `#${color}`;
 
 			fetch(imgPath)
@@ -59,7 +72,7 @@ export class BeverageService {
 					const image = Buffer.from(data);
 
 					sharp(image)
-						.resize(220, 500)
+						.resize(220)
 						.toBuffer()
 						.then(preparedImage => {
 							potrace.trace(preparedImage, {
@@ -82,6 +95,47 @@ export class BeverageService {
 						.catch(err => { reject(err) });
 				});
 		});
+	}
+
+	async updateCoverOutline({ badge, brand, id, shortId }) {
+		const outline = await this.getTracedSVG({
+			badge,
+			brand,
+			color: 'ddd',
+			shortId,
+			type: 'cover'
+		});
+		const response: boolean = await this.beverageModel.updateCoverOutline({ id, outline });
+		return response;
+	}
+
+	async updateContainerOutline({ badge, brand, id, shortId }) {
+		const outline = await this.getTracedSVG({
+			badge,
+			brand,
+			color: 'ddd',
+			shortId,
+			type: 'container'
+		});
+		const response: boolean = await this.beverageModel.updateContainerOutline({ id, outline });
+		return response;
+	}
+
+	async getUpdatedBeverageImages({
+		language,
+		shortId,
+		brand,
+		badge,
+	}: {
+		language: SiteLanguage,
+		shortId: string,
+		brand: string,
+		badge: string,
+	}) {
+		const rawBeverage: BeverageUpdatedImages = await this.beverageModel.getUpdatedBeverageImages({ shortId, brand, badge });
+		const formattedBeverage: TranslatedBeverageUpdatedImages = normalizeUpdatedBeverageImgages({ beverage: rawBeverage[0], language });
+
+		return formattedBeverage;
 	}
 
 	async beverageSearch({

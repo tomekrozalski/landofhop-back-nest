@@ -208,6 +208,7 @@ const normalizeBeverageDetails = <T extends boolean>({ beverage, language, trans
 			...(editorial('photos.cap') && { cap: true }),
 			...(editorial('photos.cover') && { cover: editorial('photos.cover') }),
 			...(editorial('photos.gallery') && { gallery: editorial('photos.gallery') }),
+			...(editorial('photos.outlines') && { outlines: editorial('photos.outlines') }),
 		},
 		...(editorial('notes') && { notes: editorial('notes') }),
 		added: beverage.added,
