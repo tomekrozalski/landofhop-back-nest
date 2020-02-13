@@ -13,10 +13,14 @@ import {
 	RawBeverage as BeverageUpdatedImages,
 	TranslatedBeverage as TranslatedBeverageUpdatedImages
 } from 'utils/types/beverage/getUpdatedBeverageImages';
-
+import {
+	RawBeverage as BeverageSearchRawResults,
+	TranslatedBeverage as BeverageSearchTranslatedResults,
+} from 'utils/types/beverage/getUpdatedBeverageImages';
 import {
 	normalizeBeverageBasics,
 	normalizeBeverageDetails,
+	normalizeSearchResult,
 	normalizeUpdatedBeverageImgages,
 } from 'utils/normalizers/output';
 
@@ -153,14 +157,14 @@ export class BeverageService {
 		language: SiteLanguage,
 		phrase: string,
 	}) {
-		const rawResults: BeverageBasics[] = await this.beverageModel.beverageSearch(phrase);
+		const rawResults: BeverageSearchRawResults[] = await this.beverageModel.beverageSearch(phrase);
 
 		if (!rawResults.length) {
 			return [];
 		}
 
-		const formattedResults: TranslatedBeverageBasics[] = rawResults.map(beverage =>
-			normalizeBeverageBasics({
+		const formattedResults: BeverageSearchTranslatedResults[] = rawResults.map(beverage =>
+			normalizeSearchResult({
 				beverage,
 				language,
 			}));

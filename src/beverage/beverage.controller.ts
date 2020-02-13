@@ -3,6 +3,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nes
 import { SiteLanguage } from 'utils/enums';
 import { AuthGuard } from 'utils/guards';
 import { TranslatedBeverage as TranslatedBeverageUpdatedImages } from 'utils/types/beverage/getUpdatedBeverageImages';
+import { TranslatedBeverage as BeverageSearchTranslatedResults } from 'utils/types/beverage/getUpdatedBeverageImages';
 import {
 	NormalizedBeverage,
 	NormalizedTranslatedBeverage,
@@ -95,7 +96,7 @@ export class BeverageController {
 		@Body('language') language: SiteLanguage,
 		@Body('phrase') phrase: string,
 	) {
-		const beverage: TranslatedBeverageBasics[] =
+		const beverage: BeverageSearchTranslatedResults[] =
 			await this.beverageService.beverageSearch({ language, phrase });
 
 		return beverage;

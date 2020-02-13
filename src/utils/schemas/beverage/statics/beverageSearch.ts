@@ -1,6 +1,6 @@
-import { Beverage } from 'utils/types';
+import { RawBeverage } from 'utils/types/beverage/beverageSearch';
 
-const beverageSearch = function (phrase: string): any {
+const beverageSearch = function (phrase: string): RawBeverage {
 	return this.aggregate([
 		// ------------------------------------------------
 		// Label - brand, contract, cooperation
@@ -580,7 +580,15 @@ const beverageSearch = function (phrase: string): any {
 					badge: '$label.general.brand.badge',
 					name: '$label.general.brand.name',
 				},
-				containerType: '$label.container.type',
+				photos: {
+					cover: '$editorial.photos.cover',
+					outlines: {
+						cover: '$editorial.photos.outlines.cover'
+					}
+				},
+				container: {
+					type: '$label.container.type'
+				}
 			},
 		},
 	]);
