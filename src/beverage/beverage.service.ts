@@ -57,7 +57,15 @@ export class BeverageService {
 		shortId,
 		type,
 	}) {
-		const svgo = new SVGO({ multipass: true, floatPrecision: 0 });
+		const svgo = new SVGO({
+			multipass: true,
+			floatPrecision: 0,
+			plugins: [{
+				removeViewBox: false,
+			}, {
+				removeDimensions: true,
+			}]
+		});
 
 		return new Promise((resolve, reject) => {
 			const generalPath = `${process.env.IMAGES_SERVER}/${brand}/${badge}/${shortId}`;
