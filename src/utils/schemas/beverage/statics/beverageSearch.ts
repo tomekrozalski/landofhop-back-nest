@@ -564,9 +564,16 @@ const beverageSearch = function (phrase: string): RawBeverage {
 		{
 			$match: {
 				$or: [
+					// FIND BY:
+					// Badge
 					{ badge: { $regex: new RegExp(phrase, 'i') } },
+					// Name
 					{ 'label.general.name.value': { $regex: new RegExp(phrase, 'i') } },
-					{ 'label.general.brand.name.value': { $regex: new RegExp(phrase, 'i') } }
+					// Brand name
+					{ 'label.general.brand.name.value': { $regex: new RegExp(phrase, 'i') } },
+					// Series (label / producer)
+					{ 'label.general.series.value': { $regex: new RegExp(phrase, 'i') } },
+					{ 'producer.general.series.value': { $regex: new RegExp(phrase, 'i') } }
 				]
 			}
 		},
