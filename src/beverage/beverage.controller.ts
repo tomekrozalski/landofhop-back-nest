@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 import { SiteLanguage } from 'utils/enums';
 import { AuthGuard } from 'utils/guards';
@@ -100,6 +101,20 @@ export class BeverageController {
 			await this.beverageService.beverageSearch({ language, phrase });
 
 		return beverage;
+	}
+
+	@Post('cover')
+	@UseGuards(AuthGuard)
+	@UseInterceptors(FileInterceptor('image'))
+	async saveCover(
+		@Body('badge') badge: string,
+		@Body('brand') brand: string,
+		@Body('id') id: string,
+		@UploadedFile() image,
+		@Body('shortId') shortId: string,
+	) {
+		const result: boolean = await this.beverageService.saveCover({ badge, brand, id, image, shortId });
+		return result;
 	}
 
 	// @Delete(':badge')

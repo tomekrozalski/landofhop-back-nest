@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import * as sharp from 'sharp';
 import * as potrace from 'potrace';
 import * as SVGO from 'svgo';
+import * as sizeOf from 'buffer-image-size';
 import 'isomorphic-unfetch';
 
 import { SiteLanguage } from 'utils/enums';
@@ -23,6 +24,7 @@ import {
 	normalizeSearchResult,
 	normalizeUpdatedBeverageImgages,
 } from 'utils/normalizers/output';
+import saveCover, { ImageFormat, ImageSize } from 'utils/s3-interactions/beverage/saveCover';
 
 import { getValueByLanguage } from 'utils/helpers';
 
@@ -170,5 +172,68 @@ export class BeverageService {
 			}));
 
 		return formattedResults;
+	}
+
+	async saveCover({
+		badge,
+		brand,
+		id,
+		image,
+		shortId
+	}: {
+		badge: string,
+		brand: string,
+		id: string,
+		image: { buffer: Buffer },
+		shortId: string
+	}) {
+		const coverPath = `${brand}/${badge}/${shortId}/cover`;
+
+		const result = Promise.all([
+			saveCover({
+				coverPath,
+				format: ImageFormat.webp,
+				image,
+				size: ImageSize.large,
+			}),
+			saveCover({
+				coverPath,
+				format: ImageFormat.webp,
+				image,
+				size: ImageSize.big,
+			}),
+			saveCover({
+				coverPath,
+				format: ImageFormat.webp,
+				image,
+				size: ImageSize.small,
+			}),
+			saveCover({
+				coverPath,
+				format: ImageFormat.jpg,
+				image,
+				size: ImageSize.large,
+			}),
+			saveCover({
+				coverPath,
+				format: ImageFormat.jpg,
+				image,
+				size: ImageSize.big,
+			}),
+			saveCover({
+				coverPath,
+				format: ImageFormat.jpg,
+				image,
+				size: ImageSize.small,
+			}),
+		])
+			.then(async () => {
+				const { height, width } = sizeOf(image.buffer);
+				await this.beverageModel.saveCover({ height, id, width });
+				return true;
+			})
+			.catch(() => false);
+
+		return result;
 	}
 }
