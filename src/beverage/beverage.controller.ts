@@ -1,5 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UploadedFiles, UseGuards, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 
 import { SiteLanguage } from 'utils/enums';
 import { AuthGuard } from 'utils/guards';
@@ -16,45 +16,10 @@ import { BeverageService } from './beverage.service';
 export class BeverageController {
 	constructor(private readonly beverageService: BeverageService) { }
 
-	// @Post()
-	// async addBeverage(@Body('badge') badge: string, @Body('added') added: string) {
-	// 	const generatedId = await this.beverageService.addBeverage(badge, new Date(added));
-
-	// 	return { id: generatedId };
-	// }
-
 	@Get()
 	async getAllBeverages() {
 		const beverages: NormalizedBeverage[] = await this.beverageService.getAllBeverages();
 		return beverages;
-	}
-
-	// -------------------------------------------------
-	// Temporal method, I will not need it in the future
-	@Get('update-cover-outline/:id/:shortId/:brand/:badge')
-	@UseGuards(AuthGuard)
-	async updateCoverOutline(
-		@Param('badge') badge: string,
-		@Param('brand') brand: string,
-		@Param('id') id: string,
-		@Param('shortId') shortId: string,
-	) {
-		const result = this.beverageService.updateCoverOutline({ badge, brand, id, shortId });
-		return result;
-	}
-
-	// -------------------------------------------------
-	// Temporal method, I will not need it in the future
-	@Get('update-container-outline/:id/:shortId/:brand/:badge')
-	@UseGuards(AuthGuard)
-	async updateContainerOutline(
-		@Param('badge') badge: string,
-		@Param('brand') brand: string,
-		@Param('id') id: string,
-		@Param('shortId') shortId: string,
-	) {
-		const result = this.beverageService.updateContainerOutline({ badge, brand, id, shortId });
-		return result;
 	}
 
 	@Get(':language/:shortId/:brand/:badge')
@@ -103,6 +68,9 @@ export class BeverageController {
 		return beverage;
 	}
 
+	// ------------------------------------------
+	// IMAGES
+
 	@Post('cover')
 	@UseGuards(AuthGuard)
 	@UseInterceptors(FileInterceptor('image'))
@@ -114,6 +82,44 @@ export class BeverageController {
 		@Body('shortId') shortId: string,
 	) {
 		const result: boolean = await this.beverageService.saveCover({ badge, brand, id, image, shortId });
+		return result;
+	}
+
+	@Post('gallery')
+	@UseGuards(AuthGuard)
+	@UseInterceptors(FilesInterceptor('images'))
+	async saveGallery(
+		@Body('badge') badge: string,
+		@Body('brand') brand: string,
+		@Body('id') id: string,
+		@UploadedFiles() images,
+		@Body('shortId') shortId: string,
+	) {
+		const result: boolean = await this.beverageService.saveGallery({ badge, brand, id, images, shortId });
+		return result;
+	}
+
+	@Get('update-cover-outline/:id/:shortId/:brand/:badge')
+	@UseGuards(AuthGuard)
+	async updateCoverOutline(
+		@Param('badge') badge: string,
+		@Param('brand') brand: string,
+		@Param('id') id: string,
+		@Param('shortId') shortId: string,
+	) {
+		const result = this.beverageService.updateCoverOutline({ badge, brand, id, shortId });
+		return result;
+	}
+
+	@Get('update-container-outline/:id/:shortId/:brand/:badge')
+	@UseGuards(AuthGuard)
+	async updateContainerOutline(
+		@Param('badge') badge: string,
+		@Param('brand') brand: string,
+		@Param('id') id: string,
+		@Param('shortId') shortId: string,
+	) {
+		const result = this.beverageService.updateContainerOutline({ badge, brand, id, shortId });
 		return result;
 	}
 

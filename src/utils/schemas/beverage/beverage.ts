@@ -9,6 +9,7 @@ import {
 	getBeverage,
 	getUpdatedBeverageImages,
 	saveCover,
+	saveGallery,
 	updateContainerOutline,
 	updateCoverOutline,
 } from './statics';
@@ -41,6 +42,7 @@ beverageSchema.statics.getAllBeverages = getAllBeverages;
 beverageSchema.statics.getBeverage = getBeverage;
 beverageSchema.statics.getUpdatedBeverageImages = getUpdatedBeverageImages;
 beverageSchema.statics.saveCover = saveCover;
+beverageSchema.statics.saveGallery = saveGallery;
 beverageSchema.statics.updateContainerOutline = updateContainerOutline;
 beverageSchema.statics.updateCoverOutline = updateCoverOutline;
 

@@ -24,7 +24,12 @@ import {
 	normalizeSearchResult,
 	normalizeUpdatedBeverageImgages,
 } from 'utils/normalizers/output';
-import saveCover, { ImageFormat, ImageSize } from 'utils/s3-interactions/beverage/saveCover';
+import {
+	ImageFormat,
+	ImageSize,
+	saveCover,
+	saveGallery,
+} from 'utils/s3-interactions/beverage';
 
 import { getValueByLanguage } from 'utils/helpers';
 
@@ -230,6 +235,81 @@ export class BeverageService {
 			.then(async () => {
 				const { height, width } = sizeOf(image.buffer);
 				await this.beverageModel.saveCover({ height, id, width });
+				return true;
+			})
+			.catch(() => false);
+
+		return result;
+	}
+
+	async saveGallery({
+		badge,
+		brand,
+		id,
+		images,
+		shortId
+	}: {
+		badge: string,
+		brand: string,
+		id: string,
+		images: { buffer: Buffer }[],
+		shortId: string
+	}) {
+		const containerPath = `${brand}/${badge}/${shortId}/container`;
+
+		const result = Promise.all(images.map((image, i) => {
+			const properIndex = i + 1;
+			const fileName = properIndex < 10 ? `0${properIndex}` : properIndex.toString();
+
+			return (
+				[
+					saveGallery({
+						containerPath,
+						fileName,
+						format: ImageFormat.webp,
+						image,
+						size: ImageSize.large,
+					}),
+					saveGallery({
+						containerPath,
+						fileName,
+						format: ImageFormat.webp,
+						image,
+						size: ImageSize.big,
+					}),
+					saveGallery({
+						containerPath,
+						fileName,
+						format: ImageFormat.webp,
+						image,
+						size: ImageSize.small,
+					}),
+					saveGallery({
+						containerPath,
+						fileName,
+						format: ImageFormat.jpg,
+						image,
+						size: ImageSize.large,
+					}),
+					saveGallery({
+						containerPath,
+						fileName,
+						format: ImageFormat.jpg,
+						image,
+						size: ImageSize.big,
+					}),
+					saveGallery({
+						containerPath,
+						fileName,
+						format: ImageFormat.jpg,
+						image,
+						size: ImageSize.small,
+					}),
+				]
+			);
+		}))
+			.then(async () => {
+				await this.beverageModel.saveGallery({ id, images: images.length });
 				return true;
 			})
 			.catch(() => false);

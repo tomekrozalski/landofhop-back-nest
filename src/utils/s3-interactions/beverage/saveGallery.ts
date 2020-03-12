@@ -10,13 +10,15 @@ import {
 
 const s3 = new aws.S3({});
 
-const saveCover = ({
-	coverPath,
+const saveGallery = ({
+	containerPath,
+	fileName,
 	format,
 	image,
 	size,
 }: {
-	coverPath: string,
+	containerPath: string,
+	fileName: string,
 	format: ImageFormat,
 	image: any,
 	size: ImageSize
@@ -29,7 +31,7 @@ const saveCover = ({
 					.toBuffer((err, data) => (
 						s3.upload({
 							Bucket: 'land-of-hop-images',
-							Key: `${coverPath}/jpg/${getSize(size)}.jpg`,
+							Key: `${containerPath}/jpg/${getSize(size)}/${fileName}.jpg`,
 							Body: data,
 							ACL: 'public-read',
 						}, (errors, data) => {
@@ -49,7 +51,7 @@ const saveCover = ({
 					.toBuffer((err, data) => (
 						s3.upload({
 							Bucket: 'land-of-hop-images',
-							Key: `${coverPath}/webp/${getSize(size)}.webp`,
+							Key: `${containerPath}/webp/${getSize(size)}/${fileName}.webp`,
 							Body: data,
 							ACL: 'public-read',
 						}, (errors, data) => {
@@ -64,4 +66,4 @@ const saveCover = ({
 		})
 	);
 
-export default saveCover;
+export default saveGallery;
