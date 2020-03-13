@@ -123,8 +123,15 @@ export class BeverageController {
 		return result;
 	}
 
-	// @Delete(':badge')
-	// removeBeverage(@Param('badge') badge: string) {
-	// 	return this.beverageService.removeBeverage(badge);
-	// }
+	@Delete('gallery')
+	async removeGallery(
+		@Body('badge') badge: string,
+		@Body('brand') brand: string,
+		@Body('files') files: number,
+		@Body('id') id: string,
+		@Body('shortId') shortId: string,
+	) {
+		const result: boolean = await this.beverageService.removeGallery({ badge, brand, files, id, shortId });
+		return result;
+	}
 }

@@ -8,8 +8,8 @@ import * as sizeOf from 'buffer-image-size';
 import 'isomorphic-unfetch';
 
 import { SiteLanguage } from 'utils/enums';
-import { Beverage, BeverageBasics } from 'utils/types';
-import { NormalizedBeverage, NormalizedTranslatedBeverage, TranslatedBeverageBasics } from 'utils/types/normalized';
+import { Beverage } from 'utils/types';
+import { NormalizedBeverage, NormalizedTranslatedBeverage } from 'utils/types/normalized';
 import {
 	RawBeverage as BeverageUpdatedImages,
 	TranslatedBeverage as TranslatedBeverageUpdatedImages
@@ -19,7 +19,6 @@ import {
 	TranslatedBeverage as BeverageSearchTranslatedResults,
 } from 'utils/types/beverage/getUpdatedBeverageImages';
 import {
-	normalizeBeverageBasics,
 	normalizeBeverageDetails,
 	normalizeSearchResult,
 	normalizeUpdatedBeverageImgages,
@@ -27,6 +26,7 @@ import {
 import {
 	ImageFormat,
 	ImageSize,
+	removeGallery,
 	saveCover,
 	saveGallery,
 } from 'utils/s3-interactions/beverage';
@@ -257,59 +257,86 @@ export class BeverageService {
 	}) {
 		const containerPath = `${brand}/${badge}/${shortId}/container`;
 
-		const result = Promise.all(images.map((image, i) => {
+		const result = Promise.all(images.reduce((acc, image, i) => {
 			const properIndex = i + 1;
 			const fileName = properIndex < 10 ? `0${properIndex}` : properIndex.toString();
 
-			return (
-				[
-					saveGallery({
-						containerPath,
-						fileName,
-						format: ImageFormat.webp,
-						image,
-						size: ImageSize.large,
-					}),
-					saveGallery({
-						containerPath,
-						fileName,
-						format: ImageFormat.webp,
-						image,
-						size: ImageSize.big,
-					}),
-					saveGallery({
-						containerPath,
-						fileName,
-						format: ImageFormat.webp,
-						image,
-						size: ImageSize.small,
-					}),
-					saveGallery({
-						containerPath,
-						fileName,
-						format: ImageFormat.jpg,
-						image,
-						size: ImageSize.large,
-					}),
-					saveGallery({
-						containerPath,
-						fileName,
-						format: ImageFormat.jpg,
-						image,
-						size: ImageSize.big,
-					}),
-					saveGallery({
-						containerPath,
-						fileName,
-						format: ImageFormat.jpg,
-						image,
-						size: ImageSize.small,
-					}),
-				]
-			);
-		}))
-			.then(async () => {
+			return [
+				...acc,
+				saveGallery({
+					containerPath,
+					fileName,
+					format: ImageFormat.webp,
+					image,
+					size: ImageSize.large,
+				}),
+				saveGallery({
+					containerPath,
+					fileName,
+					format: ImageFormat.webp,
+					image,
+					size: ImageSize.big,
+				}),
+				saveGallery({
+					containerPath,
+					fileName,
+					format: ImageFormat.webp,
+					image,
+					size: ImageSize.small,
+				}),
+				saveGallery({
+					containerPath,
+					fileName,
+					format: ImageFormat.jpg,
+					image,
+					size: ImageSize.large,
+				}),
+				saveGallery({
+					containerPath,
+					fileName,
+					format: ImageFormat.jpg,
+					image,
+					size: ImageSize.big,
+				}),
+				saveGallery({
+					containerPath,
+					fileName,
+					format: ImageFormat.jpg,
+					image,
+					size: ImageSize.small,
+				}),
+			];
+		}, []))
+			.then(async (data) => {
 				await this.beverageModel.saveGallery({ id, images: images.length });
+				return true;
+			})
+			.catch(() => false);
+
+		return result;
+	}
+
+	async removeGallery({
+		badge,
+		brand,
+		files,
+		id,
+		shortId
+	}: {
+		badge: string,
+		brand: string,
+		files: number,
+		id: string,
+		shortId: string
+	}) {
+		const result = removeGallery({
+			badge,
+			brand,
+			files,
+			shortId
+		})
+			.then(async () => {
+				await this.beverageModel.removeGallery({ id });
 				return true;
 			})
 			.catch(() => false);

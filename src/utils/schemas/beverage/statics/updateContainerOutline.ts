@@ -11,12 +11,8 @@ const updateContainerOutline = function ({ id, outline }: Props): boolean {
 			'editorial.photos.outlines.gallery': outline
 		}
 	})
-		.then(() => {
-			return true;
-		})
-		.catch(() => {
-			return false
-		});
+		.then(() => true)
+		.catch(() => false);
 }
 
 export default updateContainerOutline;

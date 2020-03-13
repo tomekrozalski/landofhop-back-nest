@@ -8,6 +8,7 @@ import {
 	getAllBeverages,
 	getBeverage,
 	getUpdatedBeverageImages,
+	removeGallery,
 	saveCover,
 	saveGallery,
 	updateContainerOutline,
@@ -41,6 +42,7 @@ beverageSchema.statics.beverageSearch = beverageSearch;
 beverageSchema.statics.getAllBeverages = getAllBeverages;
 beverageSchema.statics.getBeverage = getBeverage;
 beverageSchema.statics.getUpdatedBeverageImages = getUpdatedBeverageImages;
+beverageSchema.statics.removeGallery = removeGallery;
 beverageSchema.statics.saveCover = saveCover;
 beverageSchema.statics.saveGallery = saveGallery;
 beverageSchema.statics.updateContainerOutline = updateContainerOutline;

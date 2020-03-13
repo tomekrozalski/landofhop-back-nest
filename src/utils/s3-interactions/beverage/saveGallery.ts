@@ -28,7 +28,8 @@ const saveGallery = ({
 				sharp(image.buffer)
 					.jpeg({})
 					.resize(getWidth(size))
-					.toBuffer((err, data) => (
+					.toBuffer()
+					.then(data => {
 						s3.upload({
 							Bucket: 'land-of-hop-images',
 							Key: `${containerPath}/jpg/${getSize(size)}/${fileName}.jpg`,
@@ -41,14 +42,15 @@ const saveGallery = ({
 								resolve(data);
 							}
 						})
-					));
+					});
 			}
 
 			if (format === ImageFormat.webp) {
 				sharp(image.buffer)
 					.webp({})
 					.resize(getWidth(size))
-					.toBuffer((err, data) => (
+					.toBuffer()
+					.then(data => {
 						s3.upload({
 							Bucket: 'land-of-hop-images',
 							Key: `${containerPath}/webp/${getSize(size)}/${fileName}.webp`,
@@ -61,7 +63,7 @@ const saveGallery = ({
 								resolve(data);
 							}
 						})
-					));
+					});
 			}
 		})
 	);

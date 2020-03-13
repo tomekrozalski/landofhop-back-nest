@@ -26,7 +26,8 @@ const saveCover = ({
 				sharp(image.buffer)
 					.jpeg({})
 					.resize(getWidth(size))
-					.toBuffer((err, data) => (
+					.toBuffer()
+					.then(data => (
 						s3.upload({
 							Bucket: 'land-of-hop-images',
 							Key: `${coverPath}/jpg/${getSize(size)}.jpg`,
@@ -46,7 +47,8 @@ const saveCover = ({
 				sharp(image.buffer)
 					.webp({})
 					.resize(getWidth(size))
-					.toBuffer((err, data) => (
+					.toBuffer()
+					.then(data => (
 						s3.upload({
 							Bucket: 'land-of-hop-images',
 							Key: `${coverPath}/webp/${getSize(size)}.webp`,
