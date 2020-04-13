@@ -54,6 +54,29 @@ export class BeverageService {
   }
 
   async getBeverage({
+    shortId,
+    brand,
+    badge,
+  }: {
+    shortId: string;
+    brand: string;
+    badge: string;
+  }) {
+    const rawBeverages: Beverage[] = await this.beverageModel.getBeverage(
+      badge,
+      brand,
+      shortId,
+    );
+
+    const formattedBeverage: NormalizedBeverage = normalizeBeverageDetails({
+      beverage: rawBeverages[0],
+      translated: false,
+    });
+
+    return formattedBeverage;
+  }
+
+  async getTranslatedBeverage({
     language,
     shortId,
     brand,

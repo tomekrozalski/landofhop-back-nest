@@ -34,14 +34,31 @@ export class BeverageController {
     return beverages;
   }
 
-  @Get(':language/:shortId/:brand/:badge')
+  @Get(':shortId/:brand/:badge')
   async getBeverage(
+    @Param('shortId') shortId: string,
+    @Param('brand') brand: string,
+    @Param('badge') badge: string,
+  ) {
+    const beverage: NormalizedBeverage = await this.beverageService.getBeverage(
+      {
+        shortId,
+        brand,
+        badge,
+      },
+    );
+
+    return beverage;
+  }
+
+  @Get(':language/:shortId/:brand/:badge')
+  async getTranslatedBeverage(
     @Param('language') language: SiteLanguage,
     @Param('shortId') shortId: string,
     @Param('brand') brand: string,
     @Param('badge') badge: string,
   ) {
-    const beverage: NormalizedTranslatedBeverage = await this.beverageService.getBeverage(
+    const beverage: NormalizedTranslatedBeverage = await this.beverageService.getTranslatedBeverage(
       {
         language,
         shortId,
