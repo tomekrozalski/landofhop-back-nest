@@ -1,9 +1,10 @@
 import { LanguageValue } from '.';
 
 export type Institution = {
-	badge: string
-	name: LanguageValue[]
-	shortId: string
-	website?: string
-	consortium?: LanguageValue[]
-}
+  badge: string;
+  id: string;
+  name: LanguageValue[];
+  shortId: string;
+  website?: string;
+  consortium?: LanguageValue[];
+};
