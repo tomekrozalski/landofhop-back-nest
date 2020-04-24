@@ -317,7 +317,7 @@ const getBeverage = function(
                 as: 'coop',
                 in: {
                   badge: '$$coop.badge',
-                  id: '$$coop.id',
+                  id: '$$coop._id',
                   name: '$$coop.name',
                   shortId: '$$coop.shortId',
                   website: '$$coop.website',
@@ -326,7 +326,7 @@ const getBeverage = function(
             },
             contract: {
               badge: '$label.general.contract_info.badge',
-              id: '$label.general.contract_info.id',
+              id: '$label.general.contract_info._id',
               name: '$label.general.contract_info.name',
               shortId: '$label.general.contract_info.shortId',
               website: '$label.general.contract_info.website',
@@ -414,7 +414,7 @@ const getBeverage = function(
                 as: 'coop',
                 in: {
                   badge: '$$coop.badge',
-                  id: '$$coop.id',
+                  id: '$$coop._id',
                   name: '$$coop.name',
                   shortId: '$$coop.shortId',
                   website: '$$coop.website',
@@ -423,7 +423,7 @@ const getBeverage = function(
             },
             contract: {
               badge: '$producer.general.contract_info.badge',
-              id: '$producer.general.contract_info.id',
+              id: '$producer.general.contract_info._id',
               name: '$producer.general.contract_info.name',
               shortId: '$producer.general.contract_info.shortId',
               website: '$producer.general.contract_info.website',
@@ -509,7 +509,7 @@ const getBeverage = function(
                 as: 'coop',
                 in: {
                   badge: '$$coop.badge',
-                  id: '$$coop.id',
+                  id: '$$coop._id',
                   name: '$$coop.name',
                   shortId: '$$coop.shortId',
                   website: '$$coop.website',
@@ -518,7 +518,7 @@ const getBeverage = function(
             },
             contract: {
               badge: '$editorial.general.contract_info.badge',
-              id: '$editorial.general.contract_info.id',
+              id: '$editorial.general.contract_info._id',
               name: '$editorial.general.contract_info.name',
               shortId: '$editorial.general.contract_info.shortId',
               website: '$editorial.general.contract_info.website',
