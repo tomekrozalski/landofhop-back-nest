@@ -1,12 +1,9 @@
-import { Country, Institution, LanguageValue } from '.';
+import { LanguageValue } from '.';
 
 export type Place = {
-	city?: LanguageValue[]
-	country: Country
-	institution: Institution
-	location: {
-		type: 'Point'
-		coordinates: number[]
-	}
-	shortId: string
-}
+  city?: LanguageValue[];
+  coordinates?: number[];
+  country: LanguageValue[];
+  id: string;
+  institution: LanguageValue[];
+};

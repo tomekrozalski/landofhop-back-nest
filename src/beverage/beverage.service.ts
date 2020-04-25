@@ -36,8 +36,6 @@ import {
   saveGallery,
 } from 'utils/s3-interactions/beverage';
 
-import { getValueByLanguage } from 'utils/helpers';
-
 @Injectable()
 export class BeverageService {
   constructor(
