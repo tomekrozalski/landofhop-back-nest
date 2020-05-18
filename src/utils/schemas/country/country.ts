@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
 
 import { langValue } from '../common';
+import { getAllCountries } from './statics';
 
 const countrySchema = new mongoose.Schema({
   code: {
@@ -14,5 +15,6 @@ const countrySchema = new mongoose.Schema({
 });
 
 countrySchema.index({ code: 1 }, { unique: true });
+countrySchema.statics.getAllCountries = getAllCountries;
 
 export default countrySchema;

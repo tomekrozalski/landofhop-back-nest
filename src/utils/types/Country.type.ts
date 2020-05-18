@@ -1,6 +1,7 @@
 import { LanguageValue } from '.';
 
 export type Country = {
-	code: string
-	name: LanguageValue[]
-}
+  code: string;
+  id: string;
+  name: LanguageValue[];
+};
