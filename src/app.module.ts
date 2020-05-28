@@ -1,7 +1,13 @@
-import { Module } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 
+import { AddShortIdMiddleware } from './utils/middlewares';
 import { UserModule } from './user/user.module';
 import { BeverageModule } from './beverage/beverage.module';
 import { InstitutionModule } from './institution/institution.module';
@@ -21,4 +27,10 @@ import { CountryModule } from './country/country.module';
     ),
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(AddShortIdMiddleware)
+      .forRoutes({ path: 'place', method: RequestMethod.POST });
+  }
+}

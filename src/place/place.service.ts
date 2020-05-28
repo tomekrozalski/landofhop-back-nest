@@ -16,4 +16,33 @@ export class PlaceService {
     const places: Place[] = await this.placeModel.getAllPlaces();
     return places.map(normalizePlace);
   }
+
+  async savePlace({
+    city,
+    country,
+    institution,
+    latitude,
+    longitude,
+    shortId,
+  }) {
+    const newPlace = new this.placeModel({
+      city: city.map(({ lang, value }) => ({
+        ...(lang !== 'none' && { language: lang }),
+        value,
+      })),
+      country,
+      institution,
+      shortId,
+      ...(latitude &&
+        longitude && {
+          location: {
+            type: 'Point',
+            coordinates: [latitude, longitude],
+          },
+        }),
+    });
+
+    await newPlace.save();
+    return true;
+  }
 }

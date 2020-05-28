@@ -4,7 +4,10 @@ import { langValue } from '../common';
 import { getAllPlaces } from './statics';
 
 const placeSchema = new mongoose.Schema({
-  city: [langValue],
+  city: {
+    type: [langValue],
+    required: true,
+  },
   country: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Country',
@@ -20,7 +23,11 @@ const placeSchema = new mongoose.Schema({
       type: String,
       enum: ['Point'],
     },
-    coordinates: [mongoose.Schema.Types.Decimal128],
+    coordinates: {
+      type: [mongoose.Schema.Types.Decimal128],
+      default: undefined,
+    },
+    required: false,
   },
   shortId: {
     type: String,
