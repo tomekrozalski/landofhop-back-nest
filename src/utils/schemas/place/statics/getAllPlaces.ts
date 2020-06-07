@@ -41,7 +41,7 @@ const getAllInstitutions = function(): Place[] {
       },
     },
     {
-      $sort: { city: 1 },
+      $sort: { 'city.value': 1 },
     },
   ]);
 };
