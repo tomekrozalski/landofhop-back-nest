@@ -41,8 +41,13 @@ const normalizeBeverageDetails = <T extends boolean>({
   });
 
   const normalizePlace = place => ({
-    city: translate(place.city),
+    ...(place.city && { city: translate(place.city) }),
+    ...(place.coordinates && {
+      coordinates: place.coordinates.map(item => +item),
+    }),
     country: translate(place.country.name),
+    id: place.id,
+    institution: translate(place.institution.name),
   });
 
   const normalizeExtract = ({ relate, unit, value }) => ({
