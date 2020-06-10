@@ -31,6 +31,9 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AddShortIdMiddleware)
-      .forRoutes({ path: 'place', method: RequestMethod.POST });
+      .forRoutes(
+        { path: 'place', method: RequestMethod.POST },
+        { path: 'institution', method: RequestMethod.POST },
+      );
   }
 }

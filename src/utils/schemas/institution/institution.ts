@@ -8,10 +8,6 @@ const institutionSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  id: {
-    type: String,
-    required: true,
-  },
   name: {
     type: [langValue],
     required: true,
@@ -27,7 +23,7 @@ const institutionSchema = new mongoose.Schema({
   },
 });
 
-institutionSchema.index({ badge: 1, id: 1, shortId: 1 }, { unique: true });
+institutionSchema.index({ badge: 1, shortId: 1 }, { unique: true });
 institutionSchema.statics.getAllInstitutions = getAllInstitutions;
 
 export default institutionSchema;
