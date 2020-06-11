@@ -1,4 +1,3 @@
-import { DataLanguage } from '../../enums';
 import {
   AlcoholRelate,
   AlcoholScope,
@@ -147,12 +146,12 @@ export type NormalizedBeverage = {
   ingredientsDescription?: {
     label?: {
       complete: boolean;
-      language: DataLanguage;
+      language: string;
       value: string;
     }[];
     producer?: {
       complete: boolean;
-      language: DataLanguage;
+      language: string;
       value: string;
     }[];
   };
