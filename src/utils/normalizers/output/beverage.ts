@@ -1,4 +1,5 @@
 import { get, isBoolean, isEmpty, isNumber, unset } from 'lodash';
+import * as mongoose from 'mongoose';
 
 import { Beverage } from 'utils/types';
 import {
@@ -17,12 +18,27 @@ const normalizeBeverageDetails = <T extends boolean>({
   language?: SiteLanguage;
   translated: T;
 }): T extends true ? NormalizedTranslatedBeverage : NormalizedBeverage => {
+  const getLanguageCode = (values: []) => {
+    return values.map((props: any) => {
+      const language = beverage.language.find(
+        ({ id }) =>
+          mongoose.Types.ObjectId(id).toString() ===
+          mongoose.Types.ObjectId(props.language).toString(),
+      )?.code;
+
+      return {
+        ...props,
+        ...(language && { language }),
+      };
+    });
+  };
+
   const translate = (values: [], strict: boolean = false) => {
     if (translated) {
       return getValueByLanguage(values, language, strict);
     }
 
-    return values;
+    return getLanguageCode(values);
   };
 
   const label = query => get(beverage, `label.${query}`);

@@ -37,6 +37,7 @@ const getBeverage = function(
         ...{ editorial },
         added: 1,
         updated: 1,
+        language: 1,
       },
     },
     { $sort: { added: -1 } },

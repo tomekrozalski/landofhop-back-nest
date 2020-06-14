@@ -17,6 +17,20 @@ import {
   updateCoverOutline,
 } from './statics';
 
+const LanguagesSchema = new mongoose.Schema(
+  {
+    code: {
+      type: String,
+      required: true,
+    },
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+    },
+  },
+  { _id: false },
+);
+
 const beverageSchema = new mongoose.Schema(
   {
     shortId: {
@@ -38,6 +52,10 @@ const beverageSchema = new mongoose.Schema(
       required: true,
     },
     updated: Date,
+    language: {
+      type: [LanguagesSchema],
+      required: true,
+    },
   },
   { strict: false },
 );
