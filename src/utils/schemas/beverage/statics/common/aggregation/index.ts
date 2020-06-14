@@ -1,3 +1,3 @@
-import getLanguages from './getLanguages';
+import language from './language';
 
-export { getLanguages };
+export { language };

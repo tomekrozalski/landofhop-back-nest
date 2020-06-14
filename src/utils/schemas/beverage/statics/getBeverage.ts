@@ -1,11 +1,6 @@
 import { Beverage } from 'utils/types';
-import { getLanguages } from './common/aggregation';
-import {
-  institution,
-  ingredient,
-  place,
-  language,
-} from './common/aggregation/beverage';
+import { language } from './common/aggregation';
+import { institution, ingredient, place } from './common/aggregation/beverage';
 import { editorial, label, producer } from './common/project/beverage';
 
 const getBeverage = function(
@@ -14,7 +9,6 @@ const getBeverage = function(
   shortId: string,
 ): Beverage[] {
   return this.aggregate([
-    ...getLanguages,
     ...institution,
     ...place,
     ...ingredient,

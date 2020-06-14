@@ -1,4 +1,4 @@
-const getLanguages = [
+const language = [
   {
     $lookup: {
       from: 'languages',
@@ -8,6 +8,7 @@ const getLanguages = [
             _id: 0,
             code: 1,
             id: '$_id',
+            name: 1,
           },
         },
       ],
@@ -16,4 +17,4 @@ const getLanguages = [
   },
 ];
 
-export default getLanguages;
+export default language;

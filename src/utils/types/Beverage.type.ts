@@ -16,6 +16,7 @@ import {
   Brewing,
   Ingredient,
   Institution,
+  Language,
   LanguageValue,
   Place,
 } from '.';
@@ -105,5 +106,5 @@ export type Beverage = {
   };
   added: Date;
   updated?: Date;
-  language: { code: string; id: string }[];
+  language: Language[];
 };

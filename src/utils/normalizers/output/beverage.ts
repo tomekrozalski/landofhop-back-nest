@@ -1,7 +1,7 @@
 import { get, isBoolean, isEmpty, isNumber, unset } from 'lodash';
 import * as mongoose from 'mongoose';
 
-import { Beverage } from 'utils/types';
+import { Beverage, LanguageValue } from 'utils/types';
 import {
   NormalizedBeverage,
   NormalizedTranslatedBeverage,
@@ -18,8 +18,8 @@ const normalizeBeverageDetails = <T extends boolean>({
   language?: SiteLanguage;
   translated: T;
 }): T extends true ? NormalizedTranslatedBeverage : NormalizedBeverage => {
-  const getLanguageCode = (values: []) => {
-    return values.map((props: any) => {
+  const getLanguageCode = (values: LanguageValue[]) => {
+    return values.map((props: LanguageValue) => {
       const language = beverage.language.find(
         ({ id }) =>
           mongoose.Types.ObjectId(id).toString() ===
@@ -34,11 +34,13 @@ const normalizeBeverageDetails = <T extends boolean>({
   };
 
   const translate = (values: [], strict: boolean = false) => {
+    const valuesWithLangCode = getLanguageCode(values);
+
     if (translated) {
-      return getValueByLanguage(values, language, strict);
+      return getValueByLanguage(valuesWithLangCode, language, strict);
     }
 
-    return getLanguageCode(values);
+    return valuesWithLangCode;
   };
 
   const label = query => get(beverage, `label.${query}`);
@@ -85,9 +87,11 @@ const normalizeBeverageDetails = <T extends boolean>({
     badge: beverage.badge,
     name: translate(label('general.name')),
     series: {
-      ...(label('general.series') && { label: label('general.series') }),
+      ...(label('general.series') && {
+        label: getLanguageCode(label('general.series')),
+      }),
       ...(producer('general.series') && {
-        producer: producer('general.series'),
+        producer: getLanguageCode(producer('general.series')),
       }),
     },
     brand: normalizeBrand(label('general.brand')),
@@ -207,13 +211,13 @@ const normalizeBeverageDetails = <T extends boolean>({
     },
     style: {
       ...(!isEmpty(label('brewing.style')) && {
-        label: label('brewing.style'),
+        label: getLanguageCode(label('brewing.style')),
       }),
       ...(!isEmpty(producer('brewing.style')) && {
-        producer: producer('brewing.style'),
+        producer: getLanguageCode(producer('brewing.style')),
       }),
       ...(!isEmpty(editorial('brewing.style')) && {
-        editorial: editorial('brewing.style'),
+        editorial: getLanguageCode(editorial('brewing.style')),
       }),
     },
     isDryHopped: {

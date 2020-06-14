@@ -1,16 +1,10 @@
 import { Beverage } from 'utils/types';
-import { getLanguages } from './common/aggregation';
-import {
-  institution,
-  ingredient,
-  place,
-  language,
-} from './common/aggregation/beverage';
+import { language } from './common/aggregation';
+import { institution, ingredient, place } from './common/aggregation/beverage';
 import { editorial, label, producer } from './common/project/beverage';
 
 const getAllBeverages = function(): Beverage[] {
   return this.aggregate([
-    ...getLanguages,
     ...institution,
     ...place,
     ...ingredient,
@@ -26,6 +20,7 @@ const getAllBeverages = function(): Beverage[] {
         ...{ editorial },
         added: 1,
         updated: 1,
+        language: 1,
       },
     },
     { $sort: { added: -1 } },

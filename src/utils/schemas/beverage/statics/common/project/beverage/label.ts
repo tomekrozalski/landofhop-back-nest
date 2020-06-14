@@ -10,7 +10,19 @@ const label = {
       consortium: '$label.general.brand_info.consortium_info.name',
       website: '$label.general.brand_info.website',
     },
-    cooperation: '$label.general.cooperation_info',
+    cooperation: {
+      $map: {
+        input: '$label.general.cooperation_info',
+        as: 'coop',
+        in: {
+          badge: '$$coop.badge',
+          id: '$$coop._id',
+          name: '$$coop.name',
+          shortId: '$$coop.shortId',
+          website: '$$coop.website',
+        },
+      },
+    },
     contract: {
       badge: '$label.general.contract_info.badge',
       id: '$label.general.contract_info._id',

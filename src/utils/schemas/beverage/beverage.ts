@@ -1,5 +1,6 @@
 import * as mongoose from 'mongoose';
 
+import languageSchema from '../language';
 import editorialSchema from './editorialSchema';
 import labelSchema from './labelSchema';
 import producerSchema from './producerSchema';
@@ -16,20 +17,6 @@ import {
   updateContainerOutline,
   updateCoverOutline,
 } from './statics';
-
-const LanguagesSchema = new mongoose.Schema(
-  {
-    code: {
-      type: String,
-      required: true,
-    },
-    id: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-    },
-  },
-  { _id: false },
-);
 
 const beverageSchema = new mongoose.Schema(
   {
@@ -53,7 +40,7 @@ const beverageSchema = new mongoose.Schema(
     },
     updated: Date,
     language: {
-      type: [LanguagesSchema],
+      type: [languageSchema],
       required: true,
     },
   },

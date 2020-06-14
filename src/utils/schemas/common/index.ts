@@ -1,5 +1,3 @@
 import langValue from './langValue';
 
-export {
-	langValue,
-};
+export { langValue };
