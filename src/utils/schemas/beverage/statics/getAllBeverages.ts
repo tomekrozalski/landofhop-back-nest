@@ -1,7 +1,7 @@
 import { Beverage } from 'utils/types';
-import { language } from './common/aggregation';
-import { institution, ingredient, place } from './common/aggregation/beverage';
-import { editorial, label, producer } from './common/project/beverage';
+import { language } from 'utils/schemas/common/aggregation';
+import { institution, ingredient, place } from './common/aggregation';
+import { editorial, label, producer } from './common/project';
 
 const getAllBeverages = function(): Beverage[] {
   return this.aggregate([

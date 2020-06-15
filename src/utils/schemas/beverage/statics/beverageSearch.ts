@@ -1,7 +1,7 @@
 import { RawBeverage } from 'utils/types/beverage/beverageSearch';
-import { language } from './common/aggregation';
-import { institution, ingredient, place } from './common/aggregation/beverage';
-import { editorial, label, producer } from './common/project/beverage';
+import { language } from 'utils/schemas/common/aggregation';
+import { institution, ingredient, place } from './common/aggregation';
+import { editorial, label, producer } from './common/project';
 
 const beverageSearch = function(phrase: string): RawBeverage {
   return this.aggregate([

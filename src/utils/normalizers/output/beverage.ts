@@ -1,5 +1,4 @@
 import { get, isBoolean, isEmpty, isNumber, unset } from 'lodash';
-import * as mongoose from 'mongoose';
 
 import { Beverage, LanguageValue } from 'utils/types';
 import {
@@ -8,6 +7,7 @@ import {
 } from 'utils/types/normalized';
 import { SiteLanguage } from 'utils/enums';
 import { getValueByLanguage } from 'utils/helpers';
+import { normalizeLanguageCodes } from '.';
 
 const normalizeBeverageDetails = <T extends boolean>({
   beverage,
@@ -18,20 +18,8 @@ const normalizeBeverageDetails = <T extends boolean>({
   language?: SiteLanguage;
   translated: T;
 }): T extends true ? NormalizedTranslatedBeverage : NormalizedBeverage => {
-  const getLanguageCode = (values: LanguageValue[]) => {
-    return values.map((props: LanguageValue) => {
-      const language = beverage.language.find(
-        ({ id }) =>
-          mongoose.Types.ObjectId(id).toString() ===
-          mongoose.Types.ObjectId(props.language).toString(),
-      )?.code;
-
-      return {
-        ...props,
-        ...(language && { language }),
-      };
-    });
-  };
+  const getLanguageCode = (values: LanguageValue[]) =>
+    normalizeLanguageCodes({ languages: beverage.language, values });
 
   const translate = (values: [], strict: boolean = false) => {
     const valuesWithLangCode = getLanguageCode(values);
@@ -129,7 +117,9 @@ const normalizeBeverageDetails = <T extends boolean>({
       }),
     },
     tale: {
-      ...(label('general.tale') && { label: label('general.tale') }),
+      ...(label('general.tale') && {
+        label: getLanguageCode(label('general.tale')),
+      }),
       ...(producer('general.tale') && {
         producer: translate(producer('general.tale'), true),
       }),

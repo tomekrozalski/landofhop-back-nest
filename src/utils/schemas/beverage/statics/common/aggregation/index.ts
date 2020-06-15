@@ -1,3 +1,5 @@
-import language from './language';
+import institution from './institution';
+import ingredient from './ingredient';
+import place from './place';
 
-export { language };
+export { institution, ingredient, place };
