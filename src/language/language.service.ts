@@ -15,4 +15,17 @@ export class LanguageService {
     const languages: Language[] = await this.languageModel.getAllLanguages();
     return languages;
   }
+
+  async saveLanguage({ code, name }) {
+    const newLanguage = new this.languageModel({
+      code,
+      name: name.map(({ lang, value }) => ({
+        ...(lang !== 'none' && { language: lang }),
+        value,
+      })),
+    });
+
+    await newLanguage.save();
+    return true;
+  }
 }
