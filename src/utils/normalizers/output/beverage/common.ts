@@ -1,36 +1,22 @@
 import { get, isBoolean, isEmpty, isNumber, unset } from 'lodash';
 
 import { Beverage, LanguageValue } from 'utils/types';
-import {
-  NormalizedBeverage,
-  NormalizedTranslatedBeverage,
-} from 'utils/types/normalized';
-import { SiteLanguage } from 'utils/enums';
-import { getValueByLanguage } from 'utils/helpers';
-import { normalizeLanguageCodes } from '.';
 
-const normalizeBeverageDetails = <T extends boolean>({
+const common = ({
   beverage,
-  language,
-  translated,
+  transformLanguage,
+  translate,
 }: {
   beverage: Beverage;
-  language?: SiteLanguage;
-  translated: T;
-}): T extends true ? NormalizedTranslatedBeverage : NormalizedBeverage => {
-  const getLanguageCode = (values: LanguageValue[]) =>
-    normalizeLanguageCodes({ languages: beverage.language, values });
-
-  const translate = (values: [], strict: boolean = false) => {
-    const valuesWithLangCode = getLanguageCode(values);
-
-    if (translated) {
-      return getValueByLanguage(valuesWithLangCode, language, strict);
-    }
-
-    return valuesWithLangCode;
-  };
-
+  transformLanguage: ({ values }: { values: LanguageValue[] }) => any;
+  translate: ({
+    strict,
+    values,
+  }: {
+    strict?: boolean;
+    values: LanguageValue[];
+  }) => any;
+}) => {
   const label = query => get(beverage, `label.${query}`);
   const producer = query => get(beverage, `producer.${query}`);
   const editorial = query => get(beverage, `editorial.${query}`);
@@ -38,22 +24,22 @@ const normalizeBeverageDetails = <T extends boolean>({
   const normalizeBrand = institution => ({
     badge: institution.badge,
     id: institution.id,
-    name: translate(institution.name),
+    name: translate({ values: institution.name }),
     shortId: institution.shortId,
     ...(institution.website && { website: institution.website }),
     ...(institution.consortium && {
-      consortium: translate(institution.consortium),
+      consortium: translate({ values: institution.consortium }),
     }),
   });
 
   const normalizePlace = place => ({
-    ...(place.city && { city: translate(place.city) }),
+    ...(place.city && { city: translate({ values: place.city }) }),
     ...(place.coordinates && {
       coordinates: place.coordinates.map(item => +item),
     }),
-    country: translate(place.country.name),
+    country: translate({ values: place.country.name }),
     id: place.id,
-    institution: translate(place.institution.name),
+    institution: translate({ values: place.institution.name }),
   });
 
   const normalizeExtract = ({ relate, unit, value }) => ({
@@ -73,13 +59,13 @@ const normalizeBeverageDetails = <T extends boolean>({
     id: beverage.id,
     shortId: beverage.shortId,
     badge: beverage.badge,
-    name: translate(label('general.name')),
+    name: translate({ values: label('general.name') }),
     series: {
       ...(label('general.series') && {
-        label: getLanguageCode(label('general.series')),
+        label: transformLanguage({ values: label('general.series') }),
       }),
       ...(producer('general.series') && {
-        producer: getLanguageCode(producer('general.series')),
+        producer: transformLanguage({ values: producer('general.series') }),
       }),
     },
     brand: normalizeBrand(label('general.brand')),
@@ -118,10 +104,10 @@ const normalizeBeverageDetails = <T extends boolean>({
     },
     tale: {
       ...(label('general.tale') && {
-        label: getLanguageCode(label('general.tale')),
+        label: transformLanguage({ values: label('general.tale') }),
       }),
       ...(producer('general.tale') && {
-        producer: translate(producer('general.tale'), true),
+        producer: translate({ strict: true, values: producer('general.tale') }),
       }),
     },
     ...(label('general.barcode') && { barcode: label('general.barcode') }),
@@ -201,13 +187,13 @@ const normalizeBeverageDetails = <T extends boolean>({
     },
     style: {
       ...(!isEmpty(label('brewing.style')) && {
-        label: getLanguageCode(label('brewing.style')),
+        label: transformLanguage({ values: label('brewing.style') }),
       }),
       ...(!isEmpty(producer('brewing.style')) && {
-        producer: getLanguageCode(producer('brewing.style')),
+        producer: transformLanguage({ values: producer('brewing.style') }),
       }),
       ...(!isEmpty(editorial('brewing.style')) && {
-        editorial: getLanguageCode(editorial('brewing.style')),
+        editorial: transformLanguage({ values: editorial('brewing.style') }),
       }),
     },
     isDryHopped: {
@@ -221,17 +207,17 @@ const normalizeBeverageDetails = <T extends boolean>({
     dryHopped: {
       ...(!isEmpty(label('brewing.dryHopped.hops')) && {
         label: label('brewing.dryHopped.hops').map(({ name }) =>
-          translate(name),
+          translate({ values: name }),
         ),
       }),
       ...(!isEmpty(producer('brewing.dryHopped.hops')) && {
         producer: producer('brewing.dryHopped.hops').map(({ name }) =>
-          translate(name),
+          translate({ values: name }),
         ),
       }),
       ...(!isEmpty(editorial('brewing.dryHopped.hops')) && {
         editorial: editorial('brewing.dryHopped.hops').map(({ name }) =>
-          translate(name),
+          translate({ values: name }),
         ),
       }),
     },
@@ -245,22 +231,22 @@ const normalizeBeverageDetails = <T extends boolean>({
     },
     ingredientsDescription: {
       ...(label('ingredients.description') && {
-        label: translate(label('ingredients.description')),
+        label: translate({ values: label('ingredients.description') }),
       }),
       ...(producer('ingredients.description') && {
-        producer: translate(producer('ingredients.description')),
+        producer: translate({ values: producer('ingredients.description') }),
       }),
     },
     ingredientsList: {
       ...(!isEmpty(label('ingredients.list')) && {
         label: label('ingredients.list').map(({ name, type }) => ({
-          name: translate(name),
+          name: translate({ values: name }),
           type,
         })),
       }),
       ...(!isEmpty(producer('ingredients.list')) && {
         producer: producer('ingredients.list').map(({ name, type }) => ({
-          name: translate(name),
+          name: translate({ values: name }),
           type,
         })),
       }),
@@ -425,7 +411,7 @@ const normalizeBeverageDetails = <T extends boolean>({
     'photos',
   ]);
 
-  return formattedObject as any;
+  return formattedObject;
 };
 
-export default normalizeBeverageDetails;
+export default common;

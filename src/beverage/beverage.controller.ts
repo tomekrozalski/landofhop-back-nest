@@ -18,10 +18,9 @@ import { AuthGuard } from 'utils/guards';
 import { TranslatedBeverage as TranslatedBeverageUpdatedImages } from 'utils/types/beverage/getUpdatedBeverageImages';
 import { TranslatedBeverage as BeverageSearchTranslatedResults } from 'utils/types/beverage/getUpdatedBeverageImages';
 import {
-  NormalizedBeverage,
-  NormalizedTranslatedBeverage,
-  TranslatedBeverageBasics,
-} from 'utils/types/normalized';
+  Dashboard as NormalizedBeverageForDashboard,
+  Regular as NormalizedBeverage,
+} from 'utils/types/normalized/beverage';
 import { BeverageService } from './beverage.service';
 
 @Controller('beverage')
@@ -40,27 +39,8 @@ export class BeverageController {
     @Param('brand') brand: string,
     @Param('badge') badge: string,
   ) {
-    const beverage: NormalizedBeverage = await this.beverageService.getBeverage(
+    const beverage: NormalizedBeverageForDashboard = await this.beverageService.getBeverage(
       {
-        shortId,
-        brand,
-        badge,
-      },
-    );
-
-    return beverage;
-  }
-
-  @Get(':language/:shortId/:brand/:badge')
-  async getTranslatedBeverage(
-    @Param('language') language: SiteLanguage,
-    @Param('shortId') shortId: string,
-    @Param('brand') brand: string,
-    @Param('badge') badge: string,
-  ) {
-    const beverage: NormalizedTranslatedBeverage = await this.beverageService.getTranslatedBeverage(
-      {
-        language,
         shortId,
         brand,
         badge,

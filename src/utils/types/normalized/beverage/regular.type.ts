@@ -13,10 +13,15 @@ import {
   Fermentation,
   IngredientType,
   TemperatureUnit,
-} from '../../enums/beverage';
-import { Aged, BeveragePrice, LanguageValue } from '../';
+} from 'utils/enums/beverage';
+import { Aged, BeveragePrice } from '../..';
 
-type NormalizedInstitution = {
+type LanguageValue = {
+  language?: string;
+  value: string;
+};
+
+type Institution = {
   badge: string;
   id: string;
   name: LanguageValue[];
@@ -25,7 +30,7 @@ type NormalizedInstitution = {
   consortium?: LanguageValue[];
 };
 
-export type NormalizedBeverage = {
+export type Regular = {
   id: string;
   shortId: string;
   badge: string;
@@ -34,16 +39,16 @@ export type NormalizedBeverage = {
     label?: LanguageValue[];
     producer?: LanguageValue[];
   };
-  brand: NormalizedInstitution;
+  brand: Institution;
   cooperation?: {
-    label?: NormalizedInstitution[];
-    producer?: NormalizedInstitution[];
-    editorial?: NormalizedInstitution[];
+    label?: Institution[];
+    producer?: Institution[];
+    editorial?: Institution[];
   };
   contract?: {
-    label?: NormalizedInstitution;
-    producer?: NormalizedInstitution;
-    editorial?: NormalizedInstitution;
+    label?: Institution;
+    producer?: Institution;
+    editorial?: Institution;
   };
   place?: {
     label?: {
@@ -109,9 +114,9 @@ export type NormalizedBeverage = {
     editorial?: boolean;
   };
   isAged?: {
-    label?: true;
-    producer?: true;
-    editorial?: true;
+    label?: boolean;
+    producer?: boolean;
+    editorial?: boolean;
   };
   aged?: {
     label?: Aged[];
@@ -124,9 +129,9 @@ export type NormalizedBeverage = {
     editorial?: LanguageValue[];
   };
   isDryHopped?: {
-    label?: true;
-    producer?: true;
-    editorial?: true;
+    label?: boolean;
+    producer?: boolean;
+    editorial?: boolean;
   };
   dryHopped?: {
     label?: Array<LanguageValue[]>;

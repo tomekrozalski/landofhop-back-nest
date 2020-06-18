@@ -9,10 +9,13 @@ import 'isomorphic-unfetch';
 
 import { SiteLanguage } from 'utils/enums';
 import { Beverage } from 'utils/types';
+import { NormalizedTranslatedBeverage } from 'utils/types/normalized';
+
 import {
-  NormalizedBeverage,
-  NormalizedTranslatedBeverage,
-} from 'utils/types/normalized';
+  Dashboard as NormalizedBeverageForDashboard,
+  Regular as NormalizedBeverage,
+} from 'utils/types/normalized/beverage';
+
 import {
   RawBeverage as BeverageUpdatedImages,
   TranslatedBeverage as TranslatedBeverageUpdatedImages,
@@ -22,10 +25,12 @@ import {
   TranslatedBeverage as BeverageSearchTranslatedResults,
 } from 'utils/types/beverage/getUpdatedBeverageImages';
 import {
-  normalizeBeverageDetails,
   normalizeSearchResult,
   normalizeUpdatedBeverageImgages,
 } from 'utils/normalizers/output';
+import normalizeBeverage from 'utils/normalizers/output/beverage/regular';
+import normalizeBeverageForDashboard from 'utils/normalizers/output/beverage/dashboard';
+
 import {
   ImageFormat,
   ImageSize,
@@ -45,7 +50,7 @@ export class BeverageService {
   async getAllBeverages() {
     const rawBeverages: Beverage[] = await this.beverageModel.getAllBeverages();
     const formattedBeverages: NormalizedBeverage[] = rawBeverages.map(
-      beverage => normalizeBeverageDetails({ beverage, translated: false }),
+      beverage => normalizeBeverage(beverage),
     );
 
     return formattedBeverages;
@@ -66,34 +71,11 @@ export class BeverageService {
       shortId,
     );
 
-    const formattedBeverage: NormalizedBeverage = normalizeBeverageDetails({
-      beverage: rawBeverages[0],
-      translated: false,
-    });
+    console.log('typeof', typeof normalizeBeverageForDashboard);
 
-    return formattedBeverage;
-  }
-
-  async getTranslatedBeverage({
-    language,
-    shortId,
-    brand,
-    badge,
-  }: {
-    language: SiteLanguage;
-    shortId: string;
-    brand: string;
-    badge: string;
-  }) {
-    const rawBeverages: Beverage[] = await this.beverageModel.getBeverage(
-      badge,
-      brand,
-      shortId,
+    const formattedBeverage: NormalizedBeverageForDashboard = normalizeBeverageForDashboard(
+      rawBeverages[0],
     );
-    const formattedBeverage: NormalizedTranslatedBeverage = normalizeBeverageDetails(
-      { beverage: rawBeverages[0], language, translated: true },
-    );
-
     return formattedBeverage;
   }
 
