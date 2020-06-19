@@ -1,3 +1,4 @@
+import getValueByLanguage from './getValueByLanguage';
 import languageIdToCode from './languageIdToCode';
 
-export { languageIdToCode };
+export { getValueByLanguage, languageIdToCode };

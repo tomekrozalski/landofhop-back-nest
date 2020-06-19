@@ -50,6 +50,25 @@ export class BeverageController {
     return beverage;
   }
 
+  @Get(':language/:shortId/:brand/:badge')
+  async getTranslatedDetails(
+    @Param('language') language: SiteLanguage,
+    @Param('shortId') shortId: string,
+    @Param('brand') brand: string,
+    @Param('badge') badge: string,
+  ) {
+    const beverage: NormalizedBeverage = await this.beverageService.getTranslatedDetails(
+      {
+        language,
+        shortId,
+        brand,
+        badge,
+      },
+    );
+
+    return beverage;
+  }
+
   @Get('update-beverage-images/:language/:shortId/:brand/:badge')
   @UseGuards(AuthGuard)
   async getUpdatedBeverageImages(

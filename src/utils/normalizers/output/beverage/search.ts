@@ -1,7 +1,7 @@
 import { RawBeverage as BeverageSearchRawResults } from 'utils/types/beverage/beverageSearch';
 import { Search as NormalizedBeverageForSearch } from 'utils/types/normalized/beverage';
 import { SiteLanguage } from 'utils/enums';
-import { getValueByLanguage } from 'utils/helpers';
+import { getValueByLanguage } from './helpers';
 
 /* ---------------------------------------------------
  * SEARCH BEVERAGE NORMALIZATION

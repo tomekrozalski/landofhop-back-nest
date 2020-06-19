@@ -23,6 +23,7 @@ import { normalizeUpdatedBeverageImgages } from 'utils/normalizers/output';
 import {
   normalizeBeverage,
   normalizeBeverageForDashboard,
+  normalizeBeverageForDetails,
   normalizeBeverageForSearch,
 } from 'utils/normalizers/output/beverage';
 import {
@@ -67,6 +68,31 @@ export class BeverageService {
     );
 
     const formattedBeverage = normalizeBeverageForDashboard(rawBeverages[0]);
+    return formattedBeverage;
+  }
+
+  async getTranslatedDetails({
+    language,
+    shortId,
+    brand,
+    badge,
+  }: {
+    language: SiteLanguage;
+    shortId: string;
+    brand: string;
+    badge: string;
+  }) {
+    const rawBeverages: Beverage[] = await this.beverageModel.getBeverage(
+      badge,
+      brand,
+      shortId,
+    );
+
+    const formattedBeverage: any = normalizeBeverageForDetails(
+      rawBeverages[0],
+      language,
+    );
+
     return formattedBeverage;
   }
 

@@ -1,5 +1,5 @@
-import { LanguageValue } from '../types';
-import { SiteLanguage } from '../enums';
+import { LanguageValue } from 'utils/types';
+import { SiteLanguage } from 'utils/enums';
 
 type ExtendedLanguageValue = LanguageValue & { complete?: boolean };
 

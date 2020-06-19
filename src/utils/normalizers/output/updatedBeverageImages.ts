@@ -1,23 +1,29 @@
-import { RawBeverage, TranslatedBeverage } from 'utils/types/beverage/getUpdatedBeverageImages';
+import {
+  RawBeverage,
+  TranslatedBeverage,
+} from 'utils/types/beverage/getUpdatedBeverageImages';
 import { SiteLanguage } from 'utils/enums';
-import { getValueByLanguage } from 'utils/helpers';
+import { getValueByLanguage } from './beverage/helpers';
 
 type Props = {
-	beverage: RawBeverage
-	language: SiteLanguage
-}
+  beverage: RawBeverage;
+  language: SiteLanguage;
+};
 
-const normalizeUpdatedBeverageImgages = ({ beverage, language }: Props): TranslatedBeverage => {
-	const translate = values => getValueByLanguage(values, language, false);
+const normalizeUpdatedBeverageImgages = ({
+  beverage,
+  language,
+}: Props): TranslatedBeverage => {
+  const translate = values => getValueByLanguage(values, language, false);
 
-	return {
-		...beverage,
-		name: translate(beverage.name),
-		brand: {
-			...beverage.brand,
-			name: translate(beverage.brand.name),
-		}
-	};
-}
+  return {
+    ...beverage,
+    name: translate(beverage.name),
+    brand: {
+      ...beverage.brand,
+      name: translate(beverage.brand.name),
+    },
+  };
+};
 
 export default normalizeUpdatedBeverageImgages;
