@@ -7,7 +7,7 @@ import producerSchema from './producerSchema';
 import {
   beverageSearch,
   getAllBeverages,
-  getBeverage,
+  getBeverageForDashboard,
   getUpdatedBeverageImages,
   removeCap,
   removeGallery,
@@ -50,7 +50,7 @@ const beverageSchema = new mongoose.Schema(
 beverageSchema.index({ badge: 1, shortId: 1 }, { unique: true });
 beverageSchema.statics.beverageSearch = beverageSearch;
 beverageSchema.statics.getAllBeverages = getAllBeverages;
-beverageSchema.statics.getBeverage = getBeverage;
+beverageSchema.statics.getBeverageForDashboard = getBeverageForDashboard;
 beverageSchema.statics.getUpdatedBeverageImages = getUpdatedBeverageImages;
 beverageSchema.statics.removeCap = removeCap;
 beverageSchema.statics.removeGallery = removeGallery;

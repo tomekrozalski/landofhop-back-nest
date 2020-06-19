@@ -17,7 +17,7 @@ import {
 import { Aged, BeveragePrice } from '../..';
 
 type LanguageValue = {
-  language?: string;
+  language?: string; // code
   value: string;
 };
 

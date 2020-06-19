@@ -34,7 +34,7 @@ export class BeverageController {
   }
 
   @Get(':shortId/:brand/:badge')
-  async getBeverage(
+  async getBeverageForDashboard(
     @Param('shortId') shortId: string,
     @Param('brand') brand: string,
     @Param('badge') badge: string,

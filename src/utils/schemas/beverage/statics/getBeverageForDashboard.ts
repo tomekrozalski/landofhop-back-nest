@@ -3,7 +3,7 @@ import { language } from 'utils/schemas/common/aggregation';
 import { institution, ingredient, place } from './common/aggregation';
 import { editorial, label, producer } from './common/project';
 
-const getBeverage = function(
+const getBeverageForDashboard = function(
   badge: string,
   brand: string,
   shortId: string,
@@ -38,4 +38,4 @@ const getBeverage = function(
   ]);
 };
 
-export default getBeverage;
+export default getBeverageForDashboard;

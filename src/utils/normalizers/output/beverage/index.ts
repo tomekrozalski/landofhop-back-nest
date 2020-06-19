@@ -1,5 +1,9 @@
-import common from './common';
 import normalizeBeverageForDashboard from './dashboard';
 import normalizeBeverage from './regular';
+import normalizeBeverageForSearch from './search';
 
-export { common, normalizeBeverage, normalizeBeverageForDashboard };
+export {
+  normalizeBeverageForDashboard,
+  normalizeBeverage,
+  normalizeBeverageForSearch,
+};

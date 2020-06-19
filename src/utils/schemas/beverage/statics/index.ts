@@ -1,6 +1,6 @@
 import beverageSearch from './beverageSearch';
 import getAllBeverages from './getAllBeverages';
-import getBeverage from './getBeverage';
+import getBeverageForDashboard from './getBeverageForDashboard';
 import getUpdatedBeverageImages from './getUpdatedBeverageImages';
 import removeCap from './removeCap';
 import removeGallery from './removeGallery';
@@ -13,7 +13,7 @@ import updateCoverOutline from './updateCoverOutline';
 export {
   beverageSearch,
   getAllBeverages,
-  getBeverage,
+  getBeverageForDashboard,
   getUpdatedBeverageImages,
   removeCap,
   removeGallery,

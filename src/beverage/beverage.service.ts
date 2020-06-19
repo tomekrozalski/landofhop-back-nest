@@ -9,28 +9,22 @@ import 'isomorphic-unfetch';
 
 import { SiteLanguage } from 'utils/enums';
 import { Beverage } from 'utils/types';
-import { NormalizedTranslatedBeverage } from 'utils/types/normalized';
-
 import {
   Dashboard as NormalizedBeverageForDashboard,
   Regular as NormalizedBeverage,
+  Search as NormalizedBeverageForSearch,
 } from 'utils/types/normalized/beverage';
-
 import {
   RawBeverage as BeverageUpdatedImages,
   TranslatedBeverage as TranslatedBeverageUpdatedImages,
 } from 'utils/types/beverage/getUpdatedBeverageImages';
+import { RawBeverage as BeverageSearchRawResults } from 'utils/types/beverage/getUpdatedBeverageImages';
+import { normalizeUpdatedBeverageImgages } from 'utils/normalizers/output';
 import {
-  RawBeverage as BeverageSearchRawResults,
-  TranslatedBeverage as BeverageSearchTranslatedResults,
-} from 'utils/types/beverage/getUpdatedBeverageImages';
-import {
-  normalizeSearchResult,
-  normalizeUpdatedBeverageImgages,
-} from 'utils/normalizers/output';
-import normalizeBeverage from 'utils/normalizers/output/beverage/regular';
-import normalizeBeverageForDashboard from 'utils/normalizers/output/beverage/dashboard';
-
+  normalizeBeverage,
+  normalizeBeverageForDashboard,
+  normalizeBeverageForSearch,
+} from 'utils/normalizers/output/beverage';
 import {
   ImageFormat,
   ImageSize,
@@ -49,6 +43,7 @@ export class BeverageService {
 
   async getAllBeverages() {
     const rawBeverages: Beverage[] = await this.beverageModel.getAllBeverages();
+
     const formattedBeverages: NormalizedBeverage[] = rawBeverages.map(
       beverage => normalizeBeverage(beverage),
     );
@@ -65,17 +60,13 @@ export class BeverageService {
     brand: string;
     badge: string;
   }) {
-    const rawBeverages: Beverage[] = await this.beverageModel.getBeverage(
+    const rawBeverages: Beverage[] = await this.beverageModel.getBeverageForDashboard(
       badge,
       brand,
       shortId,
     );
 
-    console.log('typeof', typeof normalizeBeverageForDashboard);
-
-    const formattedBeverage: NormalizedBeverageForDashboard = normalizeBeverageForDashboard(
-      rawBeverages[0],
-    );
+    const formattedBeverage = normalizeBeverageForDashboard(rawBeverages[0]);
     return formattedBeverage;
   }
 
@@ -203,12 +194,8 @@ export class BeverageService {
       return [];
     }
 
-    const formattedResults: BeverageSearchTranslatedResults[] = rawResults.map(
-      beverage =>
-        normalizeSearchResult({
-          beverage,
-          language,
-        }),
+    const formattedResults: NormalizedBeverageForSearch[] = rawResults.map(
+      beverage => normalizeBeverageForSearch(beverage, language),
     );
 
     return formattedResults;
