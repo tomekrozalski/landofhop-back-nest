@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as sharp from 'sharp';
@@ -94,6 +94,41 @@ export class BeverageService {
     );
 
     return formattedBeverage;
+  }
+
+  async addNewBeverage({
+    badge,
+    name,
+    brand,
+    container,
+    notes,
+    added,
+    shortId,
+  }) {
+    const newBeverage = new this.beverageModel({
+      badge,
+      label: {
+        general: {
+          name,
+          brand,
+        },
+        container,
+      },
+      ...(notes && {
+        editorial: {
+          ...(notes && { notes }),
+        },
+      }),
+      added,
+      shortId,
+    });
+
+    const { _id } = await newBeverage.save();
+    const [{ brand: brandBadge }] = await await this.beverageModel.getBrandById(
+      _id,
+    );
+
+    return { badge, brand: brandBadge, shortId };
   }
 
   async getTracedSVG({ badge, brand, color, shortId, type }) {
@@ -305,59 +340,59 @@ export class BeverageService {
   }) {
     const containerPath = `${brand}/${badge}/${shortId}/container`;
 
-    const result = Promise.all(
-      images.reduce((acc, image, i) => {
-        const properIndex = i + 1;
-        const fileName =
-          properIndex < 10 ? `0${properIndex}` : properIndex.toString();
+    const listOfImagesToSave = images.reduce((acc, image, i) => {
+      const properIndex = i + 1;
+      const fileName =
+        properIndex < 10 ? `0${properIndex}` : properIndex.toString();
 
-        return [
-          ...acc,
-          saveGallery({
-            containerPath,
-            fileName,
-            format: ImageFormat.webp,
-            image,
-            size: ImageSize.large,
-          }),
-          saveGallery({
-            containerPath,
-            fileName,
-            format: ImageFormat.webp,
-            image,
-            size: ImageSize.big,
-          }),
-          saveGallery({
-            containerPath,
-            fileName,
-            format: ImageFormat.webp,
-            image,
-            size: ImageSize.small,
-          }),
-          saveGallery({
-            containerPath,
-            fileName,
-            format: ImageFormat.jpg,
-            image,
-            size: ImageSize.large,
-          }),
-          saveGallery({
-            containerPath,
-            fileName,
-            format: ImageFormat.jpg,
-            image,
-            size: ImageSize.big,
-          }),
-          saveGallery({
-            containerPath,
-            fileName,
-            format: ImageFormat.jpg,
-            image,
-            size: ImageSize.small,
-          }),
-        ];
-      }, []),
-    )
+      return [
+        ...acc,
+        saveGallery({
+          containerPath,
+          fileName,
+          format: ImageFormat.webp,
+          image,
+          size: ImageSize.large,
+        }),
+        saveGallery({
+          containerPath,
+          fileName,
+          format: ImageFormat.webp,
+          image,
+          size: ImageSize.big,
+        }),
+        saveGallery({
+          containerPath,
+          fileName,
+          format: ImageFormat.webp,
+          image,
+          size: ImageSize.small,
+        }),
+        saveGallery({
+          containerPath,
+          fileName,
+          format: ImageFormat.jpg,
+          image,
+          size: ImageSize.large,
+        }),
+        saveGallery({
+          containerPath,
+          fileName,
+          format: ImageFormat.jpg,
+          image,
+          size: ImageSize.big,
+        }),
+        saveGallery({
+          containerPath,
+          fileName,
+          format: ImageFormat.jpg,
+          image,
+          size: ImageSize.small,
+        }),
+      ];
+    }, []);
+
+    const result = Promise.all(listOfImagesToSave)
       .then(async data => {
         await this.beverageModel.saveGallery({ id, images: images.length });
         return true;

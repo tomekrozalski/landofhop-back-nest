@@ -1,6 +1,5 @@
 import * as mongoose from 'mongoose';
 
-import languageSchema from '../language';
 import editorialSchema from './editorialSchema';
 import labelSchema from './labelSchema';
 import producerSchema from './producerSchema';
@@ -9,6 +8,7 @@ import {
   getAllBeverages,
   getBeverage,
   getBeverageForDashboard,
+  getBrandById,
   getUpdatedBeverageImages,
   removeCap,
   removeGallery,
@@ -40,10 +40,6 @@ const beverageSchema = new mongoose.Schema(
       required: true,
     },
     updated: Date,
-    language: {
-      type: [languageSchema],
-      required: true,
-    },
   },
   { strict: false },
 );
@@ -61,5 +57,6 @@ beverageSchema.statics.saveCover = saveCover;
 beverageSchema.statics.saveGallery = saveGallery;
 beverageSchema.statics.updateContainerOutline = updateContainerOutline;
 beverageSchema.statics.updateCoverOutline = updateCoverOutline;
+beverageSchema.statics.getBrandById = getBrandById;
 
 export default beverageSchema;

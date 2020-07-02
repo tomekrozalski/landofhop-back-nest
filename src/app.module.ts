@@ -36,6 +36,7 @@ export class AppModule implements NestModule {
       .forRoutes(
         { path: 'place', method: RequestMethod.POST },
         { path: 'institution', method: RequestMethod.POST },
+        { path: 'beverage', method: RequestMethod.POST },
       );
   }
 }
