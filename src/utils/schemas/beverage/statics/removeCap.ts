@@ -1,4 +1,4 @@
-import { RawBeverage } from 'utils/types/beverage/getUpdatedBeverageImages';
+import { RawBeverage } from 'utils/types/beverage/getBeverageImagesData';
 
 type Props = {
   id: string;

@@ -1,20 +1,19 @@
-import { RawBeverage } from 'utils/types/beverage/getUpdatedBeverageImages';
+import { RawBeverage } from 'utils/types/beverage/getBeverageImagesData';
 
 type Props = {
-	height: number
-	id: string
-	width: number
-}
+  height: number;
+  id: string;
+  width: number;
+};
 
-const saveCover = function ({
-	height,
-	id,
-	width
-}: Props): RawBeverage {
-	return this
-		.findByIdAndUpdate(id, {
-			'editorial.photos.cover': { height, width },
-		}, { useFindAndModify: false })
-}
+const saveCover = function({ height, id, width }: Props): RawBeverage {
+  return this.findByIdAndUpdate(
+    id,
+    {
+      'editorial.photos.cover': { height, width },
+    },
+    { useFindAndModify: false },
+  );
+};
 
 export default saveCover;

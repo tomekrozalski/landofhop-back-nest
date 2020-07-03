@@ -9,7 +9,7 @@ import {
   getBeverage,
   getBeverageForDashboard,
   getBrandById,
-  getUpdatedBeverageImages,
+  getBeverageImagesData,
   removeCap,
   removeGallery,
   saveCap,
@@ -49,7 +49,7 @@ beverageSchema.statics.beverageSearch = beverageSearch;
 beverageSchema.statics.getAllBeverages = getAllBeverages;
 beverageSchema.statics.getBeverage = getBeverage;
 beverageSchema.statics.getBeverageForDashboard = getBeverageForDashboard;
-beverageSchema.statics.getUpdatedBeverageImages = getUpdatedBeverageImages;
+beverageSchema.statics.getBeverageImagesData = getBeverageImagesData;
 beverageSchema.statics.removeCap = removeCap;
 beverageSchema.statics.removeGallery = removeGallery;
 beverageSchema.statics.saveCap = saveCap;

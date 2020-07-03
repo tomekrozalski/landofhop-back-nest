@@ -1,7 +1,7 @@
 import {
   RawBeverage,
   TranslatedBeverage,
-} from 'utils/types/beverage/getUpdatedBeverageImages';
+} from 'utils/types/beverage/getBeverageImagesData';
 import { SiteLanguage } from 'utils/enums';
 import { getValueByLanguage } from './beverage/helpers';
 

@@ -3,7 +3,7 @@ import getAllBeverages from './getAllBeverages';
 import getBeverage from './getBeverage';
 import getBeverageForDashboard from './getBeverageForDashboard';
 import getBrandById from './getBrandById';
-import getUpdatedBeverageImages from './getUpdatedBeverageImages';
+import getBeverageImagesData from './getBeverageImagesData';
 import removeCap from './removeCap';
 import removeGallery from './removeGallery';
 import saveCap from './saveCap';
@@ -18,7 +18,7 @@ export {
   getBeverage,
   getBeverageForDashboard,
   getBrandById,
-  getUpdatedBeverageImages,
+  getBeverageImagesData,
   removeCap,
   removeGallery,
   saveCap,

@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 
 import { SiteLanguage } from 'utils/enums';
 import { AuthGuard } from 'utils/guards';
-import { TranslatedBeverage as BeverageSearchTranslatedResults } from 'utils/types/beverage/getUpdatedBeverageImages';
+import { TranslatedBeverage as BeverageSearchTranslatedResults } from 'utils/types/beverage/getBeverageImagesData';
 import {
   Dashboard as NormalizedBeverageForDashboard,
   Regular as NormalizedBeverage,
@@ -69,13 +69,13 @@ export class GetBeverageDetailsController {
 
   @Get('update-beverage-images/:language/:shortId/:brand/:badge')
   @UseGuards(AuthGuard)
-  async getUpdatedBeverageImages(
+  async getBeverageImagesData(
     @Param('language') language: SiteLanguage,
     @Param('shortId') shortId: string,
     @Param('brand') brand: string,
     @Param('badge') badge: string,
   ) {
-    const beverage: BeverageSearchTranslatedResults = await this.beverageService.getUpdatedBeverageImages(
+    const beverage: BeverageSearchTranslatedResults = await this.beverageService.getBeverageImagesData(
       {
         language,
         shortId,

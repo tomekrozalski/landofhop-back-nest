@@ -11,7 +11,7 @@ import {
 import {
   RawBeverage as BeverageSearchRawResults,
   TranslatedBeverage as TranslatedBeverageUpdatedResults,
-} from 'utils/types/beverage/getUpdatedBeverageImages';
+} from 'utils/types/beverage/getBeverageImagesData';
 import {
   normalizeBeverage,
   normalizeBeverageForDashboard,
@@ -103,7 +103,7 @@ export class GetBeverageDetailsService {
     return formattedResults;
   }
 
-  async getUpdatedBeverageImages({
+  async getBeverageImagesData({
     language,
     shortId,
     brand,
@@ -114,7 +114,7 @@ export class GetBeverageDetailsService {
     brand: string;
     badge: string;
   }) {
-    const rawBeverage: BeverageSearchRawResults = await this.beverageModel.getUpdatedBeverageImages(
+    const rawBeverage: BeverageSearchRawResults = await this.beverageModel.getBeverageImagesData(
       { shortId, brand, badge },
     );
     const formattedBeverage: TranslatedBeverageUpdatedResults = normalizeUpdatedBeverageImgages(
