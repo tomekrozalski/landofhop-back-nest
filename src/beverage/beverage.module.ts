@@ -2,14 +2,42 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { BeverageSchema } from 'utils/schemas';
-import { BeverageController } from './beverage.controller';
-import { BeverageService } from './beverage.service';
+import {
+  AddNewBeverageController,
+  BeverageCapController,
+  BeverageCoverController,
+  BeverageGalleryController,
+  BeverageOutlinesController,
+  GetBeverageDetailsController,
+} from './controllers';
+import {
+  AddNewBeverageService,
+  BeverageCapService,
+  BeverageCoverService,
+  BeverageGalleryService,
+  BeverageOutlinesService,
+  GetBeverageDetailsService,
+} from './services';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Beverage', schema: BeverageSchema }]),
   ],
-  controllers: [BeverageController],
-  providers: [BeverageService],
+  controllers: [
+    GetBeverageDetailsController,
+    AddNewBeverageController,
+    BeverageCoverController,
+    BeverageGalleryController,
+    BeverageOutlinesController,
+    BeverageCapController,
+  ],
+  providers: [
+    GetBeverageDetailsService,
+    AddNewBeverageService,
+    BeverageCoverService,
+    BeverageGalleryService,
+    BeverageOutlinesService,
+    BeverageCapService,
+  ],
 })
 export class BeverageModule {}
