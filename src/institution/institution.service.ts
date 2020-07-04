@@ -11,12 +11,18 @@ export class InstitutionService {
     private readonly institutionModel: Model<Institution>,
   ) {}
 
-  async getAllInstitutions() {
+  async getAllInstitutions(): Promise<Institution[]> {
     const institutions: Institution[] = await this.institutionModel.getAllInstitutions();
     return institutions;
   }
 
-  async saveInstitution({ badge, name, ownedBy, shortId, website }) {
+  async saveInstitution({
+    badge,
+    name,
+    ownedBy,
+    shortId,
+    website,
+  }): Promise<Institution[]> {
     const newInstitution = new this.institutionModel({
       badge,
       name: name.map(({ lang, value }) => ({
@@ -29,6 +35,8 @@ export class InstitutionService {
     });
 
     await newInstitution.save();
-    return true;
+
+    const updatedInstitutions = await this.getAllInstitutions();
+    return updatedInstitutions;
   }
 }

@@ -9,7 +9,7 @@ export class InstitutionController {
   constructor(private readonly institutionService: InstitutionService) {}
 
   @Get()
-  async getAllInstitutions() {
+  async getAllInstitutions(): Promise<Institution[]> {
     const institutions: Institution[] = await this.institutionService.getAllInstitutions();
     return institutions;
   }
@@ -26,14 +26,16 @@ export class InstitutionController {
     @Body('ownedBy') ownedBy: string,
     @Body('shortId') shortId: string,
     @Body('website') website: string,
-  ) {
-    const result: boolean = await this.institutionService.saveInstitution({
-      badge,
-      name,
-      ownedBy,
-      shortId,
-      website,
-    });
+  ): Promise<Institution[]> {
+    const result: Institution[] = await this.institutionService.saveInstitution(
+      {
+        badge,
+        name,
+        ownedBy,
+        shortId,
+        website,
+      },
+    );
 
     return result;
   }
