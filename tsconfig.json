@@ -12,9 +12,8 @@
     "incremental": true,
     "rootDir": ".",
     "paths": {
-      "utils/*": [
-        "src/utils/*"
-      ]
+      "utils/*": ["src/utils/*"],
+      "beverage/*": ["src/beverage/*"]
     }
   },
   "exclude": ["node_modules", "dist"]

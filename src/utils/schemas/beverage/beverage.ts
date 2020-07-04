@@ -19,6 +19,8 @@ import {
   updateCoverOutline,
 } from './statics';
 
+import getLastTiles from 'beverage/admin/getLastTiles/getLastTiles.query';
+
 const beverageSchema = new mongoose.Schema(
   {
     shortId: {
@@ -58,5 +60,7 @@ beverageSchema.statics.saveGallery = saveGallery;
 beverageSchema.statics.updateContainerOutline = updateContainerOutline;
 beverageSchema.statics.updateCoverOutline = updateCoverOutline;
 beverageSchema.statics.getBrandById = getBrandById;
+
+beverageSchema.statics.getLastTiles = getLastTiles;
 
 export default beverageSchema;

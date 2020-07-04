@@ -19,6 +19,8 @@ import {
   GetBeverageDetailsService,
 } from './services';
 
+import { GetLastTilesController, GetLastTilesService } from './admin';
+
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Beverage', schema: BeverageSchema }]),
@@ -30,6 +32,8 @@ import {
     BeverageGalleryController,
     BeverageOutlinesController,
     BeverageCapController,
+
+    GetLastTilesController,
   ],
   providers: [
     GetBeverageDetailsService,
@@ -38,6 +42,8 @@ import {
     BeverageGalleryService,
     BeverageOutlinesService,
     BeverageCapService,
+
+    GetLastTilesService,
   ],
 })
 export class BeverageModule {}
