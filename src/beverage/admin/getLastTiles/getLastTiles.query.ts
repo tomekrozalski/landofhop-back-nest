@@ -1,10 +1,8 @@
-import { Beverage } from 'utils/types';
-import { language } from 'utils/schemas/common/aggregation';
+import { language } from 'utils/aggregation';
+import { Beverage } from 'beverage/utils/types';
+import { getNameAndBrandLanguage } from 'beverage/utils/aggregation';
 
-import { getNameAndBrandLanguage } from 'beverage/common/aggregation';
-import { String } from 'aws-sdk/clients/cloudsearchdomain';
-
-const getLastTiles = function(amount: String): Beverage[] {
+const getLastTiles = function(amount): Beverage[] {
   return this.aggregate([
     {
       $lookup: {

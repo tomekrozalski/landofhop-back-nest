@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { Beverage } from 'utils/types';
+import { Beverage } from 'beverage/utils/types';
 import { TileType } from './Tile.type';
 
 @Injectable()

@@ -2,48 +2,64 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { BeverageSchema } from 'utils/schemas';
+
 import {
   AddNewBeverageController,
-  BeverageCapController,
-  BeverageCoverController,
-  BeverageGalleryController,
-  BeverageOutlinesController,
-  GetBeverageDetailsController,
-} from './controllers';
-import {
   AddNewBeverageService,
-  BeverageCapService,
-  BeverageCoverService,
-  BeverageGalleryService,
-  BeverageOutlinesService,
-  GetBeverageDetailsService,
-} from './services';
-
-import { GetLastTilesController, GetLastTilesService } from './admin';
+  GetDetailsController,
+  GetDetailsService,
+  GetImagesDataController,
+  GetImagesDataService,
+  GetLastTilesController,
+  GetLastTilesService,
+  GetTranslatedDetailsController,
+  GetTranslatedDetailsService,
+} from './admin';
+import {
+  CapController,
+  CapService,
+  CoverController,
+  CoverService,
+  GalleryController,
+  GalleryService,
+  OutlinesController,
+  OutlinesService,
+} from './images';
+import {
+  GetAllBeveragesDetailsController,
+  GetAllBeveragesDetailsService,
+} from './prefetch';
+import { SearchBeverageController, SearchBeverageService } from './public';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Beverage', schema: BeverageSchema }]),
   ],
   controllers: [
-    GetBeverageDetailsController,
     AddNewBeverageController,
-    BeverageCoverController,
-    BeverageGalleryController,
-    BeverageOutlinesController,
-    BeverageCapController,
-
+    GetDetailsController,
     GetLastTilesController,
+    GetImagesDataController,
+    GetTranslatedDetailsController,
+    GetAllBeveragesDetailsController,
+    SearchBeverageController,
+    CapController,
+    CoverController,
+    GalleryController,
+    OutlinesController,
   ],
   providers: [
-    GetBeverageDetailsService,
     AddNewBeverageService,
-    BeverageCoverService,
-    BeverageGalleryService,
-    BeverageOutlinesService,
-    BeverageCapService,
-
+    GetDetailsService,
     GetLastTilesService,
+    GetImagesDataService,
+    GetTranslatedDetailsService,
+    GetAllBeveragesDetailsService,
+    SearchBeverageService,
+    CapService,
+    CoverService,
+    GalleryService,
+    OutlinesService,
   ],
 })
 export class BeverageModule {}

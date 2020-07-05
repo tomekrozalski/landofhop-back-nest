@@ -1,22 +1,17 @@
+import { LanguageValue } from 'utils/types';
 import { ContainerType } from 'beverage/utils/enums';
 
-export type TileType = {
+export type RawBeverageType = {
   id: string;
   shortId: string;
   badge: string;
+  name: LanguageValue[];
   brand: {
     badge: string;
-    name: {
-      value: string;
-      language?: string;
-    };
+    name: LanguageValue[];
   };
-  name: {
-    value: string;
-    language?: string;
-  };
-  photos: {
-    cover: {
+  photos?: {
+    cover?: {
       height: number;
       width: number;
     };
