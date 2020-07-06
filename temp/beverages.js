@@ -567,4 +567,62 @@ Gotowanie: 80 minut
     added: '06.07.2020, 11:59',
     height: 17,
   },
+  {
+    name: "Żywiec Białe bezalko",
+    price: 4.20
+  }
+  {
+    name: "Zlaty Bazant (do sprwadzenia)",
+    style: "LeŻiak, Lager",
+    extract: "12% wag.",
+    tale: "Złociste piwo o pełnym słodowym charakterze, z delikatną goryczką. \n\n 100% słodu z lokalnego jęczmienia ze słonecznego regionu Hurbanovo.",
+    container: "butelka zielona 500ml",
+    pasteurisation: true,
+    alcohol: '4.7% obj',
+    ingredients: "woda, słód jęczmienny, ekstrakt z chmielu i chmiel",
+    wyprodukowano: "Heineken Hurbanovo Słowacja, dystrybutor Żywiec",
+    barcode: "8588000064014",
+    height: 26,
+    price: 3.99,
+    added: '06.07.2020, 12:33',
+  },
+  {
+    name: "Grolsch",
+    style: "Premium Lager",
+    barcode: "083741150012",
+    place: "Razotajs, Enschede, Holandia",
+    container: "puszka srebrna 500ml",
+    height: 17,
+    tale: {
+      en: "400 years ago brewmaster Peter Kuijper pushed boundaries by combining two hops for a more vibrant taste and crisp finish. Back then a breakthrough, today still the perfect brew for you to enjoy.",
+
+    },
+    alcohol: "5% obj.",
+    price: 4.49,
+    added: '06.07.2020, 12:39',
+  },
+  {
+    name: "Zatecky Svetly Lezak",
+    barcode: "5900014004764",
+    style: "Svetly Lezak",
+    pasteurisation: true,
+    alcohol: '5%',
+    ingredients: "voda, jecny slad, horky chmel, zatecky aromaticky chmel. vareno pod dohledem sladka z pivovaru Zatecky pivovar, spol. s.r.o., v pivovaru v Polsku",
+    ingredientspl: "woda, słod jęczmienny, chmiel goryczkowy, chmiel aromatyczny żatecki. wyprodukowane w Polsce",
+    wyprodukowano: "Carlsberg Polska dystrybutor",
+    container: "Puszka złota 500ml",
+    price: 3.19,
+    added: '06.07.2020, 12:44',
+  },
+  {
+    name: "Staropramen",
+    pasteurisation: true,
+    contains: "słód jęczmienny",
+    alcohol: '5% obj.',
+    container: "puszka 500ml złota",
+    wyprodukowano: "w UE",
+    barcode: "5998817529409",
+    price: 2.99,
+    added: '06.07.2020, 12:46',
+  }
 ];
