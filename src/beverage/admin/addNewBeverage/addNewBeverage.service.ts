@@ -38,9 +38,7 @@ export class AddNewBeverageService {
     });
 
     const { _id } = await newBeverage.save();
-    const [{ brand: brandBadge }] = await await this.beverageModel.getBrandById(
-      _id,
-    );
+    const [{ brand: brandBadge }] = await this.beverageModel.getBrandById(_id);
 
     return { badge, brand: brandBadge, shortId };
   }

@@ -14,6 +14,8 @@ import {
   GetLastTilesService,
   GetTranslatedDetailsController,
   GetTranslatedDetailsService,
+  UpdateBeverageController,
+  UpdateBeverageService,
 } from './admin';
 import {
   CapController,
@@ -47,6 +49,7 @@ import { SearchBeverageController, SearchBeverageService } from './public';
     CoverController,
     GalleryController,
     OutlinesController,
+    UpdateBeverageController,
   ],
   providers: [
     AddNewBeverageService,
@@ -60,6 +63,7 @@ import { SearchBeverageController, SearchBeverageService } from './public';
     CoverService,
     GalleryService,
     OutlinesService,
+    UpdateBeverageService,
   ],
 })
 export class BeverageModule {}

@@ -9,6 +9,10 @@ import {
   GetTranslatedDetailsController,
   GetTranslatedDetailsService,
 } from './getTranslatedDetails';
+import {
+  UpdateBeverageController,
+  UpdateBeverageService,
+} from './updateBeverage';
 
 export {
   AddNewBeverageController,
@@ -21,4 +25,6 @@ export {
   GetLastTilesService,
   GetTranslatedDetailsController,
   GetTranslatedDetailsService,
+  UpdateBeverageController,
+  UpdateBeverageService,
 };

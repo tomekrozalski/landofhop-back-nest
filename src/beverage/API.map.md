@@ -14,6 +14,9 @@
 - Dashboard, add new beverage:
   POST beverage (admin/addNewBeverage)
 
+- Dashboard, update beverage data:
+  PUT beverage (admin/updateBeverage)
+
 - Dashboard, get beverage images data:
   GET beverage/images/:language/:shortId/:brand/:badge (admin/getImagesData)
 
