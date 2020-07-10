@@ -10,13 +10,9 @@ export class UpdateBeverageController {
   @Put()
   @UseGuards(AuthGuard)
   async updateBeverage(
-    @Body('id') id: string,
+    @Body('added') added: Date,
     @Body('badge') badge: string,
-    @Body('name')
-    name: {
-      lang: string;
-      value: string;
-    }[],
+    @Body('barcode') barcode: string,
     @Body('brand') brand: string,
     @Body('container')
     container: {
@@ -26,21 +22,55 @@ export class UpdateBeverageController {
       unit: string;
       value: number;
     },
+    @Body('contract')
+    contract: {
+      label?: string;
+    },
+    @Body('cooperation')
+    cooperation: {
+      label?: string[];
+    },
+    @Body('id') id: string,
+    @Body('name')
+    name: {
+      lang: string;
+      value: string;
+    }[],
     @Body('notes') notes: string,
-    @Body('added') added: Date,
+    @Body('place')
+    place: {
+      label?: string;
+    },
+    @Body('series')
+    series: {
+      label?: { language?: string; value: string }[];
+    },
+    @Body('tale')
+    tale: {
+      label?: { language?: string; value: string }[];
+      producer?: { language?: string; value: string }[];
+    },
+    @Body('updated') updated: Date,
   ) {
     const result: {
       badge: string;
       brand: string;
       shortId: string;
     } = await this.beverageService.updateBeverage({
-      id,
+      added,
       badge,
-      name,
+      barcode,
       brand,
       container,
+      contract,
+      cooperation,
+      id,
+      name,
       notes,
-      added,
+      place,
+      series,
+      tale,
+      updated,
     });
 
     return result;

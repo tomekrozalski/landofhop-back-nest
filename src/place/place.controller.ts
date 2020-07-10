@@ -27,8 +27,8 @@ export class PlaceController {
     @Body('latitude') latitude: number,
     @Body('longitude') longitude: number,
     @Body('shortId') shortId: string,
-  ) {
-    const result: boolean = await this.placeService.savePlace({
+  ): Promise<Place[]> {
+    const result: Place[] = await this.placeService.savePlace({
       city,
       country,
       institution,

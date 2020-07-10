@@ -1,52 +1,55 @@
 const beverages = [
+  // Added
   {
-    name: 'Hazy APA',
-    alcohol: '0% obj.',
-    filtered: false,
-    tale:
-      'Spróbuj jak smakuje luz z American Pale Ale. Tradycyjnie warzone, nieklarowane, więc mgliste. Jasne, orzeźwiające, o wyczuwalnej goryczce. Wzbogacone cytrusowymi nutami pochodzącymi z wyselekcjonowanych odmian amerykańskich chmieli. Cornelius APA - mglisty z natury, wyrazisty w smaku - najsmaczniejszy, gdy przed otwarciem obrócisz puszkę na chwilę denkiem do góry.',
-    barcode: '5905689310363',
-    ingredients: {
-      pl:
-        'woda, słody: jęczmienny, pszeniczny, chmiele: Magnum, Cascade, Amarillo, Mosaic, drożdże',
-      en:
-        'water, malts: barley, wheat, hops: Magnum, Cascade, Amarillo, Mosaic, yests',
-    },
-    producer: 'Sulimar Sp. z o.o.',
-    place: 'Piotrków Trybunalski',
-    series: 'Cornelius',
-    fermentation: 'top',
-    pasteurisation: true,
-    alcohol: 'do 0,5%',
-    container: '500ml puszka srebrna 17cm',
-    bitterness: 40,
-    price: '4,40 zł',
-    added: '27 czerwca 2020, 18:21',
+  name: 'Hazy APA',
+  alcohol: '0% obj.',
+  filtered: false,
+  tale:
+    'Spróbuj jak smakuje luz z American Pale Ale. Tradycyjnie warzone, nieklarowane, więc mgliste. Jasne, orzeźwiające, o wyczuwalnej goryczce. Wzbogacone cytrusowymi nutami pochodzącymi z wyselekcjonowanych odmian amerykańskich chmieli. Cornelius APA - mglisty z natury, wyrazisty w smaku - najsmaczniejszy, gdy przed otwarciem obrócisz puszkę na chwilę denkiem do góry.',
+  barcode: '5905689310363',
+  ingredients: {
+    pl:
+      'woda, słody: jęczmienny, pszeniczny, chmiele: Magnum, Cascade, Amarillo, Mosaic, drożdże',
+    en:
+      'water, malts: barley, wheat, hops: Magnum, Cascade, Amarillo, Mosaic, yests',
   },
-  {
-    name: 'Hazy IPA',
-    alcohol: '0% obj.',
-    filtered: false,
-    tale:
-      'Spróbuj jak smakuje luz z India Pale Ale. Tradycyjnie warzone, nieklarowane, więc mgliste. Jasne, silniej chmielone, o intensywnej goryczce. Wzbogacone owocowymi nutami pochodzącymi z wyselekcjonowanych odmian chmieli. Cornelius IPA - mglisty z natury, wyrazisty w smaku - najsmaczniejszy, gdy przed otwarciem obrócisz puszkę na chwilę denkiem do góry.',
-    barcode: '5905689310370',
-    ingredients: {
-      pl:
-        'woda, słody: jęczmienny, pszeniczny, chmiele: Magnum, Cascade, Amarillo, Mosaic, drożdże',
-      en:
-        'water, malts: barley, wheat, hops: Magnum, Cascade, Amarillo, Mosaic, yests',
-    },
-    producer: 'Sulimar Sp. z o.o.',
-    place: 'Piotrków Trybunalski',
-    series: 'Cornelius',
-    fermentation: 'top',
-    pasteurisation: true,
-    alcohol: 'do 0,5%',
-    container: '500ml puszka srebrna 17cm',
-    bitterness: 55,
-    price: '4,45 zł',
-    added: '27 czerwca 2020, 18:27',
+  producer: 'Sulimar Sp. z o.o.',
+  place: 'Piotrków Trybunalski',
+  series: 'Cornelius',
+  fermentation: 'top',
+  pasteurisation: true,
+  alcohol: 'do 0,5%',
+  container: '500ml puszka srebrna 17cm',
+  bitterness: 40,
+  price: '4,40 zł',
+  added: '27 czerwca 2020, 18:21',
+},
+// Added
+{
+  name: 'Hazy IPA',
+  alcohol: '0% obj.',
+  filtered: false,
+  tale:
+    'Spróbuj jak smakuje luz z India Pale Ale. Tradycyjnie warzone, nieklarowane, więc mgliste. Jasne, silniej chmielone, o intensywnej goryczce. Wzbogacone owocowymi nutami pochodzącymi z wyselekcjonowanych odmian chmieli. Cornelius IPA - mglisty z natury, wyrazisty w smaku - najsmaczniejszy, gdy przed otwarciem obrócisz puszkę na chwilę denkiem do góry.',
+  barcode: '5905689310370',
+  ingredients: {
+    pl:
+      'woda, słody: jęczmienny, pszeniczny, chmiele: Magnum, Cascade, Amarillo, Mosaic, drożdże',
+    en:
+      'water, malts: barley, wheat, hops: Magnum, Cascade, Amarillo, Mosaic, yests',
   },
+  producer: 'Sulimar Sp. z o.o.',
+  place: 'Piotrków Trybunalski',
+  series: 'Cornelius',
+  fermentation: 'top',
+  pasteurisation: true,
+  alcohol: 'do 0,5%',
+  container: '500ml puszka srebrna 17cm',
+  bitterness: 55,
+  price: '4,45 zł',
+  added: '27 czerwca 2020, 18:27',
+  },
+  // Added
   {
     name: 'Free Way',
     brand: 'AleBrowar',

@@ -1,8 +1,6 @@
 import * as mongoose from 'mongoose';
 
 const getBrandById = function(id: string): { brand: string }[] {
-  console.log('getBrandById', id);
-
   return this.aggregate([
     {
       $match: {

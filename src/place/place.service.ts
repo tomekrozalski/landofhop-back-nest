@@ -24,7 +24,7 @@ export class PlaceService {
     latitude,
     longitude,
     shortId,
-  }) {
+  }): Promise<Place[]> {
     const newPlace = new this.placeModel({
       city: city.map(({ lang, value }) => ({
         ...(lang !== 'none' && { language: lang }),
@@ -43,6 +43,8 @@ export class PlaceService {
     });
 
     await newPlace.save();
-    return true;
+
+    const updatedPlaces = await this.getAllPlaces();
+    return updatedPlaces;
   }
 }

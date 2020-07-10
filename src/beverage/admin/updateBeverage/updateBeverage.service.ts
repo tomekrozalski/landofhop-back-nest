@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 
 import { Beverage } from 'beverage/utils/types';
 import { PatchType } from './Patch.type';
+import { DataType } from './Data.type';
 import normalize from './normalize';
 
 @Injectable()
@@ -12,7 +13,7 @@ export class UpdateBeverageService {
     @InjectModel('Beverage') private readonly beverageModel: Model<Beverage>,
   ) {}
 
-  async updateBeverage(data) {
+  async updateBeverage(data: DataType) {
     const [patch]: PatchType[] = await this.beverageModel.getPatchById(data.id);
     const normalizedData = normalize({ data, patch });
 
