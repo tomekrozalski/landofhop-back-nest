@@ -3,6 +3,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { Beverage } from 'beverage/utils/types';
+import { DataType } from './Data.type';
+import normalize from './normalize';
 
 @Injectable()
 export class AddNewBeverageService {
@@ -10,36 +12,11 @@ export class AddNewBeverageService {
     @InjectModel('Beverage') private readonly beverageModel: Model<Beverage>,
   ) {}
 
-  async addNewBeverage({
-    badge,
-    name,
-    brand,
-    container,
-    notes,
-    added,
-    shortId,
-  }) {
-    const newBeverage = new this.beverageModel({
-      badge,
-      label: {
-        general: {
-          name,
-          brand,
-        },
-        container,
-      },
-      ...(notes && {
-        editorial: {
-          ...(notes && { notes }),
-        },
-      }),
-      added,
-      shortId,
-    });
-
+  async addNewBeverage(data: DataType) {
+    const newBeverage = new this.beverageModel(normalize(data));
     const { _id } = await newBeverage.save();
-    const [{ brand: brandBadge }] = await this.beverageModel.getBrandById(_id);
 
-    return { badge, brand: brandBadge, shortId };
+    const [{ brand: brandBadge }] = await this.beverageModel.getBrandById(_id);
+    return { badge: data.badge, brand: brandBadge, shortId: data.shortId };
   }
 }

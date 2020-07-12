@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 
 import { langValue } from '../common';
-import { getAllLanguages } from './statics';
+import getAllLanguages from 'language/getAllLanguages/getAllLanguages.query';
 
 const languageSchema = new mongoose.Schema({
   code: {

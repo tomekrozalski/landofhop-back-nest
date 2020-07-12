@@ -10,12 +10,9 @@ export class AddNewBeverageController {
   @Post()
   @UseGuards(AuthGuard)
   async addNewBeverage(
+    @Body('added') added: Date,
     @Body('badge') badge: string,
-    @Body('name')
-    name: {
-      lang: string;
-      value: string;
-    }[],
+    @Body('barcode') barcode: string,
     @Body('brand') brand: string,
     @Body('container')
     container: {
@@ -25,22 +22,55 @@ export class AddNewBeverageController {
       unit: string;
       value: number;
     },
+    @Body('contract')
+    contract: {
+      label?: string;
+    },
+    @Body('cooperation')
+    cooperation: {
+      label?: string[];
+    },
+    @Body('name')
+    name: {
+      lang: string;
+      value: string;
+    }[],
     @Body('notes') notes: string,
-    @Body('added') added: Date,
+    @Body('place')
+    place: {
+      label?: string;
+    },
+    @Body('series')
+    series: {
+      label?: { language?: string; value: string }[];
+    },
     @Body('shortId') shortId: string,
+    @Body('tale')
+    tale: {
+      label?: { language?: string; value: string }[];
+      producer?: { language?: string; value: string }[];
+    },
+    @Body('updated') updated: Date,
   ) {
     const result: {
       badge: string;
       brand: string;
       shortId: string;
     } = await this.beverageService.addNewBeverage({
+      added,
       badge,
-      name,
+      barcode,
       brand,
       container,
+      contract,
+      cooperation,
+      name,
       notes,
-      added,
+      place,
+      series,
       shortId,
+      tale,
+      updated,
     });
 
     return result;

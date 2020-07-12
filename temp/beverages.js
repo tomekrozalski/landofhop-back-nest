@@ -79,6 +79,7 @@ const beverages = [
     price: '7,50 zł',
     added: '27 czerwca 2020, 18:38',
   },
+  // Added
   {
     name: 'Rowerzysta',
     brand: 'Browar Profesja',
@@ -97,6 +98,7 @@ const beverages = [
     price: '5.90 zł',
     added: '27 czerwca 2020, 18:44',
   },
+  // Added
   {
     name: 'Pomelo Nealko',
     brand: 'Litovel',
@@ -107,6 +109,7 @@ const beverages = [
     price: '3,15 zł',
     added: '27 czerwca 2020, 18:51',
   },
+  // Added
   {
     name: 'The Game #2',
     brand: 'Raduga',
@@ -125,6 +128,7 @@ const beverages = [
     price: '6.90 zł',
     added: '27 czerwca 2020, 18:57',
   },
+  // Added
   {
     name: 'Zenzero',
     brand: 'Browar Nepomucen',
@@ -144,6 +148,7 @@ const beverages = [
     price: '6.60 zł',
     added: '27 czerwca 2020, 20:15',
   },
+  // Added
   {
     brand: 'Inne Beczki',
     name: '338 803',
@@ -164,6 +169,7 @@ const beverages = [
     name: 'Pilot',
     notes: 'Już jest w bazie, popraw tylko zdjęcie i dodaj cenę 6.50 zł ',
   },
+  // Added
   {
     brand: 'Piwo z Żuka',
     ingredients:
@@ -212,6 +218,7 @@ const beverages = [
     price: 12.5,
     added: '05.07.2020, 21:08',
   },
+  // Added
   {
     brand: 'Pinta',
     series: 'Pinta Deli Store #3',
@@ -235,6 +242,7 @@ const beverages = [
     price: 11.3,
     added: '05.07.2020, 21:16',
   },
+  // Added
   {
     brand: 'Pinta',
     series: 'Pinta Deli Store #2',
@@ -259,6 +267,7 @@ const beverages = [
     price: 11.3,
     added: '05.07.2020, 21:20',
   },
+  // Added
   {
     brand: 'Browar Profesja',
     name: 'Kanclerz',
@@ -286,20 +295,21 @@ Używamy wyłącznie płynnych drożdży własnej propagacji
 Może zawierać naturalny osad drożdżowy
     `,
   },
+  // Added
   {
-    brand: 'Trzech Kumpli',
-    name: 'Gose',
-    series: ['sour brews', 'kwaśne warki'],
-    style: ['Gose, Mango & Passion Fruit', 'Gose, z mango i marakują'],
-    ingredients: {
-      pl:
-        'woda, słód jęczmienny, płatki pszenne, słód pszeniczny, puree z mango, puree z marakui, chmiel, drożdże, bakterie kwasu mlekowego lactobacillus',
-    },
-    alcohol: '4.9% ABV',
-    extract: '12.5% Plato',
-    container: 'butelka 500ml brązowa',
-    contract: 'Browar Zapanbrat',
-    place: 'Żywiec',
+brand: 'Trzech Kumpli',
+name: 'Gose',
+series: ['sour brews', 'kwaśne warki'],
+style: ['Gose, Mango & Passion Fruit', 'Gose, z mango i marakują'],
+ingredients: {
+  pl:
+    'woda, słód jęczmienny, płatki pszenne, słód pszeniczny, puree z mango, puree z marakui, chmiel, drożdże, bakterie kwasu mlekowego lactobacillus',
+},
+alcohol: '4.9% ABV',
+extract: '12.5% Plato',
+container: 'butelka 500ml brązowa',
+contract: 'Browar Zapanbrat',
+place: 'Żywiec',
     barcode: '5905669479752',
     tale: `
 Gose to lekkie, pszeniczny, słono-kwaśne piwo, które narodziło się w Dolnej Saksonii i prawie wyginęło jako styl piwny na początku XX w. Dopiero u zarania dwudziestego pierwszego stulecia staraniem małych niemieckich browarów rzemieślniczych zaczęło wracać do żywych.

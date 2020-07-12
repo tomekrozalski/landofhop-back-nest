@@ -5,18 +5,13 @@ import { Model } from 'mongoose';
 import { Language } from 'utils/types';
 
 @Injectable()
-export class LanguageService {
+export class SaveLanguageService {
   constructor(
     @InjectModel('Language')
     private readonly languageModel: Model<Language>,
   ) {}
 
-  async getAllLanguages() {
-    const languages: Language[] = await this.languageModel.getAllLanguages();
-    return languages;
-  }
-
-  async saveLanguage({ code, name }) {
+  async saveLanguage({ code, name }): Promise<Language[]> {
     const newLanguage = new this.languageModel({
       code,
       name: name.map(({ lang, value }) => ({
@@ -26,6 +21,8 @@ export class LanguageService {
     });
 
     await newLanguage.save();
-    return true;
+
+    const updatedLanguages = await this.languageModel.getAllLanguages();
+    return updatedLanguages;
   }
 }
