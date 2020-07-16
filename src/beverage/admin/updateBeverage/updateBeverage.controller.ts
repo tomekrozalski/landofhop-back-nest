@@ -11,6 +11,15 @@ export class UpdateBeverageController {
   @UseGuards(AuthGuard)
   async updateBeverage(
     @Body('added') added: Date,
+    @Body('alcohol')
+    alcohol: {
+      label?: {
+        relate: string;
+        scope?: string;
+        unit: string;
+        value: number;
+      };
+    },
     @Body('badge') badge: string,
     @Body('barcode') barcode: string,
     @Body('brand') brand: string,
@@ -30,6 +39,22 @@ export class UpdateBeverageController {
     cooperation: {
       label?: string[];
     },
+    @Body('extract')
+    extract: {
+      label?: {
+        relate: string;
+        unit: string;
+        value: number;
+      };
+    },
+    @Body('fermentation')
+    fermentation: {
+      label?: string[];
+    },
+    @Body('filtration')
+    filtration: {
+      label?: boolean;
+    },
     @Body('id') id: string,
     @Body('name')
     name: {
@@ -37,12 +62,20 @@ export class UpdateBeverageController {
       value: string;
     }[],
     @Body('notes') notes: string,
+    @Body('pasteurization')
+    pasteurization: {
+      label?: boolean;
+    },
     @Body('place')
     place: {
       label?: string;
     },
     @Body('series')
     series: {
+      label?: { language?: string; value: string }[];
+    },
+    @Body('style')
+    style: {
       label?: { language?: string; value: string }[];
     },
     @Body('tale')
@@ -58,17 +91,23 @@ export class UpdateBeverageController {
       shortId: string;
     } = await this.beverageService.updateBeverage({
       added,
+      alcohol,
       badge,
       barcode,
       brand,
       container,
       contract,
       cooperation,
+      extract,
+      fermentation,
+      filtration,
       id,
       name,
       notes,
+      pasteurization,
       place,
       series,
+      style,
       tale,
       updated,
     });

@@ -11,6 +11,15 @@ export class AddNewBeverageController {
   @UseGuards(AuthGuard)
   async addNewBeverage(
     @Body('added') added: Date,
+    @Body('alcohol')
+    alcohol: {
+      label?: {
+        relate: string;
+        unit: string;
+        value: number;
+        scope?: string;
+      };
+    },
     @Body('badge') badge: string,
     @Body('barcode') barcode: string,
     @Body('brand') brand: string,
@@ -30,12 +39,32 @@ export class AddNewBeverageController {
     cooperation: {
       label?: string[];
     },
+    @Body('extract')
+    extract: {
+      label?: {
+        relate: string;
+        unit: string;
+        value: number;
+      };
+    },
+    @Body('fermentation')
+    fermentation: {
+      label?: string[];
+    },
+    @Body('filtration')
+    filtration: {
+      label?: boolean;
+    },
     @Body('name')
     name: {
       lang: string;
       value: string;
     }[],
     @Body('notes') notes: string,
+    @Body('pasteurization')
+    pasteurization: {
+      label?: boolean;
+    },
     @Body('place')
     place: {
       label?: string;
@@ -45,6 +74,10 @@ export class AddNewBeverageController {
       label?: { language?: string; value: string }[];
     },
     @Body('shortId') shortId: string,
+    @Body('style')
+    style: {
+      label?: { language?: string; value: string }[];
+    },
     @Body('tale')
     tale: {
       label?: { language?: string; value: string }[];
@@ -58,17 +91,23 @@ export class AddNewBeverageController {
       shortId: string;
     } = await this.beverageService.addNewBeverage({
       added,
+      alcohol,
       badge,
       barcode,
       brand,
       container,
       contract,
       cooperation,
+      extract,
+      fermentation,
+      filtration,
       name,
       notes,
+      pasteurization,
       place,
       series,
       shortId,
+      style,
       tale,
       updated,
     });

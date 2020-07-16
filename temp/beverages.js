@@ -328,6 +328,7 @@ Nie wahaj się!
     price: 10.2,
     added: '05.07.2020, 22:17',
   },
+  // Added
   {
     name: 'Mam co robić',
     brand: 'Browar zakładowy',
@@ -345,6 +346,7 @@ Nie wahaj się!
     price: 12.1,
     added: '05.07.2020, 22:22',
   },
+  // Added
   {
     name: 'Na pewno!',
     brand: 'Browar zakładowy',
@@ -390,6 +392,7 @@ Może zawierać naturalny osad drożdżowy
     price: 8.5,
     added: '05.07.2020, 22:31',
   },
+  // Added
   {
     name: 'We are not alone here!',
     style: 'Sweet & Sour Smoothie IPA',

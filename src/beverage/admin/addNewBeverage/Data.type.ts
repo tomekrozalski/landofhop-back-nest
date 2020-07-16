@@ -1,5 +1,13 @@
 export type DataType = {
   added?: Date;
+  alcohol?: {
+    label?: {
+      relate: string;
+      scope?: string;
+      unit: string;
+      value: number;
+    };
+  };
   badge: string;
   barcode?: string;
   brand: string;
@@ -16,15 +24,34 @@ export type DataType = {
   cooperation?: {
     label?: string[];
   };
+  extract?: {
+    label?: {
+      relate: string;
+      unit: string;
+      value: number;
+    };
+  };
+  fermentation?: {
+    label?: string[];
+  };
+  filtration?: {
+    label?: boolean;
+  };
   name: {
     language?: string;
     value: string;
   }[];
   notes?: string;
+  pasteurization?: {
+    label?: boolean;
+  };
   place?: {
     label?: string;
   };
   series?: {
+    label?: { language?: string; value: string }[];
+  };
+  style?: {
     label?: { language?: string; value: string }[];
   };
   tale?: {
