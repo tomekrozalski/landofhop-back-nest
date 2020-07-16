@@ -412,6 +412,7 @@ Może zawierać naturalny osad drożdżowy
     price: 11.2,
     added: '05.07.2020, 22:35',
   },
+  // Added
   {
     brand: 'AleBrowar',
     series: '#AleLab',
@@ -445,6 +446,7 @@ Gotowanie: 30 minut
     price: 11.8,
     added: '06.07.2020, 11:17',
   },
+  // Added
   {
     brand: 'AleBrowar',
     series: '#AleLab',
@@ -480,6 +482,7 @@ Gotowanie: 80 minut
     price: 10,
     added: '06.07.2020, 11:25',
   },
+  // Added
   {
     brand: 'Funky Fluid',
     name: 'Mango & Peach Party',
@@ -504,6 +507,7 @@ Gotowanie: 80 minut
     price: 10.9,
     added: '06.07.2020, 11:33',
   },
+  // Added
   {
     brand: 'AleBrowar',
     name: 'Rowing Jack',
@@ -533,6 +537,7 @@ Gotowanie: 80 minut
     price: 12,
     added: '06.07.2020, 11:44',
   },
+  // Added
   {
     brand: 'Browar Stu Mostów',
     series: 'Art',
@@ -552,6 +557,7 @@ Gotowanie: 80 minut
     price: 11.5,
     added: '06.07.2020, 11:49',
   },
+  // Added
   {
     brand: 'Browar Nepomucen',
     name: 'Pijże, vol. 2',
@@ -587,6 +593,7 @@ Gotowanie: 80 minut
     name: "Żywiec Białe bezalko",
     price: 4.20
   }
+  // Added
   {
     name: "Zlaty Bazant (do sprwadzenia)",
     style: "LeŻiak, Lager",
@@ -602,6 +609,7 @@ Gotowanie: 80 minut
     price: 3.99,
     added: '06.07.2020, 12:33',
   },
+  // Added
   {
     name: "Grolsch",
     style: "Premium Lager",
@@ -617,6 +625,7 @@ Gotowanie: 80 minut
     price: 4.49,
     added: '06.07.2020, 12:39',
   },
+  // Added
   {
     name: "Zatecky Svetly Lezak",
     barcode: "5900014004764",
@@ -630,6 +639,7 @@ Gotowanie: 80 minut
     price: 3.19,
     added: '06.07.2020, 12:44',
   },
+  // Added
   {
     name: "Staropramen",
     pasteurisation: true,

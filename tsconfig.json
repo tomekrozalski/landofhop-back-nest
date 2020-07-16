@@ -14,7 +14,8 @@
     "paths": {
       "utils/*": ["src/utils/*"],
       "beverage/*": ["src/beverage/*"],
-      "language/*": ["src/language/*"]
+      "language/*": ["src/language/*"],
+      "place/*": ["src/place/*"]
     }
   },
   "exclude": ["node_modules", "dist"]

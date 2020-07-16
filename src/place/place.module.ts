@@ -2,14 +2,14 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { PlaceSchema } from 'utils/schemas';
-import { PlaceController } from './place.controller';
-import { PlaceService } from './place.service';
+import { GetAllPlacesController, GetAllPlacesService } from './getAllPlaces';
+import { SavePlaceController, SavePlaceService } from './savePlace';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Place', schema: PlaceSchema }]),
   ],
-  controllers: [PlaceController],
-  providers: [PlaceService],
+  controllers: [GetAllPlacesController, SavePlaceController],
+  providers: [GetAllPlacesService, SavePlaceService],
 })
 export class PlaceModule {}

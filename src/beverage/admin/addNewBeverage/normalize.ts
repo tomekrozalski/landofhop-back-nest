@@ -22,7 +22,7 @@ const normalize = ({
   tale = {},
   updated,
   shortId,
-  style,
+  style = {},
 }: DataType) => {
   return {
     badge,

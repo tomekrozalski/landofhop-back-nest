@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 
+import getAllPlaces from 'place/getAllPlaces/getAllPlaces.query';
 import { langValue } from '../common';
-import { getAllPlaces } from './statics';
 
 const placeSchema = new mongoose.Schema({
   city: {

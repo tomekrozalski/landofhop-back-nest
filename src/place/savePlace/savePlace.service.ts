@@ -3,19 +3,13 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { Place } from 'utils/types';
-import { normalizePlace } from 'utils/normalizers/output';
 
 @Injectable()
-export class PlaceService {
+export class SavePlaceService {
   constructor(
     @InjectModel('Place')
     private readonly placeModel: Model<Place>,
   ) {}
-
-  async getAllPlaces() {
-    const places: Place[] = await this.placeModel.getAllPlaces();
-    return places.map(normalizePlace);
-  }
 
   async savePlace({
     city,
@@ -44,7 +38,7 @@ export class PlaceService {
 
     await newPlace.save();
 
-    const updatedPlaces = await this.getAllPlaces();
+    const updatedPlaces = await this.placeModel.getAllPlaces();
     return updatedPlaces;
   }
 }

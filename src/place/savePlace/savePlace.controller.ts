@@ -1,18 +1,12 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 
 import { AuthGuard } from 'utils/guards';
 import { Place } from 'utils/types';
-import { PlaceService } from './place.service';
+import { SavePlaceService } from './savePlace.service';
 
 @Controller('place')
-export class PlaceController {
-  constructor(private readonly placeService: PlaceService) {}
-
-  @Get()
-  async getAllplaces() {
-    const places: Place[] = await this.placeService.getAllPlaces();
-    return places;
-  }
+export class SavePlaceController {
+  constructor(private readonly placeService: SavePlaceService) {}
 
   @Post()
   @UseGuards(AuthGuard)
