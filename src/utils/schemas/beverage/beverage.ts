@@ -7,7 +7,6 @@ import producerSchema from './producerSchema';
 // ------------- STATICS -------------
 // Admin
 import getLastTiles from 'beverage/admin/getLastTiles/getLastTiles.query';
-import getTranslatedDetails from 'beverage/admin/getTranslatedDetails/getTranslatedDetails.query';
 import getDetails from 'beverage/admin/getDetails/getDetails.query';
 import getBrandById from 'beverage/admin/addNewBeverage/getBrandById.query';
 import getImagesData from 'beverage/admin/getImagesData/getImagesData.query';
@@ -60,7 +59,6 @@ beverageSchema.index({ badge: 1, shortId: 1 }, { unique: true });
 
 // Admin
 beverageSchema.statics.getLastTiles = getLastTiles;
-beverageSchema.statics.getTranslatedDetails = getTranslatedDetails;
 beverageSchema.statics.getDetails = getDetails;
 beverageSchema.statics.getBrandById = getBrandById;
 beverageSchema.statics.getImagesData = getImagesData;
