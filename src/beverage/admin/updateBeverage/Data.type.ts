@@ -1,5 +1,16 @@
 export type DataType = {
   added?: Date;
+  aged?: {
+    label?: {
+      type?: string;
+      wood?: string;
+      time?: {
+        unit: string;
+        value: number;
+      };
+      previousContent?: string[];
+    }[];
+  };
   alcohol?: {
     label?: {
       relate: string;
@@ -23,6 +34,12 @@ export type DataType = {
   };
   cooperation?: {
     label?: string[];
+  };
+  expirationDate?: {
+    label?: {
+      unit: string;
+      value: number;
+    };
   };
   extract?: {
     label?: {

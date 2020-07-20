@@ -4,6 +4,7 @@ import { DataType } from './Data.type';
 
 const normalize = ({
   added,
+  aged = {},
   alcohol = {},
   badge,
   barcode,
@@ -11,6 +12,7 @@ const normalize = ({
   container,
   contract = {},
   cooperation = {},
+  expirationDate = {},
   extract = {},
   fermentation = {},
   filtration = {},
@@ -42,7 +44,9 @@ const normalize = ({
         alcohol.label ||
         extract.label ||
         isBoolean(filtration.label) ||
-        isBoolean(pasteurization.label)) && {
+        isBoolean(pasteurization.label) ||
+        aged.label ||
+        expirationDate.label) && {
         brewing: {
           ...(fermentation.label && { fermentation: fermentation.label }),
           ...(style.label && { style: style.label }),
@@ -52,6 +56,8 @@ const normalize = ({
           ...(isBoolean(pasteurization.label) && {
             pasteurization: pasteurization.label,
           }),
+          ...(aged.label && { aged: aged.label }),
+          ...(expirationDate.label && { expirationDate: expirationDate.label }),
         },
       }),
       container,

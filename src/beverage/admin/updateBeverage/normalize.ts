@@ -13,6 +13,7 @@ const normalize = ({ data, patch }: Props) => {
 
   const {
     added,
+    aged = {},
     alcohol = {},
     badge,
     barcode,
@@ -20,6 +21,7 @@ const normalize = ({ data, patch }: Props) => {
     container,
     contract = {},
     cooperation = {},
+    expirationDate = {},
     extract = {},
     fermentation = {},
     // id, - have it, but not use
@@ -33,6 +35,8 @@ const normalize = ({ data, patch }: Props) => {
     tale = {},
     updated,
   } = data;
+
+  console.log('-->', aged.label);
 
   return {
     badge,
@@ -52,7 +56,9 @@ const normalize = ({ data, patch }: Props) => {
         alcohol.label ||
         extract.label ||
         isBoolean(filtration.label) ||
-        isBoolean(pasteurization.label)) && {
+        isBoolean(pasteurization.label) ||
+        aged.label ||
+        expirationDate.label) && {
         brewing: {
           ...(fermentation.label && { fermentation: fermentation.label }),
           ...(style.label && { style: style.label }),
@@ -62,6 +68,8 @@ const normalize = ({ data, patch }: Props) => {
           ...(isBoolean(pasteurization.label) && {
             pasteurization: pasteurization.label,
           }),
+          ...(aged.label && { aged: aged.label }),
+          ...(expirationDate.label && { expirationDate: expirationDate.label }),
         },
       }),
       container,

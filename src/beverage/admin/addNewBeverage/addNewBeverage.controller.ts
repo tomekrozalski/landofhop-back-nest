@@ -11,6 +11,18 @@ export class AddNewBeverageController {
   @UseGuards(AuthGuard)
   async addNewBeverage(
     @Body('added') added: Date,
+    @Body('aged')
+    aged: {
+      label?: {
+        type?: string;
+        wood?: string;
+        time?: {
+          unit: string;
+          value: number;
+        };
+        previousContent?: string[];
+      }[];
+    },
     @Body('alcohol')
     alcohol: {
       label?: {
@@ -38,6 +50,13 @@ export class AddNewBeverageController {
     @Body('cooperation')
     cooperation: {
       label?: string[];
+    },
+    @Body('expirationDate')
+    expirationDate: {
+      label?: {
+        unit: string;
+        value: number;
+      };
     },
     @Body('extract')
     extract: {
@@ -91,6 +110,7 @@ export class AddNewBeverageController {
       shortId: string;
     } = await this.beverageService.addNewBeverage({
       added,
+      aged,
       alcohol,
       badge,
       barcode,
@@ -98,6 +118,7 @@ export class AddNewBeverageController {
       container,
       contract,
       cooperation,
+      expirationDate,
       extract,
       fermentation,
       filtration,

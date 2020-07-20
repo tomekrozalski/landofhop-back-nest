@@ -651,4 +651,10 @@ Gotowanie: 80 minut
     price: 2.99,
     added: '06.07.2020, 12:46',
   }
+  {
+    brand: "Profesja",
+    badge: "Szofer",
+    price: "5.70",
+    time: '19.07.2020'
+  }
 ];
