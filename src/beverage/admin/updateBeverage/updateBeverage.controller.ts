@@ -75,6 +75,14 @@ export class UpdateBeverageController {
       label?: boolean;
     },
     @Body('id') id: string,
+    @Body('ingredientsDescription')
+    ingredientsDescription: {
+      label?: {
+        language;
+        value;
+        complete;
+      }[];
+    },
     @Body('name')
     name: {
       lang: string;
@@ -123,6 +131,7 @@ export class UpdateBeverageController {
       fermentation,
       filtration,
       id,
+      ingredientsDescription,
       name,
       notes,
       pasteurization,

@@ -74,6 +74,14 @@ export class AddNewBeverageController {
     filtration: {
       label?: boolean;
     },
+    @Body('ingredientsDescription')
+    ingredientsDescription: {
+      label?: {
+        language;
+        value;
+        complete;
+      }[];
+    },
     @Body('name')
     name: {
       lang: string;
@@ -122,6 +130,7 @@ export class AddNewBeverageController {
       extract,
       fermentation,
       filtration,
+      ingredientsDescription,
       name,
       notes,
       pasteurization,

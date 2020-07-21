@@ -54,6 +54,13 @@ export type DataType = {
   filtration?: {
     label?: boolean;
   };
+  ingredientsDescription?: {
+    label?: {
+      language;
+      value;
+      complete;
+    }[];
+  };
   name: {
     language?: string;
     value: string;

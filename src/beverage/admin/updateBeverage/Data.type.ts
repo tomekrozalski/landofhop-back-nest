@@ -55,6 +55,13 @@ export type DataType = {
     label?: boolean;
   };
   id: string;
+  ingredientsDescription?: {
+    label?: {
+      language;
+      value;
+      complete;
+    }[];
+  };
   name: {
     language?: string;
     value: string;

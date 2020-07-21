@@ -26,6 +26,7 @@ const normalize = ({ data, patch }: Props) => {
     fermentation = {},
     // id, - have it, but not use
     filtration = {},
+    ingredientsDescription = {},
     name,
     notes,
     pasteurization = {},
@@ -70,6 +71,13 @@ const normalize = ({ data, patch }: Props) => {
           }),
           ...(aged.label && { aged: aged.label }),
           ...(expirationDate.label && { expirationDate: expirationDate.label }),
+        },
+      }),
+      ...(ingredientsDescription.label && {
+        ingredients: {
+          ...(ingredientsDescription.label && {
+            description: ingredientsDescription.label,
+          }),
         },
       }),
       container,

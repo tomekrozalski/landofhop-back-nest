@@ -16,6 +16,7 @@ const normalize = ({
   extract = {},
   fermentation = {},
   filtration = {},
+  ingredientsDescription = {},
   name,
   notes,
   pasteurization = {},
@@ -58,6 +59,13 @@ const normalize = ({
           }),
           ...(aged.label && { aged: aged.label }),
           ...(expirationDate.label && { expirationDate: expirationDate.label }),
+        },
+      }),
+      ...(ingredientsDescription.label && {
+        ingredients: {
+          ...(ingredientsDescription.label && {
+            description: ingredientsDescription.label,
+          }),
         },
       }),
       container,
