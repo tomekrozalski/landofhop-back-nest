@@ -1,0 +1,17 @@
+import { Ingredient } from '../Ingredient.type';
+
+const getAllIngredients = function(): Ingredient[] {
+  return this.aggregate([
+    {
+      $project: {
+        _id: 0,
+        id: '$_id',
+        badge: 1,
+        name: 1,
+        type: 1,
+      },
+    },
+  ]);
+};
+
+export default getAllIngredients;

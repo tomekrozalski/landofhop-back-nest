@@ -10,6 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AddShortIdMiddleware } from './utils/middlewares';
 import { UserModule } from './user/user.module';
 import { BeverageModule } from './beverage/beverage.module';
+import { IngredientModule } from './ingredient/ingredient.module';
 import { InstitutionModule } from './institution/institution.module';
 import { PlaceModule } from './place/place.module';
 import { CountryModule } from './country/country.module';
@@ -19,6 +20,7 @@ import { LanguageModule } from './language/language.module';
   imports: [
     UserModule,
     BeverageModule,
+    IngredientModule,
     InstitutionModule,
     PlaceModule,
     CountryModule,
