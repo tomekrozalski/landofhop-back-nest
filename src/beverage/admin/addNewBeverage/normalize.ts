@@ -12,12 +12,14 @@ const normalize = ({
   container,
   contract = {},
   cooperation = {},
+  dryHopped = {},
   expirationDate = {},
   extract = {},
   fermentation = {},
   filtration = {},
   ingredientsDescription = {},
   ingredientsList = {},
+  isDryHopped = {},
   name,
   notes,
   pasteurization = {},
@@ -49,6 +51,8 @@ const normalize = ({
         isBoolean(filtration.label) ||
         isBoolean(pasteurization.label) ||
         aged.label ||
+        dryHopped.label ||
+        isBoolean(isDryHopped.label) ||
         expirationDate.label) && {
         brewing: {
           ...(fermentation.label && { fermentation: fermentation.label }),
@@ -60,6 +64,10 @@ const normalize = ({
             pasteurization: pasteurization.label,
           }),
           ...(aged.label && { aged: aged.label }),
+          ...(dryHopped.label && { dryHopped: { hops: dryHopped.label } }),
+          ...(isBoolean(isDryHopped.label) && {
+            isDryHopped: isDryHopped.label,
+          }),
           ...(expirationDate.label && { expirationDate: expirationDate.label }),
         },
       }),

@@ -35,6 +35,9 @@ export type DataType = {
   cooperation?: {
     label?: string[];
   };
+  dryHopped?: {
+    label?: string[];
+  };
   expirationDate?: {
     label?: {
       unit: string;
@@ -63,6 +66,9 @@ export type DataType = {
   };
   ingredientsList?: {
     label?: string[];
+  };
+  isDryHopped?: {
+    label?: boolean;
   };
   name: {
     language?: string;

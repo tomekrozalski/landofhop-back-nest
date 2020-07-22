@@ -51,6 +51,10 @@ export class AddNewBeverageController {
     cooperation: {
       label?: string[];
     },
+    @Body('dryHopped')
+    dryHopped: {
+      label?: string[];
+    },
     @Body('expirationDate')
     expirationDate: {
       label?: {
@@ -85,6 +89,10 @@ export class AddNewBeverageController {
     @Body('ingredientsList')
     ingredientsList: {
       label?: string[];
+    },
+    @Body('isDryHopped')
+    isDryHopped: {
+      label?: boolean;
     },
     @Body('name')
     name: {
@@ -134,12 +142,14 @@ export class AddNewBeverageController {
       container,
       contract,
       cooperation,
+      dryHopped,
       expirationDate,
       extract,
       fermentation,
       filtration,
       ingredientsDescription,
       ingredientsList,
+      isDryHopped,
       name,
       notes,
       pasteurization,
