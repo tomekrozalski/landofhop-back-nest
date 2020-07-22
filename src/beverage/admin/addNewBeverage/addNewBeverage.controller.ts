@@ -82,6 +82,10 @@ export class AddNewBeverageController {
         complete;
       }[];
     },
+    @Body('ingredientsList')
+    ingredientsList: {
+      label?: string[];
+    },
     @Body('name')
     name: {
       lang: string;
@@ -101,6 +105,10 @@ export class AddNewBeverageController {
       label?: { language?: string; value: string }[];
     },
     @Body('shortId') shortId: string,
+    @Body('smokedMalt')
+    smokedMalt: {
+      label?: boolean;
+    },
     @Body('style')
     style: {
       label?: { language?: string; value: string }[];
@@ -131,12 +139,14 @@ export class AddNewBeverageController {
       fermentation,
       filtration,
       ingredientsDescription,
+      ingredientsList,
       name,
       notes,
       pasteurization,
       place,
       series,
       shortId,
+      smokedMalt,
       style,
       tale,
       updated,

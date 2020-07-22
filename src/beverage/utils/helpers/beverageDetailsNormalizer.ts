@@ -240,7 +240,9 @@ const beverageDetailsNormalizer = ({
     },
     ingredientsList: {
       ...(!isEmpty(label('ingredients.list')) && {
-        label: label('ingredients.list').map(({ name, type }) => ({
+        label: label('ingredients.list').map(({ id, badge, name, type }) => ({
+          id,
+          badge,
           name: translate({ values: name }),
           type,
         })),

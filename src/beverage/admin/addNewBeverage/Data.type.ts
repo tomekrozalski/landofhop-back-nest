@@ -61,6 +61,9 @@ export type DataType = {
       complete;
     }[];
   };
+  ingredientsList?: {
+    label?: string[];
+  };
   name: {
     language?: string;
     value: string;
@@ -74,6 +77,9 @@ export type DataType = {
   };
   series?: {
     label?: { language?: string; value: string }[];
+  };
+  smokedMalt?: {
+    label?: boolean;
   };
   style?: {
     label?: { language?: string; value: string }[];

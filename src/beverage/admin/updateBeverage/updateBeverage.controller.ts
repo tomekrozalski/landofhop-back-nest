@@ -83,6 +83,10 @@ export class UpdateBeverageController {
         complete;
       }[];
     },
+    @Body('ingredientsList')
+    ingredientsList: {
+      label?: string[];
+    },
     @Body('name')
     name: {
       lang: string;
@@ -100,6 +104,10 @@ export class UpdateBeverageController {
     @Body('series')
     series: {
       label?: { language?: string; value: string }[];
+    },
+    @Body('smokedMalt')
+    smokedMalt: {
+      label?: boolean;
     },
     @Body('style')
     style: {
@@ -132,11 +140,13 @@ export class UpdateBeverageController {
       filtration,
       id,
       ingredientsDescription,
+      ingredientsList,
       name,
       notes,
       pasteurization,
       place,
       series,
+      smokedMalt,
       style,
       tale,
       updated,

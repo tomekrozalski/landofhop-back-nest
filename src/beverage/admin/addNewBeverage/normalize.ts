@@ -17,11 +17,13 @@ const normalize = ({
   fermentation = {},
   filtration = {},
   ingredientsDescription = {},
+  ingredientsList = {},
   name,
   notes,
   pasteurization = {},
   place = {},
   series = {},
+  smokedMalt = {},
   tale = {},
   updated,
   shortId,
@@ -61,10 +63,18 @@ const normalize = ({
           ...(expirationDate.label && { expirationDate: expirationDate.label }),
         },
       }),
-      ...(ingredientsDescription.label && {
+      ...((ingredientsDescription.label ||
+        ingredientsList.label ||
+        smokedMalt.label) && {
         ingredients: {
           ...(ingredientsDescription.label && {
             description: ingredientsDescription.label,
+          }),
+          ...(ingredientsList.label && {
+            list: ingredientsList.label,
+          }),
+          ...(isBoolean(smokedMalt.label) && {
+            smokedMalt: smokedMalt.label,
           }),
         },
       }),

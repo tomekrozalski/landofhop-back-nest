@@ -27,11 +27,13 @@ const normalize = ({ data, patch }: Props) => {
     // id, - have it, but not use
     filtration = {},
     ingredientsDescription = {},
+    ingredientsList = {},
     name,
     notes,
     pasteurization = {},
     place = {},
     series = {},
+    smokedMalt = {},
     style = {},
     tale = {},
     updated,
@@ -73,10 +75,18 @@ const normalize = ({ data, patch }: Props) => {
           ...(expirationDate.label && { expirationDate: expirationDate.label }),
         },
       }),
-      ...(ingredientsDescription.label && {
+      ...((ingredientsDescription.label ||
+        ingredientsList.label ||
+        smokedMalt.label) && {
         ingredients: {
           ...(ingredientsDescription.label && {
             description: ingredientsDescription.label,
+          }),
+          ...(ingredientsList.label && {
+            list: ingredientsList.label,
+          }),
+          ...(isBoolean(smokedMalt.label) && {
+            smokedMalt: smokedMalt.label,
           }),
         },
       }),
