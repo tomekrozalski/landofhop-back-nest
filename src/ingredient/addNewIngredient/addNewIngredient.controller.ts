@@ -1,0 +1,30 @@
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+
+import { AuthGuard } from 'utils/guards';
+import { Ingredient } from '../Ingredient.type';
+import { AddNewIngredientService } from './addNewIngredient.service';
+
+@Controller('ingredient')
+export class AddNewIngredientController {
+  constructor(private readonly ingredientService: AddNewIngredientService) {}
+
+  @Post()
+  @UseGuards(AuthGuard)
+  async saveLanguage(
+    @Body('badge') badge: string,
+    @Body('name')
+    name: {
+      lang: string;
+      value: string;
+    }[],
+    @Body('type') type: string,
+  ): Promise<Ingredient[]> {
+    const result: Ingredient[] = await this.ingredientService.addNewIngredient({
+      badge,
+      name,
+      type,
+    });
+
+    return result;
+  }
+}
