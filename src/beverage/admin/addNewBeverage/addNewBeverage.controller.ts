@@ -34,6 +34,10 @@ export class AddNewBeverageController {
     },
     @Body('badge') badge: string,
     @Body('barcode') barcode: string,
+    @Body('bitterness')
+    bitterness: {
+      label?: number;
+    },
     @Body('brand') brand: string,
     @Body('container')
     container: {
@@ -78,6 +82,14 @@ export class AddNewBeverageController {
     filtration: {
       label?: boolean;
     },
+    @Body('fullness')
+    fullness: {
+      label?: number;
+    },
+    @Body('hoppyness')
+    hoppyness: {
+      label?: number;
+    },
     @Body('ingredientsDescription')
     ingredientsDescription: {
       label?: {
@@ -108,6 +120,10 @@ export class AddNewBeverageController {
     place: {
       label?: string;
     },
+    @Body('power')
+    power: {
+      label?: number;
+    },
     @Body('series')
     series: {
       label?: { language?: string; value: string }[];
@@ -121,10 +137,22 @@ export class AddNewBeverageController {
     style: {
       label?: { language?: string; value: string }[];
     },
+    @Body('sweetness')
+    sweetness: {
+      label?: number;
+    },
     @Body('tale')
     tale: {
       label?: { language?: string; value: string }[];
       producer?: { language?: string; value: string }[];
+    },
+    @Body('temperature')
+    temperature: {
+      label?: {
+        from: number;
+        to: number;
+        unit: string;
+      };
     },
     @Body('updated') updated: Date,
   ) {
@@ -138,6 +166,7 @@ export class AddNewBeverageController {
       alcohol,
       badge,
       barcode,
+      bitterness,
       brand,
       container,
       contract,
@@ -147,6 +176,8 @@ export class AddNewBeverageController {
       extract,
       fermentation,
       filtration,
+      fullness,
+      hoppyness,
       ingredientsDescription,
       ingredientsList,
       isDryHopped,
@@ -154,11 +185,14 @@ export class AddNewBeverageController {
       notes,
       pasteurization,
       place,
+      power,
       series,
       shortId,
       smokedMalt,
       style,
+      sweetness,
       tale,
+      temperature,
       updated,
     });
 

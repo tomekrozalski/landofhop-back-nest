@@ -1,4 +1,4 @@
-import { isBoolean } from 'lodash';
+import { isBoolean, isNumber } from 'lodash';
 
 import { DataType } from './Data.type';
 import { PatchType } from './Patch.type';
@@ -17,6 +17,7 @@ const normalize = ({ data, patch }: Props) => {
     alcohol = {},
     badge,
     barcode,
+    bitterness = {},
     brand,
     container,
     contract = {},
@@ -27,6 +28,8 @@ const normalize = ({ data, patch }: Props) => {
     fermentation = {},
     // id, - have it, but not use
     filtration = {},
+    fullness = {},
+    hoppyness = {},
     ingredientsDescription = {},
     ingredientsList = {},
     isDryHopped = {},
@@ -34,10 +37,13 @@ const normalize = ({ data, patch }: Props) => {
     notes,
     pasteurization = {},
     place = {},
+    power = {},
     series = {},
     smokedMalt = {},
     style = {},
+    sweetness = {},
     tale = {},
+    temperature = {},
     updated,
   } = data;
 
@@ -96,6 +102,21 @@ const normalize = ({ data, patch }: Props) => {
           ...(isBoolean(smokedMalt.label) && {
             smokedMalt: smokedMalt.label,
           }),
+        },
+      }),
+      ...((isNumber(bitterness.label) ||
+        isNumber(sweetness.label) ||
+        isNumber(fullness.label) ||
+        isNumber(power.label) ||
+        isNumber(hoppyness.label) ||
+        temperature.label) && {
+        impressions: {
+          ...(isNumber(bitterness.label) && { bitterness: bitterness.label }),
+          ...(isNumber(sweetness.label) && { sweetness: sweetness.label }),
+          ...(isNumber(fullness.label) && { fullness: fullness.label }),
+          ...(isNumber(power.label) && { power: power.label }),
+          ...(isNumber(hoppyness.label) && { hoppyness: hoppyness.label }),
+          ...(temperature.label && { temperature: temperature.label }),
         },
       }),
       container,

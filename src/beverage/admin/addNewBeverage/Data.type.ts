@@ -21,6 +21,9 @@ export type DataType = {
   };
   badge: string;
   barcode?: string;
+  bitterness?: {
+    label?: number;
+  };
   brand: string;
   container: {
     color: string;
@@ -57,6 +60,12 @@ export type DataType = {
   filtration?: {
     label?: boolean;
   };
+  fullness?: {
+    label?: number;
+  };
+  hoppyness?: {
+    label?: number;
+  };
   ingredientsDescription?: {
     label?: {
       language;
@@ -81,6 +90,9 @@ export type DataType = {
   place?: {
     label?: string;
   };
+  power?: {
+    label?: number;
+  };
   series?: {
     label?: { language?: string; value: string }[];
   };
@@ -90,9 +102,19 @@ export type DataType = {
   style?: {
     label?: { language?: string; value: string }[];
   };
+  sweetness?: {
+    label?: number;
+  };
   tale?: {
     label?: { language?: string; value: string }[];
     producer?: { language?: string; value: string }[];
+  };
+  temperature?: {
+    label?: {
+      from: number;
+      to: number;
+      unit: string;
+    };
   };
   updated?: Date;
   shortId: string;

@@ -34,6 +34,10 @@ export class UpdateBeverageController {
     },
     @Body('badge') badge: string,
     @Body('barcode') barcode: string,
+    @Body('bitterness')
+    bitterness: {
+      label?: number;
+    },
     @Body('brand') brand: string,
     @Body('container')
     container: {
@@ -78,6 +82,14 @@ export class UpdateBeverageController {
     filtration: {
       label?: boolean;
     },
+    @Body('fullness')
+    fullness: {
+      label?: number;
+    },
+    @Body('hoppyness')
+    hoppyness: {
+      label?: number;
+    },
     @Body('id') id: string,
     @Body('ingredientsDescription')
     ingredientsDescription: {
@@ -109,6 +121,10 @@ export class UpdateBeverageController {
     place: {
       label?: string;
     },
+    @Body('power')
+    power: {
+      label?: number;
+    },
     @Body('series')
     series: {
       label?: { language?: string; value: string }[];
@@ -121,10 +137,22 @@ export class UpdateBeverageController {
     style: {
       label?: { language?: string; value: string }[];
     },
+    @Body('sweetness')
+    sweetness: {
+      label?: number;
+    },
     @Body('tale')
     tale: {
       label?: { language?: string; value: string }[];
       producer?: { language?: string; value: string }[];
+    },
+    @Body('temperature')
+    temperature: {
+      label?: {
+        from: number;
+        to: number;
+        unit: string;
+      };
     },
     @Body('updated') updated: Date,
   ) {
@@ -138,6 +166,7 @@ export class UpdateBeverageController {
       alcohol,
       badge,
       barcode,
+      bitterness,
       brand,
       container,
       contract,
@@ -147,6 +176,8 @@ export class UpdateBeverageController {
       extract,
       fermentation,
       filtration,
+      fullness,
+      hoppyness,
       id,
       ingredientsDescription,
       ingredientsList,
@@ -155,10 +186,13 @@ export class UpdateBeverageController {
       notes,
       pasteurization,
       place,
+      power,
       series,
       smokedMalt,
       style,
+      sweetness,
       tale,
+      temperature,
       updated,
     });
 
