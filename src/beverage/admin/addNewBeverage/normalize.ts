@@ -28,6 +28,7 @@ const normalize = ({
   pasteurization = {},
   place = {},
   power = {},
+  price = {},
   series = {},
   smokedMalt = {},
   sweetness = {},
@@ -108,6 +109,9 @@ const normalize = ({
         },
       }),
       container,
+      ...(price.label && {
+        price: price.label,
+      }),
     },
     ...(tale.producer && {
       producer: {
@@ -118,8 +122,11 @@ const normalize = ({
         }),
       },
     }),
-    ...(notes && {
+    ...((rice.editorial || notes) && {
       editorial: {
+        ...(price.editorial && {
+          price: price.editorial,
+        }),
         ...(notes && { notes }),
       },
     }),

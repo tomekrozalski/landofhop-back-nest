@@ -1,3 +1,4 @@
+import removeCover from './removeCover';
 import saveCover from './saveCover';
 
-export { saveCover };
+export { removeCover, saveCover };

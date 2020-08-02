@@ -94,6 +94,18 @@ export type DataType = {
   power?: {
     label?: number;
   };
+  price?: {
+    label?: {
+      currency: string;
+      date: Date;
+      value: number;
+    }[];
+    editorial?: {
+      currency: string;
+      date: Date;
+      value: number;
+    }[];
+  };
   series?: {
     label?: { language?: string; value: string }[];
   };

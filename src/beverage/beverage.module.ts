@@ -12,6 +12,8 @@ import {
   GetImagesDataService,
   GetLastTilesController,
   GetLastTilesService,
+  RemoveBeverageController,
+  RemoveBeverageService,
   UpdateBeverageController,
   UpdateBeverageService,
 } from './admin';
@@ -46,6 +48,7 @@ import { SearchBeverageController, SearchBeverageService } from './public';
     CoverController,
     GalleryController,
     OutlinesController,
+    RemoveBeverageController,
     UpdateBeverageController,
   ],
   providers: [
@@ -58,6 +61,7 @@ import { SearchBeverageController, SearchBeverageService } from './public';
     CapService,
     CoverService,
     GalleryService,
+    RemoveBeverageService,
     OutlinesService,
     UpdateBeverageService,
   ],

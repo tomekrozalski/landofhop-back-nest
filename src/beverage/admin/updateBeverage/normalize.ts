@@ -38,6 +38,7 @@ const normalize = ({ data, patch }: Props) => {
     pasteurization = {},
     place = {},
     power = {},
+    price = {},
     series = {},
     smokedMalt = {},
     style = {},
@@ -120,6 +121,9 @@ const normalize = ({ data, patch }: Props) => {
         },
       }),
       container,
+      ...(price.label && {
+        price: price.label,
+      }),
     },
     ...(tale.producer && {
       producer: {
@@ -130,8 +134,11 @@ const normalize = ({ data, patch }: Props) => {
         }),
       },
     }),
-    ...((patch.photos || notes) && {
+    ...((price.editorial || patch.photos || notes) && {
       editorial: {
+        ...(price.editorial && {
+          price: price.editorial,
+        }),
         ...(patch.photos && { photos: patch.photos }),
         ...(notes && { notes }),
       },

@@ -6,6 +6,10 @@ import { GetDetailsController, GetDetailsService } from './getDetails';
 import { GetImagesDataController, GetImagesDataService } from './getImagesData';
 import { GetLastTilesController, GetLastTilesService } from './getLastTiles';
 import {
+  RemoveBeverageController,
+  RemoveBeverageService,
+} from './removeBeverage';
+import {
   UpdateBeverageController,
   UpdateBeverageService,
 } from './updateBeverage';
@@ -19,6 +23,8 @@ export {
   GetImagesDataService,
   GetLastTilesController,
   GetLastTilesService,
+  RemoveBeverageController,
+  RemoveBeverageService,
   UpdateBeverageController,
   UpdateBeverageService,
 };

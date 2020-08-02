@@ -37,6 +37,7 @@ export class GalleryController {
   }
 
   @Delete('gallery')
+  @UseGuards(AuthGuard)
   async removeGallery(
     @Body('badge') badge: string,
     @Body('brand') brand: string,

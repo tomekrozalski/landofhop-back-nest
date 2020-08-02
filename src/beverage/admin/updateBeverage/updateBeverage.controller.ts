@@ -125,6 +125,19 @@ export class UpdateBeverageController {
     power: {
       label?: number;
     },
+    @Body('price')
+    price: {
+      label?: {
+        currency: string;
+        date: Date;
+        value: number;
+      }[];
+      editorial?: {
+        currency: string;
+        date: Date;
+        value: number;
+      }[];
+    },
     @Body('series')
     series: {
       label?: { language?: string; value: string }[];
@@ -187,6 +200,7 @@ export class UpdateBeverageController {
       pasteurization,
       place,
       power,
+      price,
       series,
       smokedMalt,
       style,
