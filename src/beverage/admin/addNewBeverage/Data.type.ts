@@ -34,9 +34,11 @@ export type DataType = {
   };
   contract?: {
     label?: string;
+    producer?: string;
   };
   cooperation?: {
     label?: string[];
+    producer?: string[];
   };
   dryHopped?: {
     label?: string[];
@@ -89,6 +91,7 @@ export type DataType = {
   };
   place?: {
     label?: string;
+    producer?: string;
   };
   power?: {
     label?: number;
@@ -107,6 +110,7 @@ export type DataType = {
   };
   series?: {
     label?: { language?: string; value: string }[];
+    producer?: { language?: string; value: string }[];
   };
   smokedMalt?: {
     label?: boolean;

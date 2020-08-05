@@ -113,16 +113,28 @@ const normalize = ({
         price: price.label,
       }),
     },
-    ...(tale.producer && {
+    ...((series.producer ||
+      contract.producer ||
+      cooperation.producer ||
+      place.producer ||
+      tale.producer) && {
       producer: {
-        ...(tale.producer && {
+        ...((series.producer ||
+          contract.producer ||
+          cooperation.producer ||
+          place.producer ||
+          tale.producer) && {
           general: {
+            ...(series.producer && { series: series.producer }),
+            ...(contract.producer && { contract: contract.producer }),
+            ...(cooperation.producer && { cooperation: cooperation.producer }),
+            ...(place.producer && { place: place.producer }),
             ...(tale.producer && { tale: tale.producer }),
           },
         }),
       },
     }),
-    ...((rice.editorial || notes) && {
+    ...((price.editorial || notes) && {
       editorial: {
         ...(price.editorial && {
           price: price.editorial,

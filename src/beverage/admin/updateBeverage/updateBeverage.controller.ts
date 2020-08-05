@@ -50,10 +50,12 @@ export class UpdateBeverageController {
     @Body('contract')
     contract: {
       label?: string;
+      producer?: string;
     },
     @Body('cooperation')
     cooperation: {
       label?: string[];
+      producer?: string[];
     },
     @Body('dryHopped')
     dryHopped: {
@@ -120,6 +122,7 @@ export class UpdateBeverageController {
     @Body('place')
     place: {
       label?: string;
+      producer?: string;
     },
     @Body('power')
     power: {
@@ -141,6 +144,7 @@ export class UpdateBeverageController {
     @Body('series')
     series: {
       label?: { language?: string; value: string }[];
+      producer?: { language?: string; value: string }[];
     },
     @Body('smokedMalt')
     smokedMalt: {
