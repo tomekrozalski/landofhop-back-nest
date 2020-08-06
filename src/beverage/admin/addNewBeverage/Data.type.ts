@@ -38,6 +38,7 @@ export type DataType = {
   barcode?: string;
   bitterness?: {
     label?: number;
+    producer?: number;
   };
   brand: string;
   container: {
@@ -91,9 +92,11 @@ export type DataType = {
   };
   fullness?: {
     label?: number;
+    producer?: number;
   };
   hoppyness?: {
     label?: number;
+    producer?: number;
   };
   ingredientsDescription?: {
     label?: {
@@ -101,9 +104,15 @@ export type DataType = {
       value;
       complete;
     }[];
+    producer?: {
+      language;
+      value;
+      complete;
+    }[];
   };
   ingredientsList?: {
     label?: string[];
+    producer?: string[];
   };
   isDryHopped?: {
     label?: boolean;
@@ -124,9 +133,15 @@ export type DataType = {
   };
   power?: {
     label?: number;
+    producer?: number;
   };
   price?: {
     label?: {
+      currency: string;
+      date: Date;
+      value: number;
+    }[];
+    producer?: {
       currency: string;
       date: Date;
       value: number;
@@ -143,6 +158,7 @@ export type DataType = {
   };
   smokedMalt?: {
     label?: boolean;
+    producer?: boolean;
   };
   style?: {
     label?: { language?: string; value: string }[];
@@ -150,6 +166,7 @@ export type DataType = {
   };
   sweetness?: {
     label?: number;
+    producer?: number;
   };
   tale?: {
     label?: { language?: string; value: string }[];
@@ -157,6 +174,11 @@ export type DataType = {
   };
   temperature?: {
     label?: {
+      from: number;
+      to: number;
+      unit: string;
+    };
+    producer?: {
       from: number;
       to: number;
       unit: string;

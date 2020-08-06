@@ -251,10 +251,14 @@ const beverageDetailsNormalizer = ({
         })),
       }),
       ...(!isEmpty(producer('ingredients.list')) && {
-        producer: producer('ingredients.list').map(({ name, type }) => ({
-          name: translate({ values: name }),
-          type,
-        })),
+        producer: producer('ingredients.list').map(
+          ({ id, badge, name, type }) => ({
+            id,
+            badge,
+            name: translate({ values: name }),
+            type,
+          }),
+        ),
       }),
     },
     smokedMalt: {

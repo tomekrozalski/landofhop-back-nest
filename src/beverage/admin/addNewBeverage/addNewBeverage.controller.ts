@@ -52,6 +52,7 @@ export class AddNewBeverageController {
     @Body('bitterness')
     bitterness: {
       label?: number;
+      producer?: number;
     },
     @Body('brand') brand: string,
     @Body('container')
@@ -114,10 +115,12 @@ export class AddNewBeverageController {
     @Body('fullness')
     fullness: {
       label?: number;
+      producer?: number;
     },
     @Body('hoppyness')
     hoppyness: {
       label?: number;
+      producer?: number;
     },
     @Body('ingredientsDescription')
     ingredientsDescription: {
@@ -126,10 +129,16 @@ export class AddNewBeverageController {
         value;
         complete;
       }[];
+      producer?: {
+        language;
+        value;
+        complete;
+      }[];
     },
     @Body('ingredientsList')
     ingredientsList: {
       label?: string[];
+      producer?: string[];
     },
     @Body('isDryHopped')
     isDryHopped: {
@@ -155,10 +164,16 @@ export class AddNewBeverageController {
     @Body('power')
     power: {
       label?: number;
+      producer?: number;
     },
     @Body('price')
     price: {
       label?: {
+        currency: string;
+        date: Date;
+        value: number;
+      }[];
+      producer?: {
         currency: string;
         date: Date;
         value: number;
@@ -178,6 +193,7 @@ export class AddNewBeverageController {
     @Body('smokedMalt')
     smokedMalt: {
       label?: boolean;
+      producer?: boolean;
     },
     @Body('style')
     style: {
@@ -187,6 +203,7 @@ export class AddNewBeverageController {
     @Body('sweetness')
     sweetness: {
       label?: number;
+      producer?: number;
     },
     @Body('tale')
     tale: {
@@ -196,6 +213,11 @@ export class AddNewBeverageController {
     @Body('temperature')
     temperature: {
       label?: {
+        from: number;
+        to: number;
+        unit: string;
+      };
+      producer?: {
         from: number;
         to: number;
         unit: string;

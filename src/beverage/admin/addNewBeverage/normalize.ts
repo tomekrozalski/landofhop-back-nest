@@ -79,6 +79,17 @@ const normalize = ({
       dryHopped.producer ||
       isBoolean(isDryHopped.producer) ||
       expirationDate.producer,
+    impressions:
+      isNumber(bitterness.producer) ||
+      isNumber(sweetness.producer) ||
+      isNumber(fullness.producer) ||
+      isNumber(power.producer) ||
+      isNumber(hoppyness.producer) ||
+      temperature.producer,
+    ingredients:
+      ingredientsDescription.producer ||
+      ingredientsList.producer ||
+      smokedMalt.producer,
   };
 
   return {
@@ -140,7 +151,11 @@ const normalize = ({
         price: price.label,
       }),
     },
-    ...((hasProducer.general || hasProducer.brewing) && {
+    ...((hasProducer.general ||
+      hasProducer.brewing ||
+      hasProducer.ingredients ||
+      hasProducer.impressions ||
+      price.producer) && {
       producer: {
         ...(hasProducer.general && {
           general: {
@@ -176,6 +191,38 @@ const normalize = ({
               expirationDate: expirationDate.producer,
             }),
           },
+        }),
+        ...(hasProducer.ingredients && {
+          ingredients: {
+            ...(ingredientsDescription.producer && {
+              description: ingredientsDescription.producer,
+            }),
+            ...(ingredientsList.producer && {
+              list: ingredientsList.producer,
+            }),
+            ...(isBoolean(smokedMalt.producer) && {
+              smokedMalt: smokedMalt.producer,
+            }),
+          },
+        }),
+        ...(hasProducer.impressions && {
+          impressions: {
+            ...(isNumber(bitterness.producer) && {
+              bitterness: bitterness.producer,
+            }),
+            ...(isNumber(sweetness.producer) && {
+              sweetness: sweetness.producer,
+            }),
+            ...(isNumber(fullness.producer) && { fullness: fullness.producer }),
+            ...(isNumber(power.producer) && { power: power.producer }),
+            ...(isNumber(hoppyness.producer) && {
+              hoppyness: hoppyness.producer,
+            }),
+            ...(temperature.producer && { temperature: temperature.producer }),
+          },
+        }),
+        ...(price.producer && {
+          price: price.producer,
         }),
       },
     }),
