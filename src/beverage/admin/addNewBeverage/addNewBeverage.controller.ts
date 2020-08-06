@@ -31,6 +31,15 @@ export class AddNewBeverageController {
         };
         previousContent?: string[];
       }[];
+      editorial?: {
+        type?: string;
+        wood?: string;
+        time?: {
+          unit: string;
+          value: number;
+        };
+        previousContent?: string[];
+      }[];
     },
     @Body('alcohol')
     alcohol: {
@@ -45,6 +54,9 @@ export class AddNewBeverageController {
         unit: string;
         value: number;
         scope?: string;
+      };
+      editorial?: {
+        scope: string;
       };
     },
     @Body('badge') badge: string,
@@ -67,16 +79,19 @@ export class AddNewBeverageController {
     contract: {
       label?: string;
       producer?: string;
+      editorial?: string;
     },
     @Body('cooperation')
     cooperation: {
       label?: string[];
       producer?: string[];
+      editorial?: string[];
     },
     @Body('dryHopped')
     dryHopped: {
       label?: string[];
       producer?: string[];
+      editorial?: string[];
     },
     @Body('expirationDate')
     expirationDate: {
@@ -106,11 +121,13 @@ export class AddNewBeverageController {
     fermentation: {
       label?: string[];
       producer?: string[];
+      editorial?: string[];
     },
     @Body('filtration')
     filtration: {
       label?: boolean;
       producer?: boolean;
+      editorial?: boolean;
     },
     @Body('fullness')
     fullness: {
@@ -144,6 +161,7 @@ export class AddNewBeverageController {
     isDryHopped: {
       label?: boolean;
       producer?: boolean;
+      editorial?: boolean;
     },
     @Body('name')
     name: {
@@ -155,11 +173,13 @@ export class AddNewBeverageController {
     pasteurization: {
       label?: boolean;
       producer?: boolean;
+      editorial?: boolean;
     },
     @Body('place')
     place: {
       label?: string;
       producer?: string;
+      editorial?: string;
     },
     @Body('power')
     power: {
@@ -199,6 +219,7 @@ export class AddNewBeverageController {
     style: {
       label?: { language?: string; value: string }[];
       producer?: { language?: string; value: string }[];
+      editorial?: { language?: string; value: string }[];
     },
     @Body('sweetness')
     sweetness: {

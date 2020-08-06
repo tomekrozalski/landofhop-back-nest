@@ -92,6 +92,19 @@ const normalize = ({
       smokedMalt.producer,
   };
 
+  const hasEditorial = {
+    brewing:
+      fermentation.editorial ||
+      style.editorial ||
+      alcohol.editorial ||
+      isBoolean(filtration.editorial) ||
+      isBoolean(pasteurization.editorial) ||
+      aged.editorial ||
+      dryHopped.editorial ||
+      isBoolean(isDryHopped.editorial),
+    general: contract.editorial || cooperation.editorial || place.editorial,
+  };
+
   return {
     badge,
     label: {
@@ -226,8 +239,42 @@ const normalize = ({
         }),
       },
     }),
-    ...((price.editorial || notes) && {
+    ...((hasEditorial.general ||
+      hasEditorial.brewing ||
+      price.editorial ||
+      notes) && {
       editorial: {
+        ...(hasEditorial.general && {
+          general: {
+            ...(contract.editorial && { contract: contract.editorial }),
+            ...(cooperation.editorial && {
+              cooperation: cooperation.editorial,
+            }),
+            ...(place.editorial && { place: place.editorial }),
+          },
+        }),
+        ...(hasEditorial.brewing && {
+          brewing: {
+            ...(fermentation.editorial && {
+              fermentation: fermentation.editorial,
+            }),
+            ...(style.editorial && { style: style.editorial }),
+            ...(alcohol.editorial && { alcohol: alcohol.editorial }),
+            ...(isBoolean(filtration.editorial) && {
+              filtration: filtration.editorial,
+            }),
+            ...(isBoolean(pasteurization.editorial) && {
+              pasteurization: pasteurization.editorial,
+            }),
+            ...(aged.editorial && { aged: aged.editorial }),
+            ...(dryHopped.editorial && {
+              dryHopped: { hops: dryHopped.editorial },
+            }),
+            ...(isBoolean(isDryHopped.editorial) && {
+              isDryHopped: isDryHopped.editorial,
+            }),
+          },
+        }),
         ...(price.editorial && {
           price: price.editorial,
         }),

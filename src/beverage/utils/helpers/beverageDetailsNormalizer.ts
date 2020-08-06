@@ -207,22 +207,29 @@ const beverageDetailsNormalizer = ({
     },
     dryHopped: {
       ...(!isEmpty(label('brewing.dryHopped.hops')) && {
-        label: label('brewing.dryHopped.hops').map(({ id, name }) => ({
+        label: label('brewing.dryHopped.hops').map(({ id, name, type }) => ({
           id,
           name: translate({ values: name }),
+          type,
         })),
       }),
       ...(!isEmpty(producer('brewing.dryHopped.hops')) && {
-        producer: producer('brewing.dryHopped.hops').map(({ id, name }) => ({
-          id,
-          name: translate({ values: name }),
-        })),
+        producer: producer('brewing.dryHopped.hops').map(
+          ({ id, name, type }) => ({
+            id,
+            name: translate({ values: name }),
+            type,
+          }),
+        ),
       }),
       ...(!isEmpty(editorial('brewing.dryHopped.hops')) && {
-        editorial: editorial('brewing.dryHopped.hops').map(({ id, name }) => ({
-          id,
-          name: translate({ values: name }),
-        })),
+        editorial: editorial('brewing.dryHopped.hops').map(
+          ({ id, name, type }) => ({
+            id,
+            name: translate({ values: name }),
+            type,
+          }),
+        ),
       }),
     },
     expirationDate: {
