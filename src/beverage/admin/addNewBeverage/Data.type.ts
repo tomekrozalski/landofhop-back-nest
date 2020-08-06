@@ -10,9 +10,24 @@ export type DataType = {
       };
       previousContent?: string[];
     }[];
+    producer?: {
+      type?: string;
+      wood?: string;
+      time?: {
+        unit: string;
+        value: number;
+      };
+      previousContent?: string[];
+    }[];
   };
   alcohol?: {
     label?: {
+      relate: string;
+      scope?: string;
+      unit: string;
+      value: number;
+    };
+    producer?: {
       relate: string;
       scope?: string;
       unit: string;
@@ -42,9 +57,14 @@ export type DataType = {
   };
   dryHopped?: {
     label?: string[];
+    producer?: string[];
   };
   expirationDate?: {
     label?: {
+      unit: string;
+      value: number;
+    };
+    producer?: {
       unit: string;
       value: number;
     };
@@ -55,12 +75,19 @@ export type DataType = {
       unit: string;
       value: number;
     };
+    producer?: {
+      relate: string;
+      unit: string;
+      value: number;
+    };
   };
   fermentation?: {
     label?: string[];
+    producer?: string[];
   };
   filtration?: {
     label?: boolean;
+    producer?: boolean;
   };
   fullness?: {
     label?: number;
@@ -80,6 +107,7 @@ export type DataType = {
   };
   isDryHopped?: {
     label?: boolean;
+    producer?: boolean;
   };
   name: {
     language?: string;
@@ -88,6 +116,7 @@ export type DataType = {
   notes?: string;
   pasteurization?: {
     label?: boolean;
+    producer?: boolean;
   };
   place?: {
     label?: string;
@@ -117,6 +146,7 @@ export type DataType = {
   };
   style?: {
     label?: { language?: string; value: string }[];
+    producer?: { language?: string; value: string }[];
   };
   sweetness?: {
     label?: number;

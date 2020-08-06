@@ -48,6 +48,49 @@ const normalize = ({ data, patch }: Props) => {
     updated,
   } = data;
 
+  const hasLabel = {
+    brewing:
+      fermentation.label ||
+      style.label ||
+      alcohol.label ||
+      extract.label ||
+      isBoolean(filtration.label) ||
+      isBoolean(pasteurization.label) ||
+      aged.label ||
+      dryHopped.label ||
+      isBoolean(isDryHopped.label) ||
+      expirationDate.label,
+    impressions:
+      isNumber(bitterness.label) ||
+      isNumber(sweetness.label) ||
+      isNumber(fullness.label) ||
+      isNumber(power.label) ||
+      isNumber(hoppyness.label) ||
+      temperature.label,
+    ingredients:
+      ingredientsDescription.label || ingredientsList.label || smokedMalt.label,
+  };
+
+  const hasProducer = {
+    general:
+      series.producer ||
+      contract.producer ||
+      cooperation.producer ||
+      place.producer ||
+      tale.producer,
+    brewing:
+      fermentation.producer ||
+      style.producer ||
+      alcohol.producer ||
+      extract.producer ||
+      isBoolean(filtration.producer) ||
+      isBoolean(pasteurization.producer) ||
+      aged.producer ||
+      dryHopped.producer ||
+      isBoolean(isDryHopped.producer) ||
+      expirationDate.producer,
+  };
+
   return {
     badge,
     label: {
@@ -61,16 +104,7 @@ const normalize = ({ data, patch }: Props) => {
         ...(tale.label && { tale: tale.label }),
         ...(barcode && { barcode }),
       },
-      ...((fermentation.label ||
-        style.label ||
-        alcohol.label ||
-        extract.label ||
-        isBoolean(filtration.label) ||
-        isBoolean(pasteurization.label) ||
-        aged.label ||
-        dryHopped.label ||
-        isBoolean(isDryHopped.label) ||
-        expirationDate.label) && {
+      ...(hasLabel.brewing && {
         brewing: {
           ...(fermentation.label && { fermentation: fermentation.label }),
           ...(style.label && { style: style.label }),
@@ -88,9 +122,7 @@ const normalize = ({ data, patch }: Props) => {
           ...(expirationDate.label && { expirationDate: expirationDate.label }),
         },
       }),
-      ...((ingredientsDescription.label ||
-        ingredientsList.label ||
-        smokedMalt.label) && {
+      ...(hasLabel.ingredients && {
         ingredients: {
           ...(ingredientsDescription.label && {
             description: ingredientsDescription.label,
@@ -103,12 +135,7 @@ const normalize = ({ data, patch }: Props) => {
           }),
         },
       }),
-      ...((isNumber(bitterness.label) ||
-        isNumber(sweetness.label) ||
-        isNumber(fullness.label) ||
-        isNumber(power.label) ||
-        isNumber(hoppyness.label) ||
-        temperature.label) && {
+      ...(hasLabel.impressions && {
         impressions: {
           ...(isNumber(bitterness.label) && { bitterness: bitterness.label }),
           ...(isNumber(sweetness.label) && { sweetness: sweetness.label }),
@@ -123,23 +150,41 @@ const normalize = ({ data, patch }: Props) => {
         price: price.label,
       }),
     },
-    ...((series.producer ||
-      contract.producer ||
-      cooperation.producer ||
-      place.producer ||
-      tale.producer) && {
+    ...((hasProducer.general || hasProducer.brewing) && {
       producer: {
-        ...((series.producer ||
-          contract.producer ||
-          cooperation.producer ||
-          place.producer ||
-          tale.producer) && {
+        ...(hasProducer.general && {
           general: {
             ...(series.producer && { series: series.producer }),
             ...(contract.producer && { contract: contract.producer }),
             ...(cooperation.producer && { cooperation: cooperation.producer }),
             ...(place.producer && { place: place.producer }),
             ...(tale.producer && { tale: tale.producer }),
+          },
+        }),
+        ...(hasProducer.brewing && {
+          brewing: {
+            ...(fermentation.producer && {
+              fermentation: fermentation.producer,
+            }),
+            ...(style.producer && { style: style.producer }),
+            ...(alcohol.producer && { alcohol: alcohol.producer }),
+            ...(extract.producer && { extract: extract.producer }),
+            ...(isBoolean(filtration.producer) && {
+              filtration: filtration.producer,
+            }),
+            ...(isBoolean(pasteurization.producer) && {
+              pasteurization: pasteurization.producer,
+            }),
+            ...(aged.producer && { aged: aged.producer }),
+            ...(dryHopped.producer && {
+              dryHopped: { hops: dryHopped.producer },
+            }),
+            ...(isBoolean(isDryHopped.producer) && {
+              isDryHopped: isDryHopped.producer,
+            }),
+            ...(expirationDate.producer && {
+              expirationDate: expirationDate.producer,
+            }),
           },
         }),
       },

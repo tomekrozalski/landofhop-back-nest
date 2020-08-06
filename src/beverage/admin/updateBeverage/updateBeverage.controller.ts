@@ -22,10 +22,25 @@ export class UpdateBeverageController {
         };
         previousContent?: string[];
       }[];
+      producer?: {
+        type?: string;
+        wood?: string;
+        time?: {
+          unit: string;
+          value: number;
+        };
+        previousContent?: string[];
+      }[];
     },
     @Body('alcohol')
     alcohol: {
       label?: {
+        relate: string;
+        scope?: string;
+        unit: string;
+        value: number;
+      };
+      producer?: {
         relate: string;
         scope?: string;
         unit: string;
@@ -60,10 +75,15 @@ export class UpdateBeverageController {
     @Body('dryHopped')
     dryHopped: {
       label?: string[];
+      producer?: string[];
     },
     @Body('expirationDate')
     expirationDate: {
       label?: {
+        unit: string;
+        value: number;
+      };
+      producer?: {
         unit: string;
         value: number;
       };
@@ -75,14 +95,21 @@ export class UpdateBeverageController {
         unit: string;
         value: number;
       };
+      producer?: {
+        relate: string;
+        unit: string;
+        value: number;
+      };
     },
     @Body('fermentation')
     fermentation: {
       label?: string[];
+      producer?: string[];
     },
     @Body('filtration')
     filtration: {
       label?: boolean;
+      producer?: boolean;
     },
     @Body('fullness')
     fullness: {
@@ -108,6 +135,7 @@ export class UpdateBeverageController {
     @Body('isDryHopped')
     isDryHopped: {
       label?: boolean;
+      producer?: boolean;
     },
     @Body('name')
     name: {
@@ -118,6 +146,7 @@ export class UpdateBeverageController {
     @Body('pasteurization')
     pasteurization: {
       label?: boolean;
+      producer?: boolean;
     },
     @Body('place')
     place: {
@@ -153,6 +182,7 @@ export class UpdateBeverageController {
     @Body('style')
     style: {
       label?: { language?: string; value: string }[];
+      producer?: { language?: string; value: string }[];
     },
     @Body('sweetness')
     sweetness: {
