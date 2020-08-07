@@ -10,6 +10,8 @@ const normalize = ({
   barcode,
   bitterness = {},
   brand,
+  clarity = {},
+  color = {},
   container,
   contract = {},
   cooperation = {},
@@ -103,6 +105,7 @@ const normalize = ({
       dryHopped.editorial ||
       isBoolean(isDryHopped.editorial),
     general: contract.editorial || cooperation.editorial || place.editorial,
+    impressions: color.editorial || clarity.editorial,
   };
 
   return {
@@ -272,6 +275,16 @@ const normalize = ({
             }),
             ...(isBoolean(isDryHopped.editorial) && {
               isDryHopped: isDryHopped.editorial,
+            }),
+          },
+        }),
+        ...(hasEditorial.impressions && {
+          impressions: {
+            ...(color.editorial && {
+              color: color.editorial,
+            }),
+            ...(clarity.editorial && {
+              clarity: clarity.editorial,
             }),
           },
         }),

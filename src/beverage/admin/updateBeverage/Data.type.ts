@@ -53,6 +53,12 @@ export type DataType = {
     producer?: number;
   };
   brand: string;
+  clarity: {
+    editorial?: string;
+  };
+  color: {
+    editorial?: string;
+  };
   container: {
     color: string;
     material: string;

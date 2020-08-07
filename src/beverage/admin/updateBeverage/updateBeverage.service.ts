@@ -17,8 +17,6 @@ export class UpdateBeverageService {
     const [patch]: PatchType[] = await this.beverageModel.getPatchById(data.id);
     const normalizedData = normalize({ data, patch });
 
-    console.log('normalizedData -->', normalizedData);
-
     const values: any = await this.beverageModel.update(
       data.id,
       normalizedData,

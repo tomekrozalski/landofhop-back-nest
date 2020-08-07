@@ -67,6 +67,14 @@ export class UpdateBeverageController {
       bitterness?: number;
     },
     @Body('brand') brand: string,
+    @Body('clarity')
+    clarity: {
+      editorial?: string;
+    },
+    @Body('color')
+    color: {
+      editorial?: string;
+    },
     @Body('container')
     container: {
       color: string;
@@ -258,6 +266,8 @@ export class UpdateBeverageController {
       barcode,
       bitterness,
       brand,
+      clarity,
+      color,
       container,
       contract,
       cooperation,

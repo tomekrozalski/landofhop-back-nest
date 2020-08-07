@@ -8,10 +8,8 @@ type Props = {
   patch: PatchType;
 };
 
-const normalize = ({ data, patch }: Props) => {
-  console.log('data to normalize', data);
-
-  const {
+const normalize = ({
+  data: {
     added,
     aged = {},
     alcohol = {},
@@ -19,6 +17,8 @@ const normalize = ({ data, patch }: Props) => {
     barcode,
     bitterness = {},
     brand,
+    clarity = {},
+    color = {},
     container,
     contract = {},
     cooperation = {},
@@ -46,8 +46,9 @@ const normalize = ({ data, patch }: Props) => {
     tale = {},
     temperature = {},
     updated,
-  } = data;
-
+  },
+  patch,
+}: Props) => {
   const hasLabel = {
     brewing:
       fermentation.label ||
@@ -115,6 +116,7 @@ const normalize = ({ data, patch }: Props) => {
       dryHopped.editorial ||
       isBoolean(isDryHopped.editorial),
     general: contract.editorial || cooperation.editorial || place.editorial,
+    impressions: color.editorial || clarity.editorial,
   };
 
   return {
@@ -285,6 +287,16 @@ const normalize = ({ data, patch }: Props) => {
             }),
             ...(isBoolean(isDryHopped.editorial) && {
               isDryHopped: isDryHopped.editorial,
+            }),
+          },
+        }),
+        ...(hasEditorial.impressions && {
+          impressions: {
+            ...(color.editorial && {
+              color: color.editorial,
+            }),
+            ...(clarity.editorial && {
+              clarity: clarity.editorial,
             }),
           },
         }),
