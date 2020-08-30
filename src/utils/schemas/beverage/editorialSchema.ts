@@ -30,6 +30,10 @@ const generalSchema = new mongoose.Schema(
 
 const brewingSchema = new mongoose.Schema(
   {
+    beverageType: {
+      type: String,
+      enum: ['beer', 'radler', 'other'],
+    },
     fermentation: {
       type: [
         {

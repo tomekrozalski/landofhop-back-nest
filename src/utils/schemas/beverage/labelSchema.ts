@@ -83,6 +83,15 @@ const containerSchema = new mongoose.Schema(
       min: 0,
       max: 100000,
     },
+    hasCork: {
+      type: Boolean,
+      validate: {
+        validator(v) {
+          return v;
+        },
+        message: props => `${props.value} need to be true or be undefined`,
+      },
+    },
     hasCapWireFlip: {
       type: Boolean,
       validate: {

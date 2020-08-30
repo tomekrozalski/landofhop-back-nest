@@ -61,6 +61,21 @@ export class UpdateBeverageController {
     },
     @Body('badge') badge: string,
     @Body('barcode') barcode: string,
+    @Body('beverageType')
+    beverageType: {
+      label?: {
+        unit: string;
+        value: number;
+      };
+      producer?: {
+        unit: string;
+        value: number;
+      };
+      editorial?: {
+        unit: string;
+        value: number;
+      };
+    },
     @Body('bitterness')
     bitterness: {
       label?: number;
@@ -78,6 +93,8 @@ export class UpdateBeverageController {
     @Body('container')
     container: {
       color: string;
+      hasCapWireFlip: boolean;
+      hasCork: boolean;
       material: string;
       type: string;
       unit: string;
@@ -146,6 +163,17 @@ export class UpdateBeverageController {
     hoppyness: {
       label?: number;
       producer?: number;
+    },
+    @Body('hopRate')
+    hopRate: {
+      label?: {
+        unit: string;
+        value: number;
+      };
+      producer?: {
+        unit: string;
+        value: number;
+      };
     },
     @Body('id') id: string,
     @Body('ingredientsDescription')
@@ -264,6 +292,7 @@ export class UpdateBeverageController {
       alcohol,
       badge,
       barcode,
+      beverageType,
       bitterness,
       brand,
       clarity,
@@ -278,6 +307,7 @@ export class UpdateBeverageController {
       filtration,
       fullness,
       hoppyness,
+      hopRate,
       id,
       ingredientsDescription,
       ingredientsList,

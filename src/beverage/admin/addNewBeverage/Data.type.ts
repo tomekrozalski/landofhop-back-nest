@@ -48,6 +48,20 @@ export type DataType = {
   };
   badge: string;
   barcode?: string;
+  beverageType?: {
+    label?: {
+      unit: string;
+      value: number;
+    };
+    producer?: {
+      unit: string;
+      value: number;
+    };
+    editorial?: {
+      unit: string;
+      value: number;
+    };
+  };
   bitterness?: {
     label?: number;
     producer?: number;
@@ -61,6 +75,8 @@ export type DataType = {
   };
   container: {
     color: string;
+    hasCapWireFlip: boolean;
+    hasCork: boolean;
     material: string;
     type: string;
     unit: string;
@@ -120,6 +136,16 @@ export type DataType = {
   hoppyness?: {
     label?: number;
     producer?: number;
+  };
+  hopRate?: {
+    label?: {
+      unit: string;
+      value: number;
+    };
+    producer?: {
+      unit: string;
+      value: number;
+    };
   };
   ingredientsDescription?: {
     label?: {

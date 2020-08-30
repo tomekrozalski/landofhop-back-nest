@@ -6,6 +6,10 @@ import agedSchema from './agedSchema';
 
 const brewingSchema = new mongoose.Schema(
   {
+    beverageType: {
+      type: String,
+      enum: ['beer', 'radler', 'other'],
+    },
     fermentation: {
       type: [
         {
@@ -87,6 +91,23 @@ const brewingSchema = new mongoose.Schema(
           },
         ],
         default: undefined,
+      },
+    },
+    hopRate: {
+      value: {
+        type: Int32,
+        min: 0,
+        max: 10000,
+        required() {
+          return this.hopRate.unit;
+        },
+      },
+      unit: {
+        type: String,
+        enum: ['gl'],
+        required() {
+          return this.hopRate.value;
+        },
       },
     },
     expirationDate: {

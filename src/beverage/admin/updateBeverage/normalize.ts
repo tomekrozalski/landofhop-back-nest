@@ -15,6 +15,7 @@ const normalize = ({
     alcohol = {},
     badge,
     barcode,
+    beverageType = {},
     bitterness = {},
     brand,
     clarity = {},
@@ -30,6 +31,7 @@ const normalize = ({
     filtration = {},
     fullness = {},
     hoppyness = {},
+    hopRate = {},
     ingredientsDescription = {},
     ingredientsList = {},
     isDryHopped = {},
@@ -51,6 +53,7 @@ const normalize = ({
 }: Props) => {
   const hasLabel = {
     brewing:
+      beverageType.label ||
       fermentation.label ||
       style.label ||
       alcohol.label ||
@@ -58,6 +61,7 @@ const normalize = ({
       isBoolean(filtration.label) ||
       isBoolean(pasteurization.label) ||
       aged.label ||
+      hopRate.label ||
       dryHopped.label ||
       isBoolean(isDryHopped.label) ||
       expirationDate.label,
@@ -82,6 +86,7 @@ const normalize = ({
       place.producer ||
       tale.producer,
     brewing:
+      beverageType.producer ||
       fermentation.producer ||
       style.producer ||
       alcohol.producer ||
@@ -89,6 +94,7 @@ const normalize = ({
       isBoolean(filtration.producer) ||
       isBoolean(pasteurization.producer) ||
       aged.producer ||
+      hopRate.producer ||
       dryHopped.producer ||
       isBoolean(isDryHopped.producer) ||
       expirationDate.producer,
@@ -107,6 +113,7 @@ const normalize = ({
 
   const hasEditorial = {
     brewing:
+      beverageType.editorial ||
       fermentation.editorial ||
       style.editorial ||
       alcohol.editorial ||
@@ -134,6 +141,7 @@ const normalize = ({
       },
       ...(hasLabel.brewing && {
         brewing: {
+          ...(beverageType.label && { beverageType: beverageType.label }),
           ...(fermentation.label && { fermentation: fermentation.label }),
           ...(style.label && { style: style.label }),
           ...(alcohol.label && { alcohol: alcohol.label }),
@@ -143,6 +151,7 @@ const normalize = ({
             pasteurization: pasteurization.label,
           }),
           ...(aged.label && { aged: aged.label }),
+          ...(hopRate.label && { hopRate: hopRate.label }),
           ...(dryHopped.label && { dryHopped: { hops: dryHopped.label } }),
           ...(isBoolean(isDryHopped.label) && {
             isDryHopped: isDryHopped.label,
@@ -195,6 +204,9 @@ const normalize = ({
         }),
         ...(hasProducer.brewing && {
           brewing: {
+            ...(beverageType.producer && {
+              beverageType: beverageType.producer,
+            }),
             ...(fermentation.producer && {
               fermentation: fermentation.producer,
             }),
@@ -208,6 +220,7 @@ const normalize = ({
               pasteurization: pasteurization.producer,
             }),
             ...(aged.producer && { aged: aged.producer }),
+            ...(hopRate.producer && { hopRate: hopRate.producer }),
             ...(dryHopped.producer && {
               dryHopped: { hops: dryHopped.producer },
             }),
@@ -270,6 +283,9 @@ const normalize = ({
         }),
         ...(hasEditorial.brewing && {
           brewing: {
+            ...(beverageType.editorial && {
+              beverageType: beverageType.editorial,
+            }),
             ...(fermentation.editorial && {
               fermentation: fermentation.editorial,
             }),

@@ -112,6 +112,17 @@ const beverageDetailsNormalizer = ({
       }),
     },
     ...(label('general.barcode') && { barcode: label('general.barcode') }),
+    beverageType: {
+      ...(label('brewing.beverageType') && {
+        label: label('brewing.beverageType'),
+      }),
+      ...(producer('brewing.beverageType') && {
+        producer: producer('brewing.beverageType'),
+      }),
+      ...(editorial('brewing.beverageType') && {
+        editorial: editorial('brewing.beverageType'),
+      }),
+    },
     fermentation: {
       ...(!isEmpty(label('brewing.fermentation')) && {
         label: label('brewing.fermentation'),
@@ -232,6 +243,14 @@ const beverageDetailsNormalizer = ({
         ),
       }),
     },
+    hopRate: {
+      ...(!isEmpty(label('brewing.hopRate')) && {
+        label: label('brewing.hopRate'),
+      }),
+      ...(!isEmpty(producer('brewing.hopRate')) && {
+        producer: producer('brewing.hopRate'),
+      }),
+    },
     expirationDate: {
       ...(!isEmpty(label('brewing.expirationDate')) && {
         label: label('brewing.expirationDate'),
@@ -348,6 +367,9 @@ const beverageDetailsNormalizer = ({
       unit: label('container.unit'),
       type: label('container.type'),
       value: +label('container.value'),
+      ...(isBoolean(label('container.hasCork')) && {
+        hasCork: label('container.hasCork'),
+      }),
       ...(isBoolean(label('container.hasCapWireFlip')) && {
         hasCapWireFlip: label('container.hasCapWireFlip'),
       }),
@@ -402,6 +424,7 @@ const beverageDetailsNormalizer = ({
     'place',
     'tale.producer',
     'tale',
+    'beverageType',
     'fermentation',
     'extract',
     'alcohol',
@@ -412,6 +435,7 @@ const beverageDetailsNormalizer = ({
     'style',
     'isDryHopped',
     'dryHopped',
+    'hopRate',
     'expirationDate',
     'ingredientsDescription',
     'ingredientsList',

@@ -43,6 +43,7 @@ const producer = {
     tale: 1,
   },
   brewing: {
+    beverageType: 1,
     fermentation: 1,
     extract: 1,
     alcohol: 1,
@@ -65,6 +66,7 @@ const producer = {
         },
       },
     },
+    hopRate: 1,
     expirationDate: 1,
   },
   ingredients: {

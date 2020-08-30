@@ -41,6 +41,7 @@ const editorial = {
     },
   },
   brewing: {
+    beverageType: 1,
     fermentation: 1,
     alcohol: 1,
     filtration: 1,
