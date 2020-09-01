@@ -245,10 +245,16 @@ const beverageDetailsNormalizer = ({
     },
     hopRate: {
       ...(!isEmpty(label('brewing.hopRate')) && {
-        label: label('brewing.hopRate'),
+        label: {
+          unit: label('brewing.hopRate.unit'),
+          value: +label('brewing.hopRate.value'),
+        },
       }),
       ...(!isEmpty(producer('brewing.hopRate')) && {
-        producer: producer('brewing.hopRate'),
+        producer: {
+          unit: producer('brewing.hopRate.unit'),
+          value: +producer('brewing.hopRate.value'),
+        },
       }),
     },
     expirationDate: {

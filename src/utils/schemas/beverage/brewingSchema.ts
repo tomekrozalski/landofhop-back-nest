@@ -95,7 +95,7 @@ const brewingSchema = new mongoose.Schema(
     },
     hopRate: {
       value: {
-        type: Int32,
+        type: mongoose.Schema.Types.Decimal128,
         min: 0,
         max: 10000,
         required() {
