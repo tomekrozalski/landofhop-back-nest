@@ -41,6 +41,7 @@ const generalSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Institution',
     },
+    isContract: Boolean,
     place: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Place',

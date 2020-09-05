@@ -20,6 +20,7 @@ const editorial = {
       shortId: '$editorial.general.contract_info.shortId',
       website: '$editorial.general.contract_info.website',
     },
+    isContract: 1,
     place: {
       id: '$editorial.general.place_info._id',
       city: '$editorial.general.place_info.city',

@@ -92,6 +92,17 @@ const beverageDetailsNormalizer = ({
         editorial: normalizeBrand(editorial('general.contract')),
       }),
     },
+    isContract: {
+      ...(isBoolean(label('general.isContract')) && {
+        label: label('general.isContract'),
+      }),
+      ...(isBoolean(producer('general.isContract')) && {
+        producer: producer('general.isContract'),
+      }),
+      ...(isBoolean(editorial('general.isContract')) && {
+        editorial: editorial('general.isContract'),
+      }),
+    },
     place: {
       ...(label('general.place.city') && {
         label: normalizePlace(label('general.place')),
@@ -427,6 +438,7 @@ const beverageDetailsNormalizer = ({
     'series',
     'cooperation',
     'contract',
+    'isContract',
     'place',
     'tale.producer',
     'tale',

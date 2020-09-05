@@ -21,6 +21,7 @@ const producer = {
       shortId: '$producer.general.contract_info.shortId',
       website: '$producer.general.contract_info.website',
     },
+    isContract: 1,
     place: {
       id: '$producer.general.place_info._id',
       city: '$producer.general.place_info.city',

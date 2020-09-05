@@ -30,6 +30,7 @@ const label = {
       shortId: '$label.general.contract_info.shortId',
       website: '$label.general.contract_info.website',
     },
+    isContract: 1,
     place: {
       id: '$label.general.place_info._id',
       city: '$label.general.place_info.city',

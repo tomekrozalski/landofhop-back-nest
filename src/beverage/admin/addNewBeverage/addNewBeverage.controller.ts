@@ -193,6 +193,12 @@ export class AddNewBeverageController {
       label?: string[];
       producer?: string[];
     },
+    @Body('isContract')
+    isContract: {
+      label?: boolean;
+      producer?: boolean;
+      editorial?: boolean;
+    },
     @Body('isDryHopped')
     isDryHopped: {
       label?: boolean;
@@ -310,6 +316,7 @@ export class AddNewBeverageController {
       hopRate,
       ingredientsDescription,
       ingredientsList,
+      isContract,
       isDryHopped,
       name,
       notes,

@@ -1,9 +1,8 @@
 import {
-	BadRequestException,
-	ForbiddenException,
-	Injectable,
-	InternalServerErrorException,
-	NotFoundException,
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -12,22 +11,28 @@ import { User } from 'utils/types';
 
 @Injectable()
 export class UserService {
-	constructor(@InjectModel('User') private readonly userModel: Model<User>) { }
+  constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
 
-	async logIn({ email, password }: User) {
-		const { status, message, token }: {
-			status: number, message: string, token?: string
-		} = await this.userModel.logIn({ email, password });
+  async logIn({ email, password }: User) {
+    const {
+      status,
+      message,
+      token,
+    }: {
+      status: number;
+      message: string;
+      token?: string;
+    } = await this.userModel.logIn({ email, password });
 
-		switch (status) {
-			case 200:
-				return { token };
-			case 400:
-				throw new BadRequestException(message);
-			case 404:
-				throw new NotFoundException(message);
-			case 500:
-				throw new InternalServerErrorException(message);
-		}
-	}
+    switch (status) {
+      case 200:
+        return { token };
+      case 400:
+        throw new BadRequestException(message);
+      case 404:
+        throw new NotFoundException(message);
+      case 500:
+        throw new InternalServerErrorException(message);
+    }
+  }
 }

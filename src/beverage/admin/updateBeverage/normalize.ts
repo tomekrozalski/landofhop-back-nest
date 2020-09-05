@@ -34,6 +34,7 @@ const normalize = ({
     hopRate = {},
     ingredientsDescription = {},
     ingredientsList = {},
+    isContract = {},
     isDryHopped = {},
     name,
     notes,
@@ -82,6 +83,7 @@ const normalize = ({
     general:
       series.producer ||
       contract.producer ||
+      isContract.producer ||
       cooperation.producer ||
       place.producer ||
       tale.producer,
@@ -122,7 +124,11 @@ const normalize = ({
       aged.editorial ||
       dryHopped.editorial ||
       isBoolean(isDryHopped.editorial),
-    general: contract.editorial || cooperation.editorial || place.editorial,
+    general:
+      contract.editorial ||
+      isContract.editorial ||
+      cooperation.editorial ||
+      place.editorial,
     impressions: color.editorial || clarity.editorial,
   };
 
@@ -134,6 +140,9 @@ const normalize = ({
         ...(series.label && { series: series.label }),
         brand,
         ...(contract.label && { contract: contract.label }),
+        ...(isBoolean(isContract.label) && {
+          isContract: isContract.label,
+        }),
         ...(cooperation.label && { cooperation: cooperation.label }),
         ...(place.label && { place: place.label }),
         ...(tale.label && { tale: tale.label }),
@@ -197,6 +206,9 @@ const normalize = ({
           general: {
             ...(series.producer && { series: series.producer }),
             ...(contract.producer && { contract: contract.producer }),
+            ...(isBoolean(isContract.producer) && {
+              isContract: isContract.producer,
+            }),
             ...(cooperation.producer && { cooperation: cooperation.producer }),
             ...(place.producer && { place: place.producer }),
             ...(tale.producer && { tale: tale.producer }),
@@ -275,6 +287,9 @@ const normalize = ({
         ...(hasEditorial.general && {
           general: {
             ...(contract.editorial && { contract: contract.editorial }),
+            ...(isBoolean(isContract.editorial) && {
+              isContract: isContract.editorial,
+            }),
             ...(cooperation.editorial && {
               cooperation: cooperation.editorial,
             }),

@@ -164,6 +164,11 @@ export type DataType = {
     label?: string[];
     producer?: string[];
   };
+  isContract?: {
+    label?: boolean;
+    producer?: boolean;
+    editorial?: boolean;
+  };
   isDryHopped?: {
     label?: boolean;
     producer?: boolean;

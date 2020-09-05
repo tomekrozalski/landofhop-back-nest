@@ -194,6 +194,12 @@ export class UpdateBeverageController {
       label?: string[];
       producer?: string[];
     },
+    @Body('isContract')
+    isContract: {
+      label?: boolean;
+      producer?: boolean;
+      editorial?: boolean;
+    },
     @Body('isDryHopped')
     isDryHopped: {
       label?: boolean;
@@ -311,6 +317,7 @@ export class UpdateBeverageController {
       id,
       ingredientsDescription,
       ingredientsList,
+      isContract,
       isDryHopped,
       name,
       notes,
