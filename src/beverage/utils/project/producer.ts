@@ -41,6 +41,7 @@ const producer = {
       shortId: '$producer.general.place_info.shortId',
       coordinates: '$producer.general.place_info.location.coordinates',
     },
+    remark: 1,
     tale: 1,
   },
   brewing: {

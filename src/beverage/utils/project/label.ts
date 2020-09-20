@@ -50,6 +50,7 @@ const label = {
       shortId: '$label.general.place_info.shortId',
       coordinates: '$label.general.place_info.location.coordinates',
     },
+    remark: 1,
     tale: 1,
     barcode: 1,
   },

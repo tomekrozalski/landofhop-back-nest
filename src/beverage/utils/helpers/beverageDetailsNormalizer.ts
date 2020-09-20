@@ -114,6 +114,20 @@ const beverageDetailsNormalizer = ({
         editorial: normalizePlace(editorial('general.place')),
       }),
     },
+    remark: {
+      ...(label('general.remark') && {
+        label: translate({
+          strict: true,
+          values: label('general.remark'),
+        }),
+      }),
+      ...(producer('general.remark') && {
+        producer: translate({
+          strict: true,
+          values: producer('general.remark'),
+        }),
+      }),
+    },
     tale: {
       ...(label('general.tale') && {
         label: transformLanguage({ values: label('general.tale') }),
@@ -440,6 +454,7 @@ const beverageDetailsNormalizer = ({
     'contract',
     'isContract',
     'place',
+    'remark',
     'tale.producer',
     'tale',
     'beverageType',

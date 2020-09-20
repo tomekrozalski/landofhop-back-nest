@@ -209,6 +209,10 @@ export type DataType = {
       value: number;
     }[];
   };
+  remark?: {
+    label?: { language?: string; value: string }[];
+    producer?: { language?: string; value: string }[];
+  };
   series?: {
     label?: { language?: string; value: string }[];
     producer?: { language?: string; value: string }[];

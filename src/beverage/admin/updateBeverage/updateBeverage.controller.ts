@@ -247,6 +247,11 @@ export class UpdateBeverageController {
         value: number;
       }[];
     },
+    @Body('remark')
+    remark: {
+      label?: { language?: string; value: string }[];
+      producer?: { language?: string; value: string }[];
+    },
     @Body('series')
     series: {
       label?: { language?: string; value: string }[];
@@ -325,6 +330,7 @@ export class UpdateBeverageController {
       place,
       power,
       price,
+      remark,
       series,
       smokedMalt,
       style,

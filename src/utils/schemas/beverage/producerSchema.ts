@@ -34,6 +34,10 @@ const generalSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Place',
     },
+    remark: {
+      type: [langValue],
+      default: undefined,
+    },
     tale: {
       type: [langValue],
       default: undefined,

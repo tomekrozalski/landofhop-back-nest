@@ -246,6 +246,11 @@ export class AddNewBeverageController {
         value: number;
       }[];
     },
+    @Body('remark')
+    remark: {
+      label?: { language?: string; value: string }[];
+      producer?: { language?: string; value: string }[];
+    },
     @Body('series')
     series: {
       label?: { language?: string; value: string }[];
@@ -324,6 +329,7 @@ export class AddNewBeverageController {
       place,
       power,
       price,
+      remark,
       series,
       shortId,
       smokedMalt,

@@ -42,6 +42,7 @@ const normalize = ({
     place = {},
     power = {},
     price = {},
+    remark = {},
     series = {},
     smokedMalt = {},
     style = {},
@@ -86,6 +87,7 @@ const normalize = ({
       isContract.producer ||
       cooperation.producer ||
       place.producer ||
+      remark.producer ||
       tale.producer,
     brewing:
       beverageType.producer ||
@@ -145,6 +147,7 @@ const normalize = ({
         }),
         ...(cooperation.label && { cooperation: cooperation.label }),
         ...(place.label && { place: place.label }),
+        ...(remark.label && { remark: remark.label }),
         ...(tale.label && { tale: tale.label }),
         ...(barcode && { barcode }),
       },
@@ -211,6 +214,7 @@ const normalize = ({
             }),
             ...(cooperation.producer && { cooperation: cooperation.producer }),
             ...(place.producer && { place: place.producer }),
+            ...(remark.producer && { remark: remark.producer }),
             ...(tale.producer && { tale: tale.producer }),
           },
         }),
