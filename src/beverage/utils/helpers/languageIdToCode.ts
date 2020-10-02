@@ -1,15 +1,13 @@
 import * as mongoose from 'mongoose';
 import { Language, LanguageValue } from 'utils/types';
 
-type ExtendedLanguageValue = LanguageValue & { complete?: boolean };
-
 type Props = {
-  values: ExtendedLanguageValue[];
+  values: any[];
   languages: Language[];
 };
 
 const languageIdToCode = ({ languages, values }: Props) =>
-  values.map(({ language, value, complete }: ExtendedLanguageValue) => {
+  values.map(({ language, ...rest }: any) => {
     const code = languages.find(
       ({ id }) =>
         mongoose.Types.ObjectId(id).toString() ===
@@ -18,8 +16,7 @@ const languageIdToCode = ({ languages, values }: Props) =>
 
     return {
       ...(language && { language: code }),
-      value,
-      complete,
+      ...rest,
     };
   });
 

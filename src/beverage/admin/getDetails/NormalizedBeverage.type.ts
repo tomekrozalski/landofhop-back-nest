@@ -65,8 +65,16 @@ export type NormalizedBeverageType = {
     };
   };
   tale?: {
-    label?: LanguageValue[];
-    producer?: LanguageValue[];
+    label?: {
+      language?: string; // id
+      lead: string;
+      article?: string;
+    }[];
+    producer?: {
+      language?: string; // id
+      lead: string;
+      article?: string;
+    }[];
   };
   barcode?: string;
   fermentation?: {

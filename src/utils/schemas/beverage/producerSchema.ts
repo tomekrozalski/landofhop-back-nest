@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-import { langValue } from '../common';
+import { langValue, tale } from '../common';
 import brewingSchema from './brewingSchema';
 import impressionsSchema from './impressionsSchema';
 import ingredientsSchema from './ingredientsSchema';
@@ -39,7 +39,7 @@ const generalSchema = new mongoose.Schema(
       default: undefined,
     },
     tale: {
-      type: [langValue],
+      type: [tale],
       default: undefined,
     },
   },

@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import * as Int32 from 'mongoose-int32';
 
-import { langValue } from '../common';
+import { langValue, tale } from '../common';
 import brewingSchema from './brewingSchema';
 import impressionsSchema from './impressionsSchema';
 import ingredientsSchema from './ingredientsSchema';
@@ -51,12 +51,12 @@ const generalSchema = new mongoose.Schema(
       default: undefined,
     },
     tale: {
-      type: [langValue],
+      type: [tale],
       validate: {
         validator(v) {
-          return !v.find(({ value }) => value.length < 5);
+          return !v.find(({ lead }) => lead.length < 5);
         },
-        message: props => `${props.value} has less then 4 signs`,
+        message: props => `${props.lead} has less then 4 signs`,
       },
       default: undefined,
     },

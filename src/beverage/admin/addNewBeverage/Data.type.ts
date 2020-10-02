@@ -231,8 +231,8 @@ export type DataType = {
     producer?: number;
   };
   tale?: {
-    label?: { language?: string; value: string }[];
-    producer?: { language?: string; value: string }[];
+    label?: { language?: string; lead: string; article?: string }[];
+    producer?: { language?: string; lead: string; article?: string }[];
   };
   temperature?: {
     label?: {
