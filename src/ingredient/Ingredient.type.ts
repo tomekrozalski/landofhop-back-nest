@@ -4,4 +4,5 @@ export type Ingredient = {
   badge: string;
   name: LanguageValue[];
   type: string;
+  parent?: string;
 };

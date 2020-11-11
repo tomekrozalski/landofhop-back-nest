@@ -17,6 +17,11 @@ const ingredientSchema = new mongoose.Schema({
     enum: ['malt', 'hop', 'yeast', 'appendix'],
     required: true,
   },
+  parent: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Ingredient',
+    required: false,
+  },
 });
 
 ingredientSchema.statics.getAllIngredients = getAllIngredients;

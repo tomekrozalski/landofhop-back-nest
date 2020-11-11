@@ -9,6 +9,7 @@ const getAllIngredients = function(): Ingredient[] {
         badge: 1,
         name: 1,
         type: 1,
+        parent: 1,
       },
     },
   ]);

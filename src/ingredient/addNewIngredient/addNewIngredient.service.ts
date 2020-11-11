@@ -11,7 +11,7 @@ export class AddNewIngredientService {
     private readonly ingredientModel: Model<Ingredient>,
   ) {}
 
-  async addNewIngredient({ badge, name, type }): Promise<Ingredient[]> {
+  async addNewIngredient({ badge, name, parent, type }): Promise<Ingredient[]> {
     const newIngredient = new this.ingredientModel({
       badge,
       name: name.map(({ lang, value }) => ({
@@ -19,6 +19,7 @@ export class AddNewIngredientService {
         value,
       })),
       type,
+      ...(parent && { parent }),
     });
 
     await newIngredient.save();

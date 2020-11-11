@@ -18,11 +18,13 @@ export class AddNewIngredientController {
       value: string;
     }[],
     @Body('type') type: string,
+    @Body('parent') parent: string,
   ): Promise<Ingredient[]> {
     const result: Ingredient[] = await this.ingredientService.addNewIngredient({
       badge,
       name,
       type,
+      parent,
     });
 
     return result;
